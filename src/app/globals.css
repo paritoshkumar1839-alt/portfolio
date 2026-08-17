@@ -1,0 +1,284 @@
+@import "tailwindcss";
+
+/* ============================================================================
+ * REFINED DARK — a sophisticated near-black design system for a product
+ * designer's portfolio. One accent token drives the whole brand color.
+ * Change --accent below to re-skin the entire site.
+ * ========================================================================== */
+
+:root {
+  /* ---- Theme: Teal Noir ---- */
+  --bg: #06090b; /* near-black canvas, faint blue-green cool */
+  --bg-elevated: #0c1113;
+  --surface: #0f1517; /* panels */
+  --surface-2: #16201f; /* cards on panels */
+  --text: #ecefee;
+  --text-muted: #899492;
+  --text-faint: #606b69;
+  --line: #1e2523; /* hairline borders */
+  --line-strong: #2e3937;
+
+  /* Brand accent is a blue-green (teal) — the midpoint of the duotone.
+     Swap --accent to re-skin the solid fills; --accent-2 is the blue that
+     pairs with it in gradients and the ambient glow. */
+  --accent: #2ddbc0; /* teal / blue-green */
+  --accent-2: #4f9dff; /* blue */
+  --accent-ink: #04130f; /* dark text on accent fills */
+  --accent-gradient: linear-gradient(118deg, #4f9dff 0%, #2ddbc0 100%);
+  --accent-glow: rgba(45, 219, 192, 0.16); /* teal glow */
+  --accent-glow-2: rgba(79, 157, 255, 0.14); /* blue glow */
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-faint: var(--text-faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-ink: var(--accent-ink);
+
+  /* One sans-serif family (Montserrat) drives display, body, and labels. */
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html[data-scroll-behavior="smooth"] {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.011em;
+  min-height: 100dvh;
+  position: relative;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* --- Layout ---------------------------------------------------------------- */
+.container-page {
+  width: 100%;
+  max-width: 78rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+@media (min-width: 768px) {
+  .container-page {
+    padding-inline: 2.5rem;
+  }
+}
+@media (min-width: 1280px) {
+  .container-page {
+    padding-inline: 3.5rem;
+  }
+}
+
+.container-prose {
+  width: 100%;
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
+/* --- Type ------------------------------------------------------------------ */
+/* Display headings — now a bold sans (Montserrat). Class name kept for
+   minimal churn; it's the display font, not literally serif. */
+.font-serif {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Small-caps mono eyebrow/label used throughout. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* Blue → green premium accent, for primary CTA fills and display numbers. */
+.bg-accent-gradient {
+  background-image: var(--accent-gradient);
+}
+.text-gradient {
+  background-image: var(--accent-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Horizontal rail: hide the scrollbar (arrows + touch/trackpad drive it). */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Outlined display text — used for the second line of the hero name. */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--text-faint);
+  text-stroke: 1.5px var(--text-faint);
+}
+
+/* Anchored sections clear the sticky nav when jumped to. */
+.section-anchor {
+  scroll-margin-top: 5.5rem;
+}
+
+/* --- Ambient depth: fixed radial glow + fine grain ------------------------- */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.ambient::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  width: 72rem;
+  height: 44rem;
+  transform: translateX(-50%);
+  /* Duotone glow: blue drifting left, teal-green right. */
+  background:
+    radial-gradient(45% 55% at 38% 42%, var(--accent-glow-2) 0%, transparent 72%),
+    radial-gradient(45% 55% at 64% 50%, var(--accent-glow) 0%, transparent 72%);
+  opacity: 0.9;
+}
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --- Animated underline (links) -------------------------------------------- */
+.underline-hover {
+  position: relative;
+}
+.underline-hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.underline-hover:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* --- Hairline divider ------------------------------------------------------ */
+.hairline {
+  height: 1px;
+  width: 100%;
+  background: var(--line);
+}
+
+/* --- Marquee --------------------------------------------------------------- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 34s linear infinite;
+}
+.animate-marquee-reverse {
+  animation: marquee 34s linear infinite reverse;
+}
+.marquee-pause:hover .animate-marquee,
+.marquee-pause:hover .animate-marquee-reverse {
+  animation-play-state: paused;
+}
+
+/* --- Scroll reveal --------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(6px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* --- Reduced motion -------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}

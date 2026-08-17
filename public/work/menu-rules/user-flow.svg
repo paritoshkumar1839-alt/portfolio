@@ -1,0 +1,90 @@
+<svg viewBox="0 0 1240 580" xmlns="http://www.w3.org/2000/svg" font-family="Montserrat, -apple-system, 'Segoe UI', sans-serif">
+  <defs>
+    <marker id="arw" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+      <path d="M0,0 L6.5,3 L0,6 Z" fill="#5f6f6b"/>
+    </marker>
+    <style>
+      .box{fill:#111a1d;stroke:#2a3439;stroke-width:1.5;}
+      .acc{stroke:#2ddbc0;}
+      .dia{fill:#0e1719;stroke:#2ddbc0;stroke-width:1.5;}
+      .warn{fill:#1b1608;stroke:#f4d24a;stroke-width:1.5;}
+      .bad{stroke:#ff6b6b;}
+      .t{fill:#eef2f1;font-size:14.5px;font-weight:600;}
+      .s{fill:#93a09d;font-size:11px;}
+      .lbl{fill:#93a09d;font-size:11px;font-weight:600;}
+      .amb{fill:#f4d24a;font-size:10.5px;}
+      .con{fill:none;stroke:#3a4649;stroke-width:1.5;}
+    </style>
+  </defs>
+
+  <!-- Row 1: build -->
+  <rect class="box" x="24" y="40" width="196" height="64" rx="10"/>
+  <text class="t" x="42" y="70">Menu → Rules</text><text class="s" x="42" y="88">the Rules tab</text>
+
+  <rect class="box" x="264" y="40" width="196" height="64" rx="10"/>
+  <text class="t" x="282" y="70">Create rule</text><text class="s" x="282" y="88">name it</text>
+
+  <rect class="box" x="504" y="40" width="196" height="64" rx="10"/>
+  <text class="t" x="522" y="70">When</text><text class="s" x="522" y="88">pick platforms</text>
+
+  <rect class="box" x="744" y="40" width="196" height="64" rx="10"/>
+  <text class="t" x="762" y="70">For</text><text class="s" x="762" y="88">items / modifiers</text>
+
+  <rect class="box acc" x="984" y="40" width="196" height="64" rx="10"/>
+  <text class="t" x="1002" y="70">Then</text><text class="s" x="1002" y="88">change + live preview</text>
+
+  <line class="con" x1="220" y1="72" x2="260" y2="72" marker-end="url(#arw)"/>
+  <line class="con" x1="460" y1="72" x2="500" y2="72" marker-end="url(#arw)"/>
+  <line class="con" x1="700" y1="72" x2="740" y2="72" marker-end="url(#arw)"/>
+  <line class="con" x1="940" y1="72" x2="980" y2="72" marker-end="url(#arw)"/>
+
+  <!-- Guardrail decision under When -->
+  <line class="con" x1="602" y1="104" x2="602" y2="138" marker-end="url(#arw)"/>
+  <polygon class="dia" points="602,138 674,178 602,218 530,178"/>
+  <text class="t" x="602" y="175" text-anchor="middle" font-size="12">Per-location</text>
+  <text class="t" x="602" y="190" text-anchor="middle" font-size="12">platform?</text>
+
+  <!-- Yes -> add locations -->
+  <line class="con" x1="674" y1="178" x2="742" y2="178" marker-end="url(#arw)"/>
+  <text class="lbl" x="686" y="169">Yes</text>
+  <rect class="box" x="744" y="150" width="180" height="56" rx="9"/>
+  <text class="t" x="760" y="176">Add locations</text><text class="s" x="760" y="193">target exact outlets</text>
+
+  <!-- No -> brand-level warn -->
+  <line class="con" x1="530" y1="178" x2="474" y2="178" marker-end="url(#arw)"/>
+  <text class="lbl" x="486" y="169">No</text>
+  <rect class="warn" x="196" y="146" width="278" height="64" rx="9"/>
+  <text class="amb" x="212" y="170">Brand-level platform (ToYou / Jahez):</text>
+  <text class="amb" x="212" y="186">locations off → applies to all its outlets,</text>
+  <text class="amb" x="212" y="202">or remove it to target locations.</text>
+
+  <!-- Then -> Save -->
+  <line class="con" x1="1082" y1="104" x2="1082" y2="296" marker-end="url(#arw)"/>
+
+  <!-- Row 2: save -> conflict -> publish -->
+  <rect class="box acc" x="984" y="298" width="196" height="64" rx="10"/>
+  <text class="t" x="1002" y="328">Save</text><text class="s" x="1002" y="346">runs conflict check</text>
+
+  <polygon class="dia" points="916,330 852,288 788,330 852,372"/>
+  <text class="t" x="852" y="335" text-anchor="middle" font-size="13">Conflict?</text>
+  <line class="con" x1="984" y1="330" x2="920" y2="330" marker-end="url(#arw)"/>
+
+  <rect class="box" x="536" y="298" width="196" height="64" rx="10"/>
+  <text class="t" x="554" y="328">Rule is live</text><text class="s" x="554" y="346">in list · toggle on/off</text>
+  <line class="con" x1="788" y1="330" x2="736" y2="330" marker-end="url(#arw)"/>
+  <text class="lbl" x="752" y="321">No</text>
+
+  <rect class="box acc" x="280" y="298" width="196" height="64" rx="10"/>
+  <text class="t" x="298" y="328">Publish</text><text class="s" x="298" y="346">to platforms</text>
+  <line class="con" x1="536" y1="330" x2="480" y2="330" marker-end="url(#arw)"/>
+
+  <!-- Yes -> resolve -->
+  <line class="con" x1="852" y1="372" x2="852" y2="436" marker-end="url(#arw)"/>
+  <text class="lbl" x="862" y="404">Yes</text>
+  <rect class="box bad" x="720" y="438" width="264" height="70" rx="10"/>
+  <text class="t" x="738" y="468">Resolve conflict</text>
+  <text class="s" x="738" y="487">toggle one · edit · deselect overlaps</text>
+
+  <!-- resolve back to rule live -->
+  <path class="con" d="M720,473 L634,473 L634,366" marker-end="url(#arw)"/>
+</svg>
