@@ -1,12 +1,12 @@
 import { caseStudies } from "@/lib/case-studies";
 import { profile } from "@/lib/profile";
 import Hero from "@/components/Hero";
-import StatBand from "@/components/StatBand";
 import Marquee from "@/components/Marquee";
 import SectionHeader from "@/components/SectionHeader";
 import FeaturedWork from "@/components/FeaturedWork";
 import WorkCard from "@/components/WorkCard";
 import CareerTimeline from "@/components/CareerTimeline";
+import ToolsMarquee from "@/components/ToolsMarquee";
 import Testimonials from "@/components/Testimonials";
 import WhoIAm from "@/components/WhoIAm";
 import Reveal from "@/components/Reveal";
@@ -18,10 +18,9 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <StatBand />
 
-      {/* Credential ticker */}
-      <div className="border-b border-line py-5">
+      {/* Highlights ticker */}
+      <div className="border-y border-line py-5">
         <Marquee items={profile.credentials} variant="mono" />
       </div>
 
@@ -51,8 +50,9 @@ export default function Home() {
       </section>
 
       <CareerTimeline />
-      <Testimonials />
+      <ToolsMarquee />
       <WhoIAm />
+      <Testimonials />
     </>
   );
 }

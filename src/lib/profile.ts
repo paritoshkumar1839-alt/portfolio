@@ -35,9 +35,8 @@ export const profile = {
 
   // Bio — used in the "Who I am" section.
   bio: [
-    "I'm a product designer with 4+ years of experience, most recently at UrbanPiper. My focus has always been the same: understand why a workflow feels painful for the person stuck inside it, then simplify it until the pain disappears — not fewer screens for the sake of fewer screens, but fewer steps between someone and the thing they actually came to do.",
-    "At UrbanPiper, that meant designing for restaurant owners juggling orders across half a dozen delivery apps at once — people who don't have time to learn new software, only to run a kitchen. Every decision started with the same question: why does this step exist, and who does it actually serve? If the honest answer was “the system needs it” instead of “the user needs it,” it got redesigned or removed. [Add the specific feature or initiative you led — e.g. order aggregation, menu management, a POS integration.]",
-    "I work closely with engineering and product from day one, because the “why” behind a decision gets lost fast once it's handed off — and I'd rather defend a decision in a standup than rebuild it after launch. [Add a real detail about what you read, build, or study to stay sharp — this is what makes the paragraph sound like you, not a template.]",
+    "I'm a product designer who spent the last few years at UrbanPiper, the platform restaurants use to run every delivery channel they sell on. I designed across its three core products — Meraki, the white-labeled app diners order from; Prime, the point-of-sale system cashiers run; and Atlas, the dashboard restaurant teams use to manage it all — which meant designing for consumers, cashiers, and operators, on web and mobile.",
+    "My work lives wherever a workflow is too complex for the person stuck inside it. I start with why a step exists and who it actually serves, work with engineering from day one so decisions survive the handoff, and treat design QA as part of the job rather than an afterthought. Before product, I trained as a film editor — the instinct for pacing and story never left, and it still shapes how I think about a flow.",
   ],
 
   // Stat band under the hero. Keep these honest.
@@ -48,16 +47,17 @@ export const profile = {
     { value: "[N]+", label: "Products shipped to production" },
   ],
 
-  // Scrolling credential marquee — companies, scope, awards, publications.
+  // Scrolling highlights marquee — the best things to know, at a glance.
   credentials: [
-    "UrbanPiper — Atlas",
-    "B2B SaaS · Self-Serve",
+    "Product Designer",
+    "UrbanPiper",
+    "Meraki · consumer ordering",
+    "Prime · point of sale",
+    "Atlas · merchant dashboard",
     "MENA · UK · US · India",
-    "0 → 1 Product Design",
-    "Design Systems",
-    "[Award or recognition]",
-    "[Publication or talk]",
-    "[Previous company]",
+    "0 → 1 product design",
+    "Design systems",
+    "Systems thinking",
   ],
 
   // Capability cards — the craft, in a few grouped strengths.
@@ -113,30 +113,21 @@ export const profile = {
     { category: "Collaboration", items: ["Notion", "Linear", "Slack"] },
   ],
 
-  // Career timeline — richer than a plain list.
+  // Career timeline — one company, owned deeply.
   experience: [
     {
       role: "Product Designer",
       company: "UrbanPiper",
-      period: "20XX — Present",
-      current: true,
-      impact:
-        "Designing Atlas — order, schedule, and operations management for multi-brand restaurant businesses across delivery platforms.",
-      achievements: [
-        "Led the self-serve go-live redesign, letting restaurant teams connect their own stores to every delivery platform without waiting on an account manager.",
-        "[Add a specific feature or initiative you owned — e.g. order aggregation, menu management, a POS integration.]",
-        "[Add a measurable outcome — adoption, time saved, support tickets reduced.]",
-      ],
-    },
-    {
-      role: "[Job title]",
-      company: "[Company name]",
+      // TODO(paritosh): confirm real start/end dates.
       period: "20XX — 20XX",
       current: false,
-      impact: "[One line on what you owned and shipped here.]",
+      impact:
+        "Designed across UrbanPiper's three core products — Meraki (consumer ordering), Prime (point of sale), and Atlas (the merchant dashboard) — for diners, cashiers, and restaurant operators, on web and mobile.",
       achievements: [
-        "[Achievement or responsibility.]",
-        "[Achievement or responsibility.]",
+        "Led the self-serve Request-to-Go-Live flow, letting restaurant teams connect their own stores to delivery platforms instead of waiting on an account manager.",
+        "Designed Menu Rules — targeted exceptions by platform, location, and item that replaced dozens of duplicated menus with a single source of truth.",
+        "Owned features end to end: discovery, interaction design, prototyping, and design QA alongside engineering.",
+        "Stepped into graphic and motion work when the product needed it, not just screens.",
       ],
     },
   ],

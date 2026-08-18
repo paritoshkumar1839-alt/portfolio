@@ -12,9 +12,7 @@ export default function CareerTimeline() {
         <SectionHeader
           label="Career"
           title="Where I've built."
-          intro="4+ years turning execution into strategy — from designing a single flow to owning a product's direction end to end."
-          href={profile.resumeHref}
-          hrefLabel="Request full CV"
+          intro="One company, gone deep — from designing a single flow to owning whole products end to end at UrbanPiper."
         />
 
         <ol className="mt-16 flex flex-col">
