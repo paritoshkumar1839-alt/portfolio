@@ -202,30 +202,45 @@ export const profile = {
     {
       name: "Abhishek Tomar",
       role: "Senior Product Manager, UrbanPiper",
+      image: "/testimonials/abhishek-tomar.jpg",
+      company: "UrbanPiper",
+      logo: "/testimonials/urbanpiper.jpeg",
       quote:
         "Paritosh consistently impressed me with how he approaches his craft. What stood out most was his ability to juggle multiple projects and products at once — even with heavy context switching, he never lost sight of the details or dropped the ball. Before jumping into solutions, he always took the time to deeply understand the user and their actual pain points; it genuinely shaped the direction of his designs and led to better outcomes. Whether working with PMs, engineers, or other designers, he made sure everyone's perspective was heard, and once something was his responsibility, he took complete ownership of it, end to end, no hand-holding required.",
     },
     {
       name: "Akshay Kadam",
-      role: "Software Engineer, UrbanPiper",
+      role: "Software Engineer, Novulis Consulting",
+      image: "/testimonials/akshay-kadam.jpg",
+      company: "Novulis Consulting",
+      logo: "/testimonials/novulis.jpeg",
       quote:
         "I had the absolute pleasure of working closely with Paritosh at UrbanPiper for three years. As a developer, finding a design partner who truly understands the technical nuances of product development is rare, but Paritosh bridges that gap effortlessly. He led design across multiple core products simultaneously — Meraki, Prime, and Atlas — balancing the distinct experiences of consumers, cashiers, and merchants brilliantly. What always stood out was his meticulous approach to developer handoffs: his files and specs were consistently clear and thoroughly thought-out, which significantly streamlined our engineering cycles. Any engineering team would be incredibly lucky to have Paritosh as their design partner.",
     },
     {
       name: "Vaibhavraj Roham",
       role: "Engineering, UrbanPiper",
+      image: "/testimonials/vaibhavraj-roham.jpg",
+      company: "UrbanPiper",
+      logo: "/testimonials/urbanpiper.jpeg",
       quote:
         "What stood out most about Paritosh was his ability to translate complex product problems into simple, intuitive experiences. He didn't just make interfaces look good — he consistently asked the right questions, challenged assumptions, and ensured every design decision was grounded in user needs. He's highly collaborative with engineers, incredibly receptive to feedback, and someone you can trust to take ownership from discovery through polished execution. Any team looking for a designer who combines strong product thinking with excellent execution would be fortunate to have Paritosh.",
     },
     {
       name: "Kaviya Anandaraman",
       role: "Product Designer, UrbanPiper · prev. Lollypop",
+      image: "/testimonials/kaviya-anandaraman.jpg",
+      company: "UrbanPiper",
+      logo: "/testimonials/urbanpiper.jpeg",
       quote:
         "I worked with Paritosh at UrbanPiper, and I genuinely enjoyed collaborating with him. His designs consistently reflected a good understanding of both the user experience and the practical constraints of the product, and many of our discussions felt less like handoffs and more like solving problems together. I always found him open to feedback, easy to work with, and willing to think through edge cases before jumping to solutions. I'm sure any team would value having him as part of their design team.",
     },
     {
       name: "Vishal Maurya",
-      role: "Product Designer · studied together",
+      role: "Product Designer, Mankind · studied together",
+      image: "/testimonials/vishal-maurya.jpg",
+      company: "Mankind",
+      logo: "/testimonials/mankind.jpeg",
       quote:
         "Paritosh possesses a remarkable ability to understand user needs and translate them into outstanding user experiences. He consistently demonstrated a strong grasp of design principles and methodologies, and his attention to detail was unparalleled. His designs were not only visually captivating but also highly functional, striking the perfect balance between aesthetics and usability.",
     },

@@ -1,6 +1,7 @@
 import { profile } from "@/lib/profile";
 import SectionHeader from "@/components/SectionHeader";
 import Reveal from "@/components/Reveal";
+import TestimonialAvatar from "@/components/TestimonialAvatar";
 
 /** Two-letter monogram from a name, used as an avatar stand-in. */
 function initials(name: string) {
@@ -37,19 +38,34 @@ export default function Testimonials() {
               className="mb-6 break-inside-avoid"
             >
               <figure className="rounded-2xl border border-line bg-surface p-7 md:p-8">
-                <span
-                  className="font-serif text-5xl leading-none text-accent/50"
-                  aria-hidden
-                >
-                  &ldquo;
-                </span>
-                <blockquote className="-mt-2 text-pretty leading-relaxed text-text-muted">
+                <div className="flex items-start justify-between gap-4">
+                  <span
+                    className="font-serif text-5xl leading-none text-accent/50"
+                    aria-hidden
+                  >
+                    &ldquo;
+                  </span>
+                  {t.logo && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={t.logo}
+                      alt={t.company}
+                      width={40}
+                      height={40}
+                      loading="lazy"
+                      className="h-10 w-10 shrink-0 rounded-lg border border-line-strong bg-white object-contain p-1.5"
+                    />
+                  )}
+                </div>
+                <blockquote className="mt-2 text-pretty leading-relaxed text-text-muted">
                   {t.quote}
                 </blockquote>
                 <figcaption className="mt-6 flex items-center gap-3.5 border-t border-line pt-5">
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-line-strong bg-surface-2 text-sm font-medium text-accent">
-                    {initials(t.name)}
-                  </span>
+                  <TestimonialAvatar
+                    src={t.image}
+                    initials={initials(t.name)}
+                    name={t.name}
+                  />
                   <span className="min-w-0">
                     <span className="block truncate font-medium text-text">
                       {t.name}
