@@ -19,7 +19,19 @@ function slugify(name: string) {
   return name.toLowerCase().replace(/\+/g, "plus").replace(/[^a-z0-9]/g, "");
 }
 
+// Recognizable short marks for tools whose brand logos aren't in the icon set
+// (Adobe / Slack / OpenAI restrict their marks, so simple-icons omits them).
+const MONO_LABEL: Record<string, string> = {
+  "Adobe XD": "Xd",
+  "Adobe Premiere Pro": "Pr",
+  ChatGPT: "GPT",
+  Slack: "Sl",
+  Stitch: "St",
+  Lovable: "Lv",
+};
+
 function monogram(name: string) {
+  if (MONO_LABEL[name]) return MONO_LABEL[name];
   const words = name.trim().split(/\s+/);
   if (words.length > 1) return (words[0][0] + words[1][0]).toUpperCase();
   return name.slice(0, 2).toUpperCase();

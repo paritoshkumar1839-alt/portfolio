@@ -106,11 +106,12 @@ export const profile = {
     "Systems Thinking",
   ],
 
-  // Tools grouped by category.
+  // Tools grouped by category (order here is the order they scroll in).
   tools: [
-    { category: "Design", items: ["Figma", "Sketch", "Adobe Illustrator"] },
-    { category: "Prototyping", items: ["Framer", "Principle", "ProtoPie"] },
-    { category: "Collaboration", items: ["Notion", "Linear", "Slack"] },
+    { category: "Design", items: ["Figma", "Adobe XD", "Framer", "Wix", "Stitch"] },
+    { category: "AI", items: ["Claude Code", "Claude", "ChatGPT", "Lovable"] },
+    { category: "Product", items: ["Linear", "Slack", "PostHog", "Hotjar"] },
+    { category: "Video", items: ["Adobe Premiere Pro"] },
   ],
 
   // Career timeline — one company, owned deeply.
@@ -118,8 +119,7 @@ export const profile = {
     {
       role: "Product Designer",
       company: "UrbanPiper",
-      // TODO(paritosh): confirm real start/end dates.
-      period: "20XX — 20XX",
+      period: "Apr 2022 — Jul 2026",
       current: false,
       impact:
         "Designed across UrbanPiper's three core products — Meraki (consumer ordering), Prime (point of sale), and Atlas (the merchant dashboard) — for diners, cashiers, and restaurant operators, on web and mobile.",
@@ -172,9 +172,14 @@ export const profile = {
 
   education: [
     {
-      program: "[Degree / Program]",
-      place: "[Institution]",
-      period: "20XX — 20XX",
+      program: "Full-Stack UI/UX Design Diploma",
+      place: "Masai School",
+      period: "Aug 2020 — Feb 2021",
+    },
+    {
+      program: "BSc in Cinema",
+      place: "Asian Academy of Film & Television",
+      period: "2018 — 2021",
     },
   ],
 
