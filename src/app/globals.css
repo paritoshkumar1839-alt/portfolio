@@ -250,6 +250,23 @@ body {
   animation-play-state: paused;
 }
 
+/* --- Testimonial slider ---------------------------------------------------- */
+@keyframes testimonial-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.testimonial-track {
+  animation: testimonial-scroll 70s linear infinite;
+}
+/* Pause the whole slider when hovering any card. */
+.testimonial-slider:hover .testimonial-track {
+  animation-play-state: paused;
+}
+
 /* --- Scroll reveal --------------------------------------------------------- */
 .reveal {
   opacity: 0;
