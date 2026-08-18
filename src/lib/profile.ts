@@ -248,8 +248,8 @@ export const profile = {
   resumeHref: "/resume.pdf",
 
   socials: [
-    { label: "LinkedIn", href: "https://linkedin.com/in/your-handle" },
-    { label: "Dribbble", href: "https://dribbble.com/your-handle" },
+    { label: "LinkedIn", href: "https://linkedin.com/in/iamparitoshkumar" },
+    { label: "Behance", href: "https://behance.net/paritoshkumar4" },
   ],
 
   // Beyond product design — film work. Personal-branding subsection in About.
