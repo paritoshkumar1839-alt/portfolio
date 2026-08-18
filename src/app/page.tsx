@@ -7,6 +7,7 @@ import SectionHeader from "@/components/SectionHeader";
 import FeaturedWork from "@/components/FeaturedWork";
 import WorkCard from "@/components/WorkCard";
 import CareerTimeline from "@/components/CareerTimeline";
+import Testimonials from "@/components/Testimonials";
 import WhoIAm from "@/components/WhoIAm";
 import Reveal from "@/components/Reveal";
 
@@ -50,6 +51,7 @@ export default function Home() {
       </section>
 
       <CareerTimeline />
+      <Testimonials />
       <WhoIAm />
     </>
   );
