@@ -6,6 +6,8 @@ import Media from "@/components/Media";
 import Reveal from "@/components/Reveal";
 import CaseStudySections from "@/components/CaseStudySections";
 import CaseStudyFeatures from "@/components/CaseStudyFeatures";
+import CaseStudyGate from "@/components/CaseStudyGate";
+import { isLocked } from "@/lib/gate";
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
@@ -46,6 +48,11 @@ export default async function CaseStudyPage({
   const hasOutcome = Boolean(study.outcome) || Boolean(study.metrics?.length);
 
   return (
+    <CaseStudyGate
+      locked={isLocked(study)}
+      title={study.title}
+      teaser={study.lockedTeaser}
+    >
     <article>
       {/* Header */}
       <header className="container-page pt-14 pb-12 md:pt-20">
@@ -274,5 +281,6 @@ export default async function CaseStudyPage({
         </div>
       )}
     </article>
+    </CaseStudyGate>
   );
 }

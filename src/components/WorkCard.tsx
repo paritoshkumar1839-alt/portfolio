@@ -1,6 +1,8 @@
-import Link from "next/link";
 import type { CaseStudy } from "@/lib/case-studies";
 import Media from "@/components/Media";
+import StudyLink from "@/components/StudyLink";
+import LockBadge from "@/components/LockBadge";
+import { isLocked } from "@/lib/gate";
 
 export default function WorkCard({
   study,
@@ -10,7 +12,8 @@ export default function WorkCard({
   index: number;
 }) {
   const num = String(index + 1).padStart(2, "0");
-  const locked = study.comingSoon;
+  const comingSoon = study.comingSoon;
+  const gated = isLocked(study);
 
   const inner = (
     <>
@@ -21,7 +24,7 @@ export default function WorkCard({
       >
         <div
           className={`h-full w-full transition-transform duration-700 ease-out ${
-            locked ? "" : "group-hover:scale-[1.03]"
+            comingSoon ? "" : "group-hover:scale-[1.03]"
           }`}
         >
           <Media
@@ -30,10 +33,12 @@ export default function WorkCard({
             className={study.cardContain ? "!object-contain" : "object-top"}
           />
         </div>
-        {locked && (
+        {comingSoon ? (
           <span className="absolute left-4 top-4 rounded-full border border-line-strong bg-bg/70 px-3 py-1 text-[0.7rem] font-medium tracking-wide text-text-muted backdrop-blur">
             In progress
           </span>
+        ) : (
+          <LockBadge locked={gated} />
         )}
       </div>
 
@@ -65,7 +70,7 @@ export default function WorkCard({
             )}
           </div>
         </div>
-        {!locked && (
+        {!comingSoon && (
           <span
             aria-hidden
             className="mt-1 shrink-0 text-text-faint transition-all duration-500 group-hover:translate-x-1 group-hover:text-accent"
@@ -77,7 +82,7 @@ export default function WorkCard({
     </>
   );
 
-  if (locked) {
+  if (comingSoon) {
     return (
       <div className="group block cursor-default select-none opacity-80">
         {inner}
@@ -86,8 +91,14 @@ export default function WorkCard({
   }
 
   return (
-    <Link href={`/work/${study.slug}`} className="group block">
+    <StudyLink
+      slug={study.slug}
+      title={study.title}
+      teaser={study.lockedTeaser}
+      locked={gated}
+      className="group block"
+    >
       {inner}
-    </Link>
+    </StudyLink>
   );
 }

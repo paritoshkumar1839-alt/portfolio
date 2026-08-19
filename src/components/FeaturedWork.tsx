@@ -1,13 +1,18 @@
-import Link from "next/link";
 import type { CaseStudy } from "@/lib/case-studies";
 import Media from "@/components/Media";
 import Reveal from "@/components/Reveal";
+import StudyLink from "@/components/StudyLink";
+import LockBadge from "@/components/LockBadge";
+import { isLocked } from "@/lib/gate";
 
 export default function FeaturedWork({ study }: { study: CaseStudy }) {
   return (
     <Reveal>
-      <Link
-        href={`/work/${study.slug}`}
+      <StudyLink
+        slug={study.slug}
+        title={study.title}
+        teaser={study.lockedTeaser}
+        locked={isLocked(study)}
         className="group block overflow-hidden rounded-2xl border border-line bg-surface transition-colors hover:border-line-strong"
       >
         <div className="grid md:grid-cols-2">
@@ -20,9 +25,10 @@ export default function FeaturedWork({ study }: { study: CaseStudy }) {
                 className="!object-contain"
               />
             </div>
-            <span className="absolute left-5 top-5 rounded-full border border-line-strong bg-bg/70 px-3 py-1 text-[0.7rem] font-medium tracking-wide text-accent backdrop-blur">
+            <span className="absolute left-5 top-5 rounded-full border border-line-strong bg-bg/70 px-3 py-1 text-[0.7rem] font-medium tracking-wide text-text-muted backdrop-blur">
               Featured
             </span>
+            <LockBadge locked={isLocked(study)} className="absolute right-5 top-5 z-10" />
           </div>
 
           {/* Content */}
@@ -66,7 +72,7 @@ export default function FeaturedWork({ study }: { study: CaseStudy }) {
             </span>
           </div>
         </div>
-      </Link>
+      </StudyLink>
     </Reveal>
   );
 }

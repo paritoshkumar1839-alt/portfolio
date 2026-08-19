@@ -100,6 +100,10 @@ export type CaseStudy = {
   nextSlug?: string;
   // When true, the study is teased everywhere but has no detail page content.
   comingSoon?: boolean;
+  // Real studies are password-locked by default; set `isPublic` to open one up.
+  isPublic?: boolean;
+  // Punchy one-liner shown on the lock screen to entice a password request.
+  lockedTeaser?: string;
 };
 
 export const caseStudies: CaseStudy[] = [
@@ -111,6 +115,8 @@ export const caseStudies: CaseStudy[] = [
     tags: ["B2B SaaS", "0 → 1 Flow"],
     domain: "B2B SaaS · UrbanPiper",
     featured: true,
+    lockedTeaser:
+      "The self-serve flow that let restaurants take their own stores live across every delivery platform.",
     // TODO(paritosh): real numbers to be added later.
     metrics: [
       { label: "Go-live now self-served", value: "[  ]%" },
@@ -318,6 +324,8 @@ export const caseStudies: CaseStudy[] = [
       "Big restaurant brands can make targeted menu exceptions — a different price here, an item switched off there — without cloning a whole menu for every variation.",
     tags: ["B2B SaaS", "Systems"],
     domain: "B2B SaaS · UrbanPiper",
+    lockedTeaser:
+      "The rules engine that replaced dozens of duplicated menus with a single source of truth.",
     // TODO(paritosh): real numbers later. "Change types" and "Timeline" are real.
     metrics: [
       { label: "Duplicate menus replaced", value: "[  ]" },

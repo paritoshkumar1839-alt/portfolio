@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import GateProvider from "@/components/GateProvider";
 import { profile } from "@/lib/profile";
 import "./globals.css";
 
@@ -39,11 +40,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <div className="ambient" aria-hidden />
         <div className="grain" aria-hidden />
-        <div className="relative z-[2] flex min-h-dvh flex-col">
-          <Nav />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
+        <GateProvider>
+          <div className="relative z-[2] flex min-h-dvh flex-col">
+            <Nav />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+        </GateProvider>
       </body>
     </html>
   );
