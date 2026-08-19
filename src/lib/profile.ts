@@ -30,8 +30,9 @@ export const profile = {
   // Hero positioning sentence — sits under the big name.
   headline:
     "I turn ambiguous, high-complexity workflows into interfaces that scale.",
+  // Subtle hero metadata line (kept light on purpose).
   tagline:
-    "4+ years designing B2B and consumer products — from early concept to shipped detail.",
+    "4+ years in product design — B2B SaaS, web apps, and the design systems behind them.",
 
   // Bio — used in the "Who I am" section.
   bio: [

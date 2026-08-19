@@ -29,6 +29,11 @@ export default function Hero() {
         {profile.headline}
       </p>
 
+      {/* Subtle credentials line */}
+      <p className="mx-auto mt-4 max-w-xl text-sm text-text-faint">
+        {profile.tagline}
+      </p>
+
       {/* CTAs — primary (lime) + secondary (minimal), centered */}
       <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
         <Magnetic>
