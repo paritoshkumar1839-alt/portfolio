@@ -7,26 +7,26 @@
  * ========================================================================== */
 
 :root {
-  /* ---- Theme: Teal Noir ---- */
-  --bg: #06090b; /* near-black canvas, faint blue-green cool */
-  --bg-elevated: #0c1113;
-  --surface: #0f1517; /* panels */
-  --surface-2: #16201f; /* cards on panels */
-  --text: #ecefee;
-  --text-muted: #899492;
-  --text-faint: #606b69;
-  --line: #1e2523; /* hairline borders */
-  --line-strong: #2e3937;
+  /* ---- Theme: Mono Warm (after suhail.design) — monochrome, warm-neutral.
+     No chromatic accent; emphasis comes from brightness and weight. ---- */
+  --bg: #050505; /* neutral near-black canvas */
+  --bg-elevated: #0d0d0d;
+  --surface: #101010; /* panels */
+  --surface-2: #181818; /* cards on panels */
+  --text: #f4f3f1; /* warm off-white */
+  --text-muted: #9c9895;
+  --text-faint: #6b6866;
+  --line: #242424; /* hairline borders */
+  --line-strong: #343330;
 
-  /* Brand accent is a blue-green (teal) — the midpoint of the duotone.
-     Swap --accent to re-skin the solid fills; --accent-2 is the blue that
-     pairs with it in gradients and the ambient glow. */
-  --accent: #2ddbc0; /* teal / blue-green */
-  --accent-2: #4f9dff; /* blue */
-  --accent-ink: #04130f; /* dark text on accent fills */
-  --accent-gradient: linear-gradient(118deg, #4f9dff 0%, #2ddbc0 100%);
-  --accent-glow: rgba(45, 219, 192, 0.16); /* teal glow */
-  --accent-glow-2: rgba(79, 157, 255, 0.14); /* blue glow */
+  /* Monochrome "accent": warm off-white. There is no brand hue — the accent
+     token resolves to light-on-dark, and gradients collapse to a soft sheen. */
+  --accent: #f4f3f1; /* off-white */
+  --accent-2: #cfccc7; /* dimmer light, for gradient endpoints */
+  --accent-ink: #0a0a0a; /* near-black text on light fills */
+  --accent-gradient: linear-gradient(118deg, #ffffff 0%, #cfccc7 100%);
+  --accent-glow: rgba(255, 255, 255, 0.045); /* faint neutral glow */
+  --accent-glow-2: rgba(255, 255, 255, 0.03);
 }
 
 @theme inline {
@@ -115,8 +115,8 @@ body {
 .font-serif {
   font-family: var(--font-serif);
   font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.04;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
 }
 
 .font-mono {

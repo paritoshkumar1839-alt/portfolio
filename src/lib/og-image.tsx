@@ -13,10 +13,10 @@ export function OgImageContent() {
         flexDirection: "column",
         justifyContent: "center",
         padding: "84px",
-        backgroundColor: "#06090b",
+        backgroundColor: "#050505",
         backgroundImage:
-          "radial-gradient(50% 60% at 38% 0%, rgba(79,157,255,0.20) 0%, transparent 70%), radial-gradient(50% 60% at 64% 0%, rgba(45,219,192,0.20) 0%, transparent 70%)",
-        color: "#ecefec",
+          "radial-gradient(60% 70% at 50% 0%, rgba(255,255,255,0.06) 0%, transparent 70%)",
+        color: "#f4f3f1",
         fontFamily: "sans-serif",
       }}
     >
@@ -29,7 +29,7 @@ export function OgImageContent() {
           fontSize: 22,
           textTransform: "uppercase",
           letterSpacing: 8,
-          color: "#8b938d",
+          color: "#9c9895",
           fontFamily: "sans-serif",
         }}
       >
@@ -38,7 +38,7 @@ export function OgImageContent() {
             width: 12,
             height: 12,
             borderRadius: 999,
-            backgroundColor: "#2ddbc0",
+            backgroundColor: "#f4f3f1",
             display: "flex",
           }}
         />
@@ -59,7 +59,7 @@ export function OgImageContent() {
           display: "flex",
           fontSize: 30,
           marginTop: 48,
-          color: "#8b938d",
+          color: "#9c9895",
           fontFamily: "sans-serif",
         }}
       >
