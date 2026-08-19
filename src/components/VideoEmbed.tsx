@@ -1,6 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+// Broadcast when any embed starts, so only one video plays (and makes sound)
+// at a time — starting one resets every other back to its poster.
+const PLAY_EVENT = "video-embed-play";
 
 type VideoEmbedProps = {
   source: "youtube" | "drive";
@@ -27,6 +31,21 @@ export default function VideoEmbed({
 }: VideoEmbedProps) {
   const [playing, setPlaying] = useState(false);
 
+  // When another embed starts, stop this one (unmounts its iframe → audio off).
+  useEffect(() => {
+    if (!playing) return;
+    const onOther = (e: Event) => {
+      if ((e as CustomEvent<string>).detail !== videoId) setPlaying(false);
+    };
+    window.addEventListener(PLAY_EVENT, onOther);
+    return () => window.removeEventListener(PLAY_EVENT, onOther);
+  }, [playing, videoId]);
+
+  const start = () => {
+    window.dispatchEvent(new CustomEvent(PLAY_EVENT, { detail: videoId }));
+    setPlaying(true);
+  };
+
   const src =
     source === "youtube"
       ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`
@@ -46,7 +65,7 @@ export default function VideoEmbed({
       ) : (
         <button
           type="button"
-          onClick={() => setPlaying(true)}
+          onClick={start}
           aria-label={`Play ${title}`}
           className="group/vid absolute inset-0 h-full w-full cursor-pointer"
         >
