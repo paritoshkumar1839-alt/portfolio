@@ -16,13 +16,13 @@ export default function RemixRail() {
 
   return (
     <div className="mt-16 border-t border-line pt-12">
-      <div className="flex items-end justify-between gap-6">
+      <div className="flex flex-col items-center gap-6 text-center">
         <div>
           <span className="eyebrow">Just for fun</span>
           <h3 className="mt-4 font-serif text-[clamp(1.9rem,4.5vw,3rem)] leading-[1.04] text-balance">
             {film.remixTitle}
           </h3>
-          <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-text-muted">
+          <p className="mx-auto mt-4 max-w-2xl text-pretty leading-relaxed text-text-muted">
             {film.remixIntro}
           </p>
         </div>

@@ -7,7 +7,6 @@ import FeaturedWork from "@/components/FeaturedWork";
 import WorkCard from "@/components/WorkCard";
 import CareerTimeline from "@/components/CareerTimeline";
 import ToolsMarquee from "@/components/ToolsMarquee";
-import Testimonials from "@/components/Testimonials";
 import WhoIAm from "@/components/WhoIAm";
 import Reveal from "@/components/Reveal";
 
@@ -52,7 +51,6 @@ export default function Home() {
       <CareerTimeline />
       <ToolsMarquee />
       <WhoIAm />
-      <Testimonials />
     </>
   );
 }

@@ -11,13 +11,15 @@ export default function GalleryCollage() {
 
   return (
     <div className="mt-16 border-t border-line pt-12">
-      <span className="eyebrow">Off the desk</span>
-      <h3 className="mt-4 font-serif text-[clamp(1.9rem,4.5vw,3rem)] leading-[1.04] text-balance">
-        {gallery.heading}
-      </h3>
-      <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-text-muted">
-        {gallery.intro}
-      </p>
+      <div className="text-center">
+        <span className="eyebrow">Off the desk</span>
+        <h3 className="mx-auto mt-4 font-serif text-[clamp(1.9rem,4.5vw,3rem)] leading-[1.04] text-balance">
+          {gallery.heading}
+        </h3>
+        <p className="mx-auto mt-4 max-w-2xl text-pretty leading-relaxed text-text-muted">
+          {gallery.intro}
+        </p>
+      </div>
 
       <Reveal className="mt-8 columns-2 [column-gap:1rem] md:columns-3">
         {imgs.map((src, i) => (

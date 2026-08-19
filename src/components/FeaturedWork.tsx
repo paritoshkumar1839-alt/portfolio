@@ -32,10 +32,10 @@ export default function FeaturedWork({ study }: { study: CaseStudy }) {
                 <span className="eyebrow">01</span>
                 {study.domain && <span className="eyebrow">{study.domain}</span>}
               </div>
-              <h3 className="mt-5 font-serif text-[clamp(1.9rem,3.4vw,2.75rem)] leading-[1.05] text-text">
+              <h3 className="mt-5 font-serif text-[clamp(1.5rem,2.6vw,2rem)] leading-[1.08] text-text">
                 {study.title}
               </h3>
-              <p className="mt-4 max-w-md text-pretty leading-relaxed text-text-muted">
+              <p className="mt-4 max-w-md text-pretty text-sm leading-relaxed text-text-muted">
                 {study.tagline}
               </p>
             </div>
@@ -44,7 +44,7 @@ export default function FeaturedWork({ study }: { study: CaseStudy }) {
               <dl className="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-line pt-6 sm:grid-cols-4">
                 {study.metrics.map((m) => (
                   <div key={m.label}>
-                    <dt className="font-serif text-2xl text-accent md:text-3xl">
+                    <dt className="font-serif text-lg text-text md:text-xl">
                       {m.value}
                     </dt>
                     <dd className="mt-1 text-[0.7rem] leading-tight text-text-faint">

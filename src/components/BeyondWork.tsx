@@ -8,21 +8,23 @@ export default function BeyondWork() {
   const { film } = profile;
   return (
     <div className="mt-16 border-t border-line pt-12">
-      <span className="eyebrow">Beyond design</span>
-      <h3 className="mt-4 font-serif text-[clamp(1.9rem,4.5vw,3rem)] leading-[1.04] text-balance">
-        {film.heading}
-      </h3>
+      <div className="text-center">
+        <span className="eyebrow">Beyond design</span>
+        <h3 className="mx-auto mt-4 font-serif text-[clamp(1.9rem,4.5vw,3rem)] leading-[1.04] text-balance">
+          {film.heading}
+        </h3>
 
-      <p className="mt-6 max-w-2xl text-pretty leading-relaxed text-text-muted">
-        {film.intro}
-      </p>
-
-      <blockquote className="mt-8 max-w-2xl border-l-2 border-accent pl-5">
-        <p className="font-serif text-2xl leading-snug text-balance text-text">
-          “{film.quote}”
+        <p className="mx-auto mt-6 max-w-2xl text-pretty leading-relaxed text-text-muted">
+          {film.intro}
         </p>
-        <footer className="mt-2 text-sm text-text-muted">{film.lede}</footer>
-      </blockquote>
+
+        <blockquote className="mx-auto mt-8 max-w-2xl">
+          <p className="font-serif text-2xl leading-snug text-balance text-text">
+            “{film.quote}”
+          </p>
+          <footer className="mt-2 text-sm text-text-muted">{film.lede}</footer>
+        </blockquote>
+      </div>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {film.works.map((w, i) => {

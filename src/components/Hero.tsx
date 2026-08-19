@@ -23,10 +23,10 @@ export default function Hero() {
 
       {/* Big self-branded name — solid tonal two-tone */}
       <h1 className="mt-8 font-serif leading-[0.9] tracking-tight">
-        <span className="block text-[clamp(3.25rem,14vw,10rem)] text-text">
+        <span className="block text-[clamp(2.5rem,8vw,5.5rem)] text-text">
           {profile.firstName}
         </span>
-        <span className="block text-[clamp(3.25rem,14vw,10rem)] text-text-muted">
+        <span className="block text-[clamp(2.5rem,8vw,5.5rem)] text-text-muted">
           {profile.lastName}
         </span>
       </h1>

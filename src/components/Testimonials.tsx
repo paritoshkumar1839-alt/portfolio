@@ -1,5 +1,4 @@
 import { profile } from "@/lib/profile";
-import SectionHeader from "@/components/SectionHeader";
 import Reveal from "@/components/Reveal";
 import TestimonialAvatar from "@/components/TestimonialAvatar";
 
@@ -47,7 +46,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
         )}
       </div>
 
-      {/* Quote — in its own inner panel, like the reference */}
+      {/* Quote — in its own inner panel */}
       <blockquote className="mt-5 flex-1 rounded-xl border border-line bg-surface-2 p-5 text-sm leading-relaxed text-text-muted">
         <span className="mr-1 font-serif text-accent/60" aria-hidden>
           &ldquo;
@@ -58,31 +57,29 @@ function TestimonialCard({ t }: { t: Testimonial }) {
   );
 }
 
-/** Social proof — real LinkedIn recommendations in a continuously running
- *  horizontal slider that pauses when you hover any card. The list is
- *  duplicated so the loop is seamless. */
+/** Testimonials as an About subsection — a centered header over a continuously
+ *  running slider that pauses on hover. The list is duplicated for a seamless
+ *  loop. */
 export default function Testimonials() {
   const row = [...profile.testimonials, ...profile.testimonials];
 
   return (
-    <section id="testimonials" className="section-anchor border-t border-line">
-      <div className="container-page pt-24 md:pt-32">
-        <SectionHeader
-          label="Testimonials"
-          title={
-            <>
-              What people I&rsquo;ve worked
-              <br className="hidden sm:block" /> with have to say.
-            </>
-          }
-          intro="A few words from the engineers, PMs, and designers I built alongside — mostly from my time at UrbanPiper."
-        />
-      </div>
+    <div
+      id="testimonials"
+      className="mt-16 border-t border-line pt-12 text-center"
+    >
+      <span className="eyebrow">Testimonials</span>
+      <h3 className="mx-auto mt-4 font-serif text-[clamp(1.9rem,4.5vw,3rem)] leading-[1.04] text-balance">
+        What people I&rsquo;ve worked with have to say.
+      </h3>
+      <p className="mx-auto mt-4 max-w-2xl text-pretty leading-relaxed text-text-muted">
+        A few words from the engineers, PMs, and designers I built alongside —
+        mostly from my time at UrbanPiper.
+      </p>
 
-      {/* Full-bleed slider with soft fade at both edges */}
-      <Reveal className="mt-12 pb-24 md:pb-32">
+      <Reveal className="mt-10">
         <div
-          className="testimonial-slider relative flex overflow-hidden"
+          className="testimonial-slider relative flex overflow-hidden text-left"
           style={{
             maskImage:
               "linear-gradient(to right, transparent, #000 5%, #000 95%, transparent)",
@@ -97,6 +94,6 @@ export default function Testimonials() {
           </div>
         </div>
       </Reveal>
-    </section>
+    </div>
   );
 }
