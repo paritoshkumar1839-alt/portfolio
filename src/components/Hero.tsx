@@ -4,29 +4,25 @@ import Magnetic from "@/components/Magnetic";
 export default function Hero() {
   return (
     <section className="container-page pt-14 pb-20 text-center md:pt-20 md:pb-28">
-      {/* Eyebrow */}
-      <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-        <span className="eyebrow text-text-muted">
+      {/* Big self-branded name — one line, two-tone */}
+      <h1 className="whitespace-nowrap font-serif text-[clamp(1.9rem,9vw,5.75rem)] leading-[0.95] tracking-tight">
+        <span className="text-text">{profile.firstName} </span>
+        <span className="text-text-muted">{profile.lastName}</span>
+      </h1>
+
+      {/* Chips — role/location + green availability */}
+      <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+        <span className="rounded-full border border-line-strong px-4 py-1.5 text-xs font-medium uppercase tracking-[0.12em] text-text-muted">
           {profile.role} · {profile.location}
         </span>
-        <span className="inline-flex items-center gap-2">
+        <span className="inline-flex items-center gap-2 rounded-full border border-cta/30 bg-cta/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.12em] text-cta">
           <span className="relative flex size-1.5">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
-            <span className="relative inline-flex size-1.5 rounded-full bg-accent" />
+            <span className="absolute inline-flex size-full animate-ping rounded-full bg-cta opacity-70" />
+            <span className="relative inline-flex size-1.5 rounded-full bg-cta" />
           </span>
-          <span className="eyebrow">{profile.availability}</span>
+          {profile.availability}
         </span>
       </div>
-
-      {/* Big self-branded name — solid tonal two-tone */}
-      <h1 className="mt-8 font-serif leading-[0.9] tracking-tight">
-        <span className="block text-[clamp(2.5rem,8vw,5.5rem)] text-text">
-          {profile.firstName}
-        </span>
-        <span className="block text-[clamp(2.5rem,8vw,5.5rem)] text-text-muted">
-          {profile.lastName}
-        </span>
-      </h1>
 
       {/* Positioning sentence */}
       <p className="mx-auto mt-10 max-w-3xl text-pretty text-xl leading-relaxed text-text-muted md:text-2xl">
