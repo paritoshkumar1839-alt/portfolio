@@ -6,11 +6,8 @@ export default function Hero() {
     <section className="container-page pt-14 pb-20 text-center md:pt-20 md:pb-28">
       {/* Eyebrow */}
       <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-        <span className="flex items-center gap-3">
-          <span className="h-px w-8 bg-accent" aria-hidden />
-          <span className="eyebrow text-accent">
-            {profile.role} · {profile.location}
-          </span>
+        <span className="eyebrow text-text-muted">
+          {profile.role} · {profile.location}
         </span>
         <span className="inline-flex items-center gap-2">
           <span className="relative flex size-1.5">

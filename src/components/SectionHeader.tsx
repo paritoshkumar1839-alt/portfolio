@@ -20,10 +20,7 @@ export default function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <Reveal className="text-center">
-      <div className="flex items-center justify-center gap-3">
-        <span className="h-px w-8 bg-line-strong" aria-hidden />
-        <span className="eyebrow">{label}</span>
-      </div>
+      <span className="eyebrow">{label}</span>
       <h2 className="mx-auto mt-6 max-w-5xl font-serif text-[clamp(2.1rem,5.2vw,4rem)] leading-[1.02] text-balance">
         {title}
       </h2>

@@ -11,7 +11,11 @@ export default function CareerTimeline() {
       <div className="container-page py-24 md:py-32">
         <SectionHeader
           label="Career"
-          title="Where I've built."
+          title={
+            <>
+              Where I&rsquo;ve <span className="text-cta">built</span>.
+            </>
+          }
           intro="One company, gone deep — from designing a single flow to owning whole products end to end at UrbanPiper."
         />
 

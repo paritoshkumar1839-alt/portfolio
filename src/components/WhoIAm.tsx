@@ -11,7 +11,14 @@ export default function WhoIAm() {
   return (
     <section id="about" className="section-anchor border-t border-line">
       <div className="container-page py-24 md:py-32">
-        <SectionHeader label="Who I am" title="A designer who thinks in systems." />
+        <SectionHeader
+          label="Who I am"
+          title={
+            <>
+              A designer who thinks in <span className="text-cta">systems</span>.
+            </>
+          }
+        />
 
         <Reveal className="mx-auto mt-14 w-full max-w-[16rem]">
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line bg-surface">
@@ -31,7 +38,7 @@ export default function WhoIAm() {
         </Reveal>
 
         {/* Capabilities — the Skills & craft grid, embedded here */}
-        <div id="skills" className="section-anchor mt-16 text-center">
+        <div id="skills" className="section-anchor mt-16 border-t border-line pt-12 text-center">
           <span className="eyebrow">Capabilities</span>
           <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
             {profile.capabilities.map((c, i) => (
@@ -53,7 +60,7 @@ export default function WhoIAm() {
         </div>
 
         {/* Education */}
-        <Reveal className="mt-14 border-t border-line pt-12 text-center">
+        <Reveal className="mt-16 border-t border-line pt-12 text-center">
           <span className="eyebrow">Education</span>
           <ul className="mt-6 grid gap-8 sm:grid-cols-2">
             {profile.education.map((e, i) => (

@@ -11,7 +11,7 @@ export default function BeyondWork() {
       <div className="text-center">
         <span className="eyebrow">Beyond design</span>
         <h3 className="mx-auto mt-4 font-serif text-[clamp(1.9rem,4.5vw,3rem)] leading-[1.04] text-balance">
-          {film.heading}
+          Always a <span className="text-cta">movie buff</span>
         </h3>
 
         <p className="mx-auto mt-6 max-w-3xl text-pretty leading-relaxed text-text-muted">
@@ -59,22 +59,18 @@ export default function BeyondWork() {
               </div>
 
               <div className="mt-4">
-                <h3 className="font-serif text-xl text-text transition-colors group-hover:text-accent">
+                <h3 className="font-serif text-lg text-text transition-colors group-hover:text-cta">
                   {w.title}
                   {w.native && (
-                    <span className="ml-2 align-middle text-sm text-text-faint">
+                    <span className="ml-2 align-middle text-xs text-text-faint">
                       {w.native}
                     </span>
                   )}
                 </h3>
-                <p className="mt-1 font-mono text-xs text-text-faint">{w.meta}</p>
-                <p className="mt-3 text-pretty text-sm leading-relaxed text-text-muted">
+                <p className="mt-1.5 font-mono text-xs text-text-faint">{w.meta}</p>
+                <p className="mt-2.5 text-sm leading-relaxed text-text-muted line-clamp-2">
                   {w.blurb}
                 </p>
-                <span className="mt-3 inline-flex items-center gap-1 text-sm text-text transition-colors group-hover:text-accent">
-                  {isDrive ? "Watch on Drive" : "Watch on YouTube"}
-                  <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">↗</span>
-                </span>
               </div>
             </a>
           </Reveal>

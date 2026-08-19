@@ -29,7 +29,7 @@ export default function Home() {
           label="Selected work"
           title={
             <>
-              Designing for real impact,
+              Designing for <span className="text-cta">real impact</span>,
               <br className="hidden sm:block" /> at every scale.
             </>
           }

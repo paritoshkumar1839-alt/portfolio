@@ -255,9 +255,9 @@ export const profile = {
   // Beyond product design — film work. Personal-branding subsection in About.
   // Thumbnails are pulled from each video's YouTube poster; whole card links out.
   film: {
-    heading: "What else I do, outside work",
+    heading: "Always a movie buff",
     intro:
-      "I trained as a film student, and it stuck. I’m a relentless movie buff — films, series, all of it — and most weekends you’ll find me with friends, pulling scripts apart and helping out on whatever they’re shooting. Along the way I’ve edited, produced, and stepped in front of the camera too.",
+      "I trained as a film student, and it stuck — a relentless movie buff who still edits, produces, and occasionally steps in front of the camera.",
     quote: "Cinema is a reflection of society.",
     lede: "It shows us back to ourselves — and that’s the part I’ve never put down.",
     works: [
@@ -267,7 +267,7 @@ export const profile = {
         role: "Assistant Film Editor",
         meta: "Web series · 25M+ views · Trended on Hotstar",
         blurb:
-          "A horror–dark-drama web series I helped cut. It trended on Disney+ Hotstar for two weeks; after its year-long run there it lives on YouTube, where it’s now crossed 25M+ views.",
+          "A horror-drama web series I helped cut — it trended on Disney+ Hotstar and has since crossed 25M+ views on YouTube.",
         source: "youtube",
         videoId: "JqDJhZ2xWGs",
       },
@@ -277,7 +277,7 @@ export const profile = {
         role: "Production Manager · BTS",
         meta: "Short film · India Film Project ’18 · Undercurry",
         blurb:
-          "A short film shot in 50 hours for the India Film Project challenge with the Undercurry team. I ran production and handled everything behind the scenes.",
+          "A short film shot in 50 hours for the India Film Project. I ran production and everything behind the scenes.",
         source: "youtube",
         videoId: "eJ6Mup118vI",
       },
@@ -287,7 +287,7 @@ export const profile = {
         role: "Cameo",
         meta: "Award-winning short · Old Window Studio",
         blurb:
-          "A tiny cameo — and my first-ever time on set. We shot this in the second week of film school, so go easy on us: we were just kids figuring out a camera.",
+          "A tiny cameo, and my first-ever time on a set — filmed in my second week of film school.",
         source: "youtube",
         videoId: "-razqDbP3uU",
       },
@@ -297,7 +297,7 @@ export const profile = {
         role: "Editor",
         meta: "Music video",
         blurb:
-          "A music video I cut end to end — pacing the edit to the mood and rhythm of the track.",
+          "A music video I cut end to end, pacing the edit to the mood and rhythm of the track.",
         source: "drive",
         videoId: "1UftymEx_21MQN9vVlCuY4450I5cKLbBX",
       },
@@ -307,7 +307,7 @@ export const profile = {
         role: "Editor",
         meta: "Music video",
         blurb:
-          "Another music-video edit — building the cut around the song’s energy and beats.",
+          "Another music-video edit, built around the song’s energy and beats.",
         source: "drive",
         videoId: "1aT8_qjGpOgXeNyzaE-XdzuUDAhS7YMUp",
       },

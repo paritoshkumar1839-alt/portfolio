@@ -73,7 +73,14 @@ export default function ToolsMarquee() {
   return (
     <section id="tools" className="section-anchor border-t border-line py-24 md:py-32">
       <div className="container-page">
-        <SectionHeader label="Toolset" title="What I design with." />
+        <SectionHeader
+          label="Toolset"
+          title={
+            <>
+              What I <span className="text-cta">design</span> with.
+            </>
+          }
+        />
       </div>
 
       <div

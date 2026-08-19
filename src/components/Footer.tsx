@@ -12,14 +12,11 @@ export default function Footer() {
     >
       <div className="container-page py-24 md:py-32">
         <Reveal className="text-center">
-          <div className="mb-6 flex items-center justify-center gap-3">
-            <span className="h-px w-8 bg-line-strong" aria-hidden />
-            <span className="eyebrow">Contact · {profile.availability}</span>
-          </div>
+          <span className="eyebrow mb-6 block">Contact · {profile.availability}</span>
           <h2 className="font-serif text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.98] text-balance">
             Let&rsquo;s build something
             <br />
-            worth shipping.
+            <span className="text-cta">worth shipping</span>.
           </h2>
           <p className="mx-auto mt-8 max-w-xl text-pretty text-text-muted">
             {profile.openTo}

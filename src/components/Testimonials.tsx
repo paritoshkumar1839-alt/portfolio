@@ -70,7 +70,8 @@ export default function Testimonials() {
     >
       <span className="eyebrow">Testimonials</span>
       <h3 className="mx-auto mt-4 font-serif text-[clamp(1.9rem,4.5vw,3rem)] leading-[1.04] text-balance">
-        What people I&rsquo;ve worked with have to say.
+        What people I&rsquo;ve <span className="text-cta">worked with</span> have to
+        say.
       </h3>
       <p className="mx-auto mt-4 max-w-3xl text-pretty leading-relaxed text-text-muted">
         A few words from the engineers, PMs, and designers I built alongside —
