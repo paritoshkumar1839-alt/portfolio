@@ -9,9 +9,6 @@ export default function Hero() {
         <span className="rounded-full border border-line-strong px-4 py-1.5 text-xs font-medium uppercase tracking-[0.12em] text-text-muted">
           {profile.role} · {profile.location}
         </span>
-        <span className="rounded-full border border-line-strong px-4 py-1.5 text-xs font-medium uppercase tracking-[0.12em] text-text-muted">
-          {profile.tagline}
-        </span>
         <span className="inline-flex items-center gap-2 rounded-full border border-cta/30 bg-cta/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.12em] text-cta">
           <span className="relative flex size-1.5">
             <span className="absolute inline-flex size-full animate-ping rounded-full bg-cta opacity-70" />
