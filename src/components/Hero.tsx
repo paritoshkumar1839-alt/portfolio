@@ -4,17 +4,17 @@ import Magnetic from "@/components/Magnetic";
 export default function Hero() {
   return (
     <section className="container-page pt-16 pb-20 text-center md:pt-24 md:pb-28">
-      {/* Chips — credentials + availability, on top */}
-      <div className="flex flex-wrap items-center justify-center gap-2.5">
-        <span className="rounded-full border border-line-strong px-4 py-1.5 text-xs font-medium uppercase tracking-[0.12em] text-text-muted">
+      {/* Eyebrow — plain text, role + availability with a green beacon */}
+      <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+        <span className="eyebrow text-text-muted">
           {profile.role} · {profile.location}
         </span>
-        <span className="inline-flex items-center gap-2 rounded-full border border-cta/30 bg-cta/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.12em] text-cta">
+        <span className="inline-flex items-center gap-2">
           <span className="relative flex size-1.5">
             <span className="absolute inline-flex size-full animate-ping rounded-full bg-cta opacity-70" />
             <span className="relative inline-flex size-1.5 rounded-full bg-cta" />
           </span>
-          {profile.availability}
+          <span className="eyebrow">{profile.availability}</span>
         </span>
       </div>
 

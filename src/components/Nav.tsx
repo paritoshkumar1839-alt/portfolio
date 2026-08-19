@@ -53,7 +53,10 @@ export default function Nav() {
           </ul>
 
           <span className="hidden items-center gap-1.5 sm:inline-flex">
-            <span className="size-1.5 rounded-full bg-accent" />
+            <span className="relative flex size-1.5">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-cta opacity-70" />
+              <span className="relative inline-flex size-1.5 rounded-full bg-cta" />
+            </span>
             <span className="eyebrow">Available</span>
           </span>
 
