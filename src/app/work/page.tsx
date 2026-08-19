@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 export default function WorkIndex() {
   return (
     <div className="container-page py-20 md:py-28">
-      <Reveal>
+      <Reveal className="text-center">
         <span className="eyebrow">Selected work</span>
-        <h1 className="mt-5 max-w-3xl font-serif text-[clamp(2.5rem,7vw,5rem)] leading-[0.98] text-balance">
-          Problems I made simpler.
+        <h1 className="mx-auto mt-5 max-w-4xl font-serif text-[clamp(2.5rem,7vw,5rem)] leading-[0.98] text-balance">
+          Problems I made <span className="text-cta">simpler</span>.
         </h1>
-        <p className="mt-6 max-w-xl text-pretty text-text-muted">
+        <p className="mx-auto mt-6 max-w-2xl text-pretty text-text-muted">
           Case studies in complex, high-stakes software — the reasoning, the
           trade-offs, and what shipped. More are on the way.
         </p>
