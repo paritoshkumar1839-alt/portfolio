@@ -32,6 +32,11 @@
   --btn: #202020;
   --btn-hover: #292929;
   --btn-line: #383838;
+
+  /* Primary CTA — suhail.design's lime accent (the one spot of color). */
+  --cta: #dcff05;
+  --cta-hover: #c8e800;
+  --cta-ink: #020202;
 }
 
 @theme inline {
@@ -50,6 +55,9 @@
   --color-btn: var(--btn);
   --color-btn-hover: var(--btn-hover);
   --color-btn-line: var(--btn-line);
+  --color-cta: var(--cta);
+  --color-cta-hover: var(--cta-hover);
+  --color-cta-ink: var(--cta-ink);
 
   /* One sans-serif family (Montserrat) drives display, body, and labels. */
   --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;

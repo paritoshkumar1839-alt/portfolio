@@ -29,7 +29,7 @@ export default function Footer() {
             <Magnetic>
               <a
                 href={`mailto:${profile.email}`}
-                className="inline-flex items-center gap-2 rounded-full border border-btn-line bg-btn px-6 py-3.5 text-sm font-medium text-text transition-colors hover:bg-btn-hover"
+                className="inline-flex items-center gap-2 rounded-full bg-cta px-6 py-3.5 text-sm font-semibold text-cta-ink transition-colors hover:bg-cta-hover"
               >
                 {profile.email}
                 <span aria-hidden>→</span>
@@ -37,9 +37,10 @@ export default function Footer() {
             </Magnetic>
             <a
               href={profile.resumeHref}
-              className="text-sm text-text-muted underline-hover hover:text-text"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-text-muted transition-colors hover:text-text"
             >
               Download résumé
+              <span aria-hidden>→</span>
             </a>
           </div>
         </Reveal>

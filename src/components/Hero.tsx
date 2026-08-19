@@ -32,16 +32,16 @@ export default function Hero() {
       </h1>
 
       {/* Positioning sentence */}
-      <p className="mx-auto mt-10 max-w-2xl text-pretty text-xl leading-relaxed text-text-muted md:text-2xl">
+      <p className="mx-auto mt-10 max-w-3xl text-pretty text-xl leading-relaxed text-text-muted md:text-2xl">
         {profile.headline}
       </p>
 
-      {/* CTAs — centered, directly under the sentence */}
-      <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+      {/* CTAs — primary (lime) + secondary (minimal), centered */}
+      <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
         <Magnetic>
           <a
             href="#work"
-            className="inline-flex items-center gap-2 rounded-full border border-btn-line bg-btn px-6 py-3.5 text-sm font-medium text-text transition-colors hover:bg-btn-hover"
+            className="inline-flex items-center gap-2 rounded-full bg-cta px-6 py-3.5 text-sm font-semibold text-cta-ink transition-colors hover:bg-cta-hover"
           >
             View work
             <span aria-hidden>↓</span>
@@ -49,9 +49,10 @@ export default function Hero() {
         </Magnetic>
         <a
           href={`mailto:${profile.email}`}
-          className="inline-flex items-center rounded-full border border-line-strong px-6 py-3.5 text-sm font-medium text-text-muted transition-colors hover:border-btn-line hover:text-text"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-text-muted transition-colors hover:text-text"
         >
           Get in touch
+          <span aria-hidden>→</span>
         </a>
       </div>
     </section>

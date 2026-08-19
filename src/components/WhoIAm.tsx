@@ -22,7 +22,7 @@ export default function WhoIAm() {
           </div>
         </Reveal>
 
-        <Reveal className="mx-auto mt-10 max-w-2xl space-y-5 text-center">
+        <Reveal className="mx-auto mt-10 max-w-3xl space-y-5 text-center">
           {profile.bio.map((para, i) => (
             <p key={i} className="text-pretty leading-relaxed text-text-muted">
               {para}

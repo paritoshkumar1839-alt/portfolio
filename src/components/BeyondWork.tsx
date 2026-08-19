@@ -14,7 +14,7 @@ export default function BeyondWork() {
           {film.heading}
         </h3>
 
-        <p className="mx-auto mt-6 max-w-2xl text-pretty leading-relaxed text-text-muted">
+        <p className="mx-auto mt-6 max-w-3xl text-pretty leading-relaxed text-text-muted">
           {film.intro}
         </p>
 

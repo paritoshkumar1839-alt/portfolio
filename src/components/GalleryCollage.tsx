@@ -16,7 +16,7 @@ export default function GalleryCollage() {
         <h3 className="mx-auto mt-4 font-serif text-[clamp(1.9rem,4.5vw,3rem)] leading-[1.04] text-balance">
           {gallery.heading}
         </h3>
-        <p className="mx-auto mt-4 max-w-2xl text-pretty leading-relaxed text-text-muted">
+        <p className="mx-auto mt-4 max-w-3xl text-pretty leading-relaxed text-text-muted">
           {gallery.intro}
         </p>
       </div>

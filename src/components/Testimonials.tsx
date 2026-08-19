@@ -72,7 +72,7 @@ export default function Testimonials() {
       <h3 className="mx-auto mt-4 font-serif text-[clamp(1.9rem,4.5vw,3rem)] leading-[1.04] text-balance">
         What people I&rsquo;ve worked with have to say.
       </h3>
-      <p className="mx-auto mt-4 max-w-2xl text-pretty leading-relaxed text-text-muted">
+      <p className="mx-auto mt-4 max-w-3xl text-pretty leading-relaxed text-text-muted">
         A few words from the engineers, PMs, and designers I built alongside —
         mostly from my time at UrbanPiper.
       </p>
