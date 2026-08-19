@@ -21,11 +21,11 @@ export default function GalleryCollage() {
         </p>
       </div>
 
-      <Reveal className="mt-8 columns-2 [column-gap:1rem] md:columns-3">
+      <Reveal className="mt-8 columns-2 [column-gap:0.75rem] sm:columns-3 lg:columns-4">
         {imgs.map((src, i) => (
           <div
             key={src}
-            className="mb-4 break-inside-avoid overflow-hidden rounded-xl border border-line bg-surface"
+            className="mb-3 break-inside-avoid overflow-hidden rounded-xl border border-line bg-surface"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

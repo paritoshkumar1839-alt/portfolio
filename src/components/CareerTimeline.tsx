@@ -19,12 +19,12 @@ export default function CareerTimeline() {
           intro="One company, gone deep — from designing a single flow to owning whole products end to end at UrbanPiper."
         />
 
-        <ol className="mt-16 flex flex-col">
+        <ol className="mx-auto mt-14 flex max-w-4xl flex-col gap-6">
           {profile.experience.map((job, i) => (
             <Reveal
               key={i}
               as="li"
-              className="grid gap-6 border-t border-line py-10 md:grid-cols-[14rem_1fr] md:gap-12"
+              className="grid gap-6 rounded-2xl border border-line bg-surface p-7 text-left md:grid-cols-[13rem_1fr] md:gap-10 md:p-9"
             >
               <div>
                 {job.current && (
