@@ -1,6 +1,5 @@
 import * as simpleIcons from "simple-icons";
 import { profile } from "@/lib/profile";
-import SectionHeader from "@/components/SectionHeader";
 
 type SimpleIcon = { slug: string; path: string; hex: string; title: string };
 
@@ -71,20 +70,16 @@ export default function ToolsMarquee() {
   const row = [...tools, ...tools];
 
   return (
-    <section id="tools" className="section-anchor border-t border-line py-24 md:py-32">
-      <div className="container-page">
-        <SectionHeader
-          label="Toolset"
-          title={
-            <>
-              What I <span className="text-cta">design</span> with.
-            </>
-          }
-        />
+    <div id="tools" className="mt-16 border-t border-line pt-12">
+      <div className="text-center">
+        <span className="eyebrow">Toolset</span>
+        <h3 className="mx-auto mt-4 font-serif text-[clamp(1.9rem,4.5vw,3rem)] leading-[1.04] text-balance">
+          What I <span className="text-cta">design</span> with.
+        </h3>
       </div>
 
       <div
-        className="marquee-pause relative mt-14 flex overflow-hidden"
+        className="marquee-pause relative mt-10 flex overflow-hidden"
         style={{
           maskImage:
             "linear-gradient(to right, transparent, #000 6%, #000 94%, transparent)",
@@ -98,6 +93,6 @@ export default function ToolsMarquee() {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

@@ -11,7 +11,7 @@ export default function BeyondWork() {
       <div className="text-center">
         <span className="eyebrow">Beyond design</span>
         <h3 className="mx-auto mt-4 font-serif text-[clamp(1.9rem,4.5vw,3rem)] leading-[1.04] text-balance">
-          Always a <span className="text-cta">movie buff</span>
+          Trained as a <span className="text-cta">filmmaker</span>
         </h3>
 
         <p className="mx-auto mt-6 max-w-3xl text-pretty leading-relaxed text-text-muted">

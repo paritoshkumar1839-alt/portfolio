@@ -21,18 +21,18 @@ export default function GalleryCollage() {
         </p>
       </div>
 
-      <Reveal className="mt-8 columns-2 [column-gap:0.75rem] sm:columns-3 lg:columns-4">
+      <Reveal className="mt-8 grid grid-cols-3 gap-2.5 sm:grid-cols-4 lg:grid-cols-5">
         {imgs.map((src, i) => (
           <div
             key={src}
-            className="mb-3 break-inside-avoid overflow-hidden rounded-xl border border-line bg-surface"
+            className="aspect-square overflow-hidden rounded-lg border border-line bg-surface"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={src}
               alt={`${gallery.heading} — photo ${i + 1}`}
               loading="lazy"
-              className="block h-auto w-full transition-transform duration-500 hover:scale-[1.03]"
+              className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.05]"
             />
           </div>
         ))}

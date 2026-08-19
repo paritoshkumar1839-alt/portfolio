@@ -2,6 +2,7 @@ import { profile } from "@/lib/profile";
 import SectionHeader from "@/components/SectionHeader";
 import Media from "@/components/Media";
 import Reveal from "@/components/Reveal";
+import ToolsMarquee from "@/components/ToolsMarquee";
 import Testimonials from "@/components/Testimonials";
 import BeyondWork from "@/components/BeyondWork";
 import RemixRail from "@/components/RemixRail";
@@ -74,6 +75,9 @@ export default function WhoIAm() {
             ))}
           </ul>
         </Reveal>
+
+        {/* Toolset — running marquee */}
+        <ToolsMarquee />
 
         {/* What people say — testimonials slider */}
         <Testimonials />

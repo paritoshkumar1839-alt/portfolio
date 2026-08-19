@@ -255,7 +255,7 @@ export const profile = {
   // Beyond product design — film work. Personal-branding subsection in About.
   // Thumbnails are pulled from each video's YouTube poster; whole card links out.
   film: {
-    heading: "Always a movie buff",
+    heading: "Trained as a filmmaker",
     intro:
       "I trained as a film student, and it stuck — a relentless movie buff who still edits, produces, and occasionally steps in front of the camera.",
     quote: "Cinema is a reflection of society.",
