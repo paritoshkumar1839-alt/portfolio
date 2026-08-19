@@ -11,9 +11,9 @@ export default function Footer() {
       className="section-anchor relative border-t border-line"
     >
       <div className="container-page py-24 md:py-32">
-        <Reveal>
-          <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-8 bg-accent" aria-hidden />
+        <Reveal className="text-center">
+          <div className="mb-6 flex items-center justify-center gap-3">
+            <span className="h-px w-8 bg-line-strong" aria-hidden />
             <span className="eyebrow">Contact · {profile.availability}</span>
           </div>
           <h2 className="font-serif text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.98] text-balance">
@@ -21,15 +21,15 @@ export default function Footer() {
             <br />
             worth shipping.
           </h2>
-          <p className="mt-8 max-w-xl text-pretty text-text-muted">
+          <p className="mx-auto mt-8 max-w-xl text-pretty text-text-muted">
             {profile.openTo}
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center gap-4">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Magnetic>
               <a
                 href={`mailto:${profile.email}`}
-                className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-6 py-3.5 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90"
+                className="inline-flex items-center gap-2 rounded-full border border-btn-line bg-btn px-6 py-3.5 text-sm font-medium text-text transition-colors hover:bg-btn-hover"
               >
                 {profile.email}
                 <span aria-hidden>→</span>

@@ -3,9 +3,9 @@ import Magnetic from "@/components/Magnetic";
 
 export default function Hero() {
   return (
-    <section className="container-page pt-14 pb-20 md:pt-20 md:pb-28">
+    <section className="container-page pt-14 pb-20 text-center md:pt-20 md:pb-28">
       {/* Eyebrow */}
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+      <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
         <span className="flex items-center gap-3">
           <span className="h-px w-8 bg-accent" aria-hidden />
           <span className="eyebrow text-accent">
@@ -32,16 +32,16 @@ export default function Hero() {
       </h1>
 
       {/* Positioning sentence */}
-      <p className="mt-10 max-w-2xl text-pretty text-xl leading-relaxed text-text-muted md:text-2xl">
+      <p className="mx-auto mt-10 max-w-2xl text-pretty text-xl leading-relaxed text-text-muted md:text-2xl">
         {profile.headline}
       </p>
 
-      {/* CTAs — left-aligned, directly under the sentence */}
-      <div className="mt-10 flex flex-wrap items-center gap-4">
+      {/* CTAs — centered, directly under the sentence */}
+      <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
         <Magnetic>
           <a
             href="#work"
-            className="inline-flex items-center gap-2 rounded-full bg-accent-gradient px-6 py-3.5 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90"
+            className="inline-flex items-center gap-2 rounded-full border border-btn-line bg-btn px-6 py-3.5 text-sm font-medium text-text transition-colors hover:bg-btn-hover"
           >
             View work
             <span aria-hidden>↓</span>
@@ -49,7 +49,7 @@ export default function Hero() {
         </Magnetic>
         <a
           href={`mailto:${profile.email}`}
-          className="inline-flex items-center rounded-full border border-line-strong px-6 py-3.5 text-sm font-medium text-text transition-colors hover:border-accent hover:text-accent"
+          className="inline-flex items-center rounded-full border border-line-strong px-6 py-3.5 text-sm font-medium text-text-muted transition-colors hover:border-btn-line hover:text-text"
         >
           Get in touch
         </a>

@@ -59,7 +59,7 @@ export default function Nav() {
 
           <a
             href={`mailto:${profile.email}`}
-            className="ml-1 hidden rounded-full bg-accent-gradient px-4 py-2 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90 sm:inline-flex"
+            className="ml-1 hidden rounded-full border border-btn-line bg-btn px-4 py-2 text-sm font-medium text-text transition-colors hover:bg-btn-hover sm:inline-flex"
           >
             Hire me
           </a>

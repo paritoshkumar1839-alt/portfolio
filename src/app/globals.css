@@ -27,6 +27,11 @@
   --accent-gradient: linear-gradient(118deg, #ffffff 0%, #cfccc7 100%);
   --accent-glow: rgba(255, 255, 255, 0.045); /* faint neutral glow */
   --accent-glow-2: rgba(255, 255, 255, 0.03);
+
+  /* CTA chips — lifted from suhail.design: dark-grey fill, subtle border. */
+  --btn: #202020;
+  --btn-hover: #292929;
+  --btn-line: #383838;
 }
 
 @theme inline {
@@ -42,6 +47,9 @@
   --color-accent: var(--accent);
   --color-accent-2: var(--accent-2);
   --color-accent-ink: var(--accent-ink);
+  --color-btn: var(--btn);
+  --color-btn-hover: var(--btn-hover);
+  --color-btn-line: var(--btn-line);
 
   /* One sans-serif family (Montserrat) drives display, body, and labels. */
   --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
