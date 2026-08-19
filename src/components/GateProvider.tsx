@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 import { useRouter } from "next/navigation";
-import { CS_UNLOCK_KEY } from "@/lib/gate";
+import { readUnlocked, writeUnlocked } from "@/lib/gate";
 import PasswordGate from "@/components/PasswordGate";
 
 type StudyMeta = { slug: string; title: string; teaser?: string };
@@ -36,22 +36,25 @@ export default function GateProvider({
   const [unlocked, setUnlocked] = useState(false);
   const [modal, setModal] = useState<StudyMeta | null>(null);
 
-  // Restore unlock state on mount (client only).
+  // Restore unlock on mount, and keep re-validating so it re-locks once the
+  // 1-hour window expires (checked every minute + when the tab regains focus).
   useEffect(() => {
-    try {
-      if (localStorage.getItem(CS_UNLOCK_KEY) === "1") setUnlocked(true);
-    } catch {
-      /* ignore */
-    }
+    const revalidate = () => setUnlocked(readUnlocked());
+    revalidate();
+    const onFocus = () => revalidate();
+    window.addEventListener("focus", onFocus);
+    document.addEventListener("visibilitychange", onFocus);
+    const id = window.setInterval(revalidate, 60_000);
+    return () => {
+      window.removeEventListener("focus", onFocus);
+      document.removeEventListener("visibilitychange", onFocus);
+      window.clearInterval(id);
+    };
   }, []);
 
   const unlock = useCallback(() => {
+    writeUnlocked();
     setUnlocked(true);
-    try {
-      localStorage.setItem(CS_UNLOCK_KEY, "1");
-    } catch {
-      /* ignore */
-    }
   }, []);
 
   const openModal = useCallback((meta: StudyMeta) => setModal(meta), []);
