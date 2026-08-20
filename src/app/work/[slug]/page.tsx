@@ -7,6 +7,7 @@ import Reveal from "@/components/Reveal";
 import CaseStudySections from "@/components/CaseStudySections";
 import CaseStudyFeatures from "@/components/CaseStudyFeatures";
 import CaseStudyGate from "@/components/CaseStudyGate";
+import RtglCaseStudy from "@/components/RtglCaseStudy";
 import { isLocked } from "@/lib/gate";
 
 export function generateStaticParams() {
@@ -43,6 +44,21 @@ export default async function CaseStudyPage({
   if (!study) notFound();
 
   const next = study.nextSlug ? getCaseStudy(study.nextSlug) : undefined;
+
+  // RTGL has a dedicated, visual-first layout. It stays inside the same gate;
+  // every other case study renders through the generic template below.
+  if (study.slug === "self-serve-go-live") {
+    return (
+      <CaseStudyGate
+        locked={isLocked(study)}
+        title={study.title}
+        teaser={study.lockedTeaser}
+      >
+        <RtglCaseStudy study={study} next={next} />
+      </CaseStudyGate>
+    );
+  }
+
   const hasProcess = study.process.length > 0;
   const hasGallery = study.gallery.length > 0;
   const hasOutcome = Boolean(study.outcome) || Boolean(study.metrics?.length);

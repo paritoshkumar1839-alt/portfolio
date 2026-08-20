@@ -117,12 +117,12 @@ export const caseStudies: CaseStudy[] = [
     featured: true,
     lockedTeaser:
       "The self-serve flow that let restaurants take their own stores live across every delivery platform.",
-    // TODO(paritosh): real numbers to be added later.
     metrics: [
-      { label: "Go-live now self-served", value: "[  ]%" },
-      { label: "AM manual work reduced", value: "[  ]%" },
-      { label: "Markets supported", value: "4" },
-      { label: "Time to go live", value: "[  ]" },
+      { label: "stores processed in 2 months", value: "1,700" },
+      { label: "days — average go-live time", value: "13→7" },
+      { label: "reduction in go-live time", value: "~46%" },
+      { label: "fewer support tickets", value: "38%" },
+      { label: "adoption across supported India + MENA regions", value: "~60%" },
     ],
     cover: "/work/self-serve-go-live/cover.png",
     cardCover: "/work/self-serve-go-live/card-cover.png",
@@ -130,8 +130,8 @@ export const caseStudies: CaseStudy[] = [
     coverAlt: "Request to go live dashboard in Atlas",
     year: "2026",
     role: "Product Designer — owned end to end",
-    team: "1 PM, 1 senior product designer (review), me (design), 2 engineers, 4 account managers across MENA, UK, US, India",
-    timeline: "2–3 weeks, concept through QA",
+    team: "2 designers (me on design, a design lead on review), 1 PM, 4 engineers (2 backend, 2 frontend), account management + support, and QA — across India and MENA",
+    timeline: "~2.5 months, discovery through release",
     tools: ["Figma", "Claude", "Linear"],
     overview:
       "UrbanPiper is one place for restaurants to run every delivery platform they sell on — orders, menus, inventory. But a store only works here once it's gone live: connected from UrbanPiper to its listing on the platform, so orders start flowing in.",
