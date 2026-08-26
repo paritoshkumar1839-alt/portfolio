@@ -336,7 +336,10 @@ export const caseStudies: CaseStudy[] = [
       { label: "Timeline", value: "~1 mo" },
     ],
     cover: "/work/menu-rules/cover.png",
-    cardCover: "/work/menu-rules/card-cover.png",
+    // Outside/card thumbnail — the Menu Rules screen in a tablet mockup on a
+    // dark ground (same treatment as the self-serve card). Shown whole.
+    cardCover: "/work/menu-rules/tablet-cover.svg",
+    cardContain: true,
     coverAlt: "Menu Rules builder with live preview in Atlas",
     year: "2025",
     role: "Product Designer — owned end to end",
