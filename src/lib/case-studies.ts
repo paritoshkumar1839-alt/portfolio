@@ -109,9 +109,9 @@ export type CaseStudy = {
 export const caseStudies: CaseStudy[] = [
   {
     slug: "self-serve-go-live",
-    title: "Request to Go Live",
+    title: "Self-Serve Store Go-Live",
     tagline:
-      "Brands connect their stores on Swiggy, Zomato and other platforms to UrbanPiper themselves — instead of waiting on our team to take each store live — with full visibility into every request. Once a store is live, they run its orders and other workflows from UrbanPiper.",
+      "Restaurants take their own stores live across every delivery platform — no account manager needed. 1,700 stores in two months, ~46% faster.",
     tags: ["B2B SaaS", "0 → 1 Flow"],
     domain: "B2B SaaS · UrbanPiper",
     featured: true,
@@ -319,9 +319,9 @@ export const caseStudies: CaseStudy[] = [
 
   {
     slug: "menu-rules",
-    title: "Menu Rules",
+    title: "Targeted Menu Overrides",
     tagline:
-      "Big restaurant brands can make targeted menu exceptions — a different price here, an item switched off there — without cloning a whole menu for every variation.",
+      "Change price and availability by platform, location and item — with one menu and a few rules instead of dozens of duplicate menus.",
     tags: ["B2B SaaS", "Systems"],
     domain: "B2B SaaS · UrbanPiper",
     lockedTeaser:
@@ -517,15 +517,20 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "up-design-system",
-    title: "UP Design System",
+    title: "A Design System for a Multi-Team B2B Product",
     tagline:
-      "A platform-wide cleanup of UrbanPiper's Atlas — redundant styles merged, tables, drawers and buttons standardised — into one published system every team builds from.",
+      "Merged redundant styles and standardised tables, drawers and buttons — into one published system every team builds from.",
     tags: ["Design System", "B2B SaaS"],
     domain: "Design System · UrbanPiper",
     lockedTeaser:
       "The published styles and components behind UrbanPiper's Atlas — the foundations every other case study here is built from.",
     cover: "/work/up-design-system/assets/doc-cover.png",
-    coverAlt: "Platform-Wide Changes — for consistency and a better, cleaner UI",
+    // Outside/card thumbnail — the branded UrbanPiper design-system cover, shown
+    // whole (contain) so the full design isn't cropped. The detail-page hero
+    // still uses `cover` (the doc title slide).
+    cardCover: "/work/up-design-system/assets/card-cover.png",
+    cardContain: true,
+    coverAlt: "UrbanPiper design system — Building consistency, enabling scale",
     year: "2025",
     role: "Core contributor — foundations & components",
     team: "A small group of product designers maintaining the system, with engineering — I built and extended parts of it alongside shipping features",
