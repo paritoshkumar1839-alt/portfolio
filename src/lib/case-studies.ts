@@ -513,26 +513,33 @@ export const caseStudies: CaseStudy[] = [
     gallery: [],
     outcome:
       "Brands run one menu plus a handful of rules instead of dozens of duplicates — targeted price and availability changes by platform, location and item, with conflicts and platform limits made visible instead of silent.",
-    nextSlug: "project-three",
+    nextSlug: "up-design-system",
   },
   {
-    slug: "project-three",
-    title: "Case study, in progress",
+    slug: "up-design-system",
+    title: "UP Design System",
     tagline:
-      "A design-system effort I'm currently writing up — one shared language to replace the same button being rebuilt, slightly differently, on every team.",
-    tags: ["Design System", "Web"],
-    domain: "Design System · Web",
-    cover: "/work/project-three/cover.jpg",
-    coverAlt: "Case study coming soon",
-    year: "2024",
-    role: "Product Designer",
-    overview: "",
-    problem: "",
+      "A platform-wide cleanup of UrbanPiper's Atlas — redundant styles merged, tables, drawers and buttons standardised — into one published system every team builds from.",
+    tags: ["Design System", "B2B SaaS"],
+    domain: "Design System · UrbanPiper",
+    lockedTeaser:
+      "The published styles and components behind UrbanPiper's Atlas — the foundations every other case study here is built from.",
+    cover: "/work/up-design-system/assets/doc-cover.png",
+    coverAlt: "Platform-Wide Changes — for consistency and a better, cleaner UI",
+    year: "2025",
+    role: "Core contributor — foundations & components",
+    team: "A small group of product designers maintaining the system, with engineering — I built and extended parts of it alongside shipping features",
+    timeline: "Ongoing — a living system",
+    tools: ["Figma", "Styles & Components"],
+    overview:
+      "UrbanPiper's Atlas is a large B2B product — orders, menus, tables, analytics and onboarding — built by multiple squads at speed. The design system is the shared vocabulary that keeps all of it feeling like one product.",
+    problem:
+      "Over time the styles and components drifted: redundant text styles, too many near-identical greys (many just black at lowered opacity), and table, drawer and button patterns that behaved differently screen to screen. So we ran a platform-wide pass to merge the redundant styles and standardise the patterns — on two tracks, visual design and functionality.",
     process: [],
     gallery: [],
-    outcome: "",
+    outcome:
+      "Fewer, fixed styles with defined roles; one published component set; and consistent table, drawer, button and input behaviour across the product. Teams assemble screens from the system instead of rebuilding the basics.",
     nextSlug: "self-serve-go-live",
-    comingSoon: true,
   },
 ];
 

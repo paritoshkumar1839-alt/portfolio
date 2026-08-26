@@ -8,6 +8,7 @@ import CaseStudySections from "@/components/CaseStudySections";
 import CaseStudyFeatures from "@/components/CaseStudyFeatures";
 import CaseStudyGate from "@/components/CaseStudyGate";
 import RtglCaseStudy from "@/components/RtglCaseStudy";
+import DesignSystemCaseStudy from "@/components/DesignSystemCaseStudy";
 import { isLocked } from "@/lib/gate";
 
 export function generateStaticParams() {
@@ -55,6 +56,20 @@ export default async function CaseStudyPage({
         teaser={study.lockedTeaser}
       >
         <RtglCaseStudy study={study} next={next} />
+      </CaseStudyGate>
+    );
+  }
+
+  // The design system has its own visual-first layout that renders the real
+  // tokens live, rather than the screenshot-driven generic template.
+  if (study.slug === "up-design-system") {
+    return (
+      <CaseStudyGate
+        locked={isLocked(study)}
+        title={study.title}
+        teaser={study.lockedTeaser}
+      >
+        <DesignSystemCaseStudy study={study} next={next} />
       </CaseStudyGate>
     );
   }
