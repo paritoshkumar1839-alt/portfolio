@@ -82,6 +82,30 @@ export default function CaseStudySections({
                   </div>
                 )}
 
+                {section.hmws && (
+                  <div className="mt-8 flex flex-col gap-4">
+                    {section.hmws.map((h, j) => (
+                      <div
+                        key={j}
+                        className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-[1.1fr_1fr]"
+                      >
+                        <div className="bg-surface p-6">
+                          <span className="eyebrow text-accent">How might we</span>
+                          <p className="mt-3 text-pretty font-serif text-lg leading-snug text-text">
+                            {h.question}
+                          </p>
+                        </div>
+                        <div className="bg-surface-2 p-6">
+                          <span className="eyebrow">The solution</span>
+                          <p className="mt-3 text-pretty text-sm leading-relaxed text-text-muted">
+                            {h.solution}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 {section.bullets && (
                   <ul className="mt-8 space-y-3">
                     {section.bullets.map((b, j) => (

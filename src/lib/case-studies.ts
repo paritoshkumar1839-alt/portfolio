@@ -47,6 +47,8 @@ export type CaseStudySection = {
   bullets?: string[];
   // Challenge → Solution card pairs.
   challenges?: ChallengeSolution[];
+  // "How might we …?" design opportunities, each paired with the solution.
+  hmws?: { question: string; solution: string }[];
   // Side-by-side cards grouping points by whose perspective they're from.
   perspectives?: PerspectiveCard[];
   stats?: { value: string; label: string }[];
@@ -406,6 +408,44 @@ export const caseStudies: CaseStudy[] = [
               "Stored, published and reconciled every duplicate menu.",
               "More menus meant more load and more room for inconsistency.",
             ],
+          },
+        ],
+      },
+      {
+        heading: "Ideation",
+        editorialHeadline: "How might we…",
+        intro:
+          "I reframed the problem into a handful of design opportunities — each one answered by a screen in the walkthrough below.",
+        hmws: [
+          {
+            question:
+              "How might we let brands make a small, targeted change without duplicating an entire menu?",
+            solution:
+              "Rules live inside a single menu — a Menu Rules tab where every exception sits on one source-of-truth menu, no clones.",
+          },
+          {
+            question:
+              "How might we make a rule simple enough that anyone can write and read it?",
+            solution:
+              "A When / For / Then builder — each rule reads like a sentence: when these platforms and locations, for these items, then make this change.",
+          },
+          {
+            question:
+              "How might we give confidence a rule does exactly what's intended, before it goes live?",
+            solution:
+              "A live preview shows each item's Default vs Overridden price and state in real time as the rule is built.",
+          },
+          {
+            question:
+              "How might we keep dozens of rules manageable instead of trading one mess for another?",
+            solution:
+              "Saved rules sit in a readable list as plain-English sentences, each with an on/off toggle and filters by item, location and platform.",
+          },
+          {
+            question:
+              "How might we stop rules from silently conflicting — or breaking on platforms that can't honor them?",
+            solution:
+              "Conflict detection blocks overlapping rules and flags exactly what clashes, and platform-limit guards prevent location-scoped rules on brand-level-only platforms.",
           },
         ],
       },
