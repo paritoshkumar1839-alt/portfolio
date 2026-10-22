@@ -1,9 +1,11 @@
+import { ViewTransition } from "react";
 import type { CaseStudy } from "@/lib/case-studies";
 import Media from "@/components/Media";
 import Reveal from "@/components/Reveal";
 import StudyLink from "@/components/StudyLink";
 import LockBadge from "@/components/LockBadge";
 import { isLocked } from "@/lib/gate";
+import CountUp from "@/components/CountUp";
 
 export default function FeaturedWork({ study }: { study: CaseStudy }) {
   return (
@@ -17,6 +19,7 @@ export default function FeaturedWork({ study }: { study: CaseStudy }) {
       >
         <div className="grid md:grid-cols-2">
           {/* Cover */}
+          <ViewTransition name={`study-cover-${study.slug}`} share="morph" default="none">
           <div className="relative aspect-[16/11] overflow-hidden border-b border-line md:aspect-auto md:border-b-0 md:border-r">
             <div className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
               <Media
@@ -30,6 +33,7 @@ export default function FeaturedWork({ study }: { study: CaseStudy }) {
             </span>
             <LockBadge locked={isLocked(study)} className="absolute right-5 top-5 z-10" />
           </div>
+          </ViewTransition>
 
           {/* Content */}
           <div className="flex flex-col justify-between gap-8 p-7 md:p-10">
@@ -51,7 +55,7 @@ export default function FeaturedWork({ study }: { study: CaseStudy }) {
                 {study.metrics.map((m) => (
                   <div key={m.label}>
                     <dt className="font-serif text-lg text-text md:text-xl">
-                      {m.value}
+                      <CountUp value={m.value} />
                     </dt>
                     <dd className="mt-1 text-[0.7rem] leading-tight text-text-faint">
                       {m.label}

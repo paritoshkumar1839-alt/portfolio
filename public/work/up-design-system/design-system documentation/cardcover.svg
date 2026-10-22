@@ -1,0 +1,74 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="UrbanPiper Design System">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#111319"/>
+      <stop offset="1" stop-color="#0A0B0F"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3B5FEB"/>
+      <stop offset="1" stop-color="#2543B6"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#c9cede"/>
+    </linearGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#ffffff" stroke-opacity="0.035" stroke-width="1"/>
+    </pattern>
+    <style>
+      .sans { font-family: 'Helvetica Neue', Arial, system-ui, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <rect width="1200" height="900" fill="url(#grid)"/>
+
+  <!-- header: UP monogram + eyebrow -->
+  <g transform="translate(84,86)">
+    <rect width="66" height="66" rx="16" fill="url(#blue)"/>
+    <text x="33" y="45" class="sans" font-size="30" font-weight="800" fill="#ffffff" text-anchor="middle">UP</text>
+    <text x="88" y="27" class="sans" font-size="20" letter-spacing="4" fill="#8A8FA0" font-weight="700">DESIGN SYSTEM</text>
+    <text x="88" y="56" class="sans" font-size="26" fill="#E7E9F0" font-weight="600">UrbanPiper · Atlas</text>
+  </g>
+
+  <!-- big type specimen -->
+  <text x="80" y="430" class="sans" font-size="300" font-weight="800" fill="url(#sheen)" letter-spacing="-8">Aa</text>
+
+  <!-- color tokens row -->
+  <g transform="translate(84,520)">
+    <rect x="0"   y="0" width="120" height="120" rx="22" fill="#3B5FEB"/>
+    <rect x="140" y="0" width="120" height="120" rx="22" fill="#0DA125"/>
+    <rect x="280" y="0" width="120" height="120" rx="22" fill="#D64949"/>
+    <rect x="420" y="0" width="120" height="120" rx="22" fill="#E5B917"/>
+    <rect x="560" y="0" width="120" height="120" rx="22" fill="#6D7AA8"/>
+    <rect x="700" y="0" width="120" height="120" rx="22" fill="#EAEAEA"/>
+  </g>
+
+  <!-- component specimens (right column) -->
+  <g transform="translate(820,150)" class="sans">
+    <!-- button -->
+    <rect x="0" y="0" width="220" height="64" rx="12" fill="#3B5FEB"/>
+    <text x="110" y="41" font-size="24" font-weight="700" fill="#ffffff" text-anchor="middle">Primary</text>
+    <!-- input -->
+    <rect x="0" y="88" width="296" height="60" rx="12" fill="none" stroke="#2E313C" stroke-width="2"/>
+    <text x="20" y="126" font-size="22" fill="#6C7180">Input field</text>
+    <!-- chip -->
+    <rect x="0" y="176" width="150" height="46" rx="23" fill="#12351E"/>
+    <circle cx="26" cy="199" r="6" fill="#2ECC71"/>
+    <text x="44" y="207" font-size="20" font-weight="600" fill="#3DDC84">Live</text>
+    <!-- switch -->
+    <rect x="176" y="180" width="74" height="40" rx="20" fill="#2ECC71"/>
+    <circle cx="230" cy="200" r="15" fill="#ffffff"/>
+  </g>
+
+  <!-- footer label -->
+  <line x1="84" y1="720" x2="1116" y2="720" stroke="#20222B"/>
+  <g transform="translate(84,760)" class="sans" fill="#7C8090" font-size="21" font-weight="600">
+    <text x="0" y="20">Color</text>
+    <text x="150" y="20">Type</text>
+    <text x="290" y="20">Components</text>
+    <text x="520" y="20">Elevation</text>
+    <text x="720" y="20">Icons</text>
+    <text x="900" y="20" fill="#3B5FEB">One published library ↗</text>
+  </g>
+</svg>

@@ -1,228 +1,151 @@
-import { Fragment, type ReactNode } from "react";
+import { ViewTransition, type ReactNode } from "react";
 import Link from "next/link";
 import Media from "@/components/Media";
 import Reveal from "@/components/Reveal";
-import CaseStudyFeatures from "@/components/CaseStudyFeatures";
+import CountUp from "@/components/CountUp";
+import AgentLoop from "@/components/AgentLoop";
+import JtbdBoard from "@/components/JtbdBoard";
+import HmwBoard from "@/components/HmwBoard";
+import PageNav from "@/components/PageNav";
+import StrategyRoadmap from "@/components/StrategyRoadmap";
+import ProductDemo from "@/components/ProductDemo";
+import LottieClip from "@/components/LottieClip";
+import PlatformLogo from "@/components/PlatformLogo";
+import RtglProcessMap from "@/components/RtglProcessMap";
 import type { CaseStudy } from "@/lib/case-studies";
 
 /* ------------------------------------------------------------------ *
  * RTGL — Request to Go Live
- * A dedicated, visual-first case study told as one storyline:
- * Situation → Definition → Design → Impact (STAR). Real screenshots
- * carry the product; diagrams fill only the gaps.
+ * Built from the case-study deck: Brief → Discover → Define → Develop →
+ * Deliver. Real screens carry the solution; everything else stays short.
  * ------------------------------------------------------------------ */
 
+const A = "/work/self-serve-go-live";
+const V = `${A}/v2`;
+
 const METRICS = [
-  { value: "1,700", label: "stores processed in 2 months" },
-  { value: "13→7", label: "days — average go-live time" },
-  { value: "~46%", label: "reduction in go-live time" },
+  { value: "~94%", label: "faster go-live — ~3 days → under 5 hours" },
+  { value: "1,700", label: "stores connected" },
   { value: "38%", label: "fewer support tickets" },
-  { value: "~60%", label: "of new & scaling businesses went self-serve (India + MENA)" },
+  { value: "60%", label: "of new store connections in India raised by merchants themselves" },
 ];
 
-/* ---------------- primitives ---------------- */
 
-function Sec({
-  label,
-  heading,
-  intro,
-  first = false,
-  children,
-}: {
-  label: string;
-  heading?: ReactNode;
-  intro?: string;
-  first?: boolean;
-  children?: ReactNode;
-}) {
+/** The 11 columns of the platform's shared sheet, and where each now comes from. */
+const FIELDS: { field: string; now: string; who: "auto" | "pick" | "type" }[] = [
+  { field: "Reference ID", now: "Atlas generates it", who: "auto" },
+  { field: "Biz ID", now: "Atlas fills it in from the account", who: "auto" },
+  { field: "Biz name", now: "Atlas fills it in from the account", who: "auto" },
+  { field: "Location ID", now: "Atlas fills it in from stores already set up", who: "auto" },
+  { field: "Location name", now: "Atlas fills it in from stores already set up", who: "auto" },
+  { field: "Vendor ID", now: "Filled in automatically — UrbanPiper's ID on the platform", who: "auto" },
+  { field: "Brand name", now: "Merchant picks it — last-used is pre-selected", who: "pick" },
+  { field: "Platform", now: "Merchant picks it on the first step", who: "pick" },
+  { field: "Menu ID", now: "Merchant picks a menu by name; Atlas maps it to the ID", who: "pick" },
+  { field: "Zomato platform ID", now: "Merchant types it", who: "type" },
+  { field: "Restaurant URL", now: "Merchant types it", who: "type" },
+];
+
+/* ---------------- type + layout primitives ----------------
+ * Modelled on a calm editorial case-study system: one 720px reading
+ * column, 16/26 body, 20px section heads, small uppercase tag labels,
+ * 64px between sections. Only images break out wider.
+ * ---------------------------------------------------------- */
+
+const COL = "mx-auto w-full max-w-3xl px-6";
+const WIDE = "mx-auto w-full max-w-6xl px-6";
+
+function Tag({ children }: { children: ReactNode }) {
   return (
-    <Reveal
-      as="section"
-      className={first ? "mt-14 pt-2" : "mt-20 border-t border-line pt-14"}
-    >
-      <span className="eyebrow">{label}</span>
-      {heading && (
-        <h2 className="mt-5 max-w-3xl font-serif text-[clamp(1.9rem,4.2vw,3.25rem)] leading-[1.03] text-balance">
-          {heading}
-        </h2>
-      )}
-      {intro && (
-        <p className="mt-5 max-w-2xl text-pretty text-lg leading-relaxed text-text-muted">
-          {intro}
-        </p>
-      )}
+    <span className="inline-flex rounded-md bg-cta/10 px-2.5 py-1 text-[12px] font-semibold uppercase leading-[18px] tracking-[0.1em] text-cta">
       {children}
-    </Reveal>
+    </span>
   );
 }
 
-// Act break — signals the STAR phase and keeps the long story navigable.
-function Phase({ name, blurb }: { name: string; blurb: string }) {
+function H2({ children }: { children: ReactNode }) {
   return (
-    <Reveal as="div" className="mt-24 md:mt-28">
-      <div className="flex items-center gap-5">
-        <span className="eyebrow shrink-0">{name}</span>
-        <span aria-hidden className="h-px flex-1 bg-line" />
-      </div>
-      <p className="mt-4 max-w-2xl font-serif text-[clamp(1.2rem,2.4vw,1.6rem)] leading-snug text-text-muted">
-        {blurb}
-      </p>
-    </Reveal>
+    <h2 className="mt-6 text-[20px] font-semibold leading-[26px] tracking-[-0.01em] text-text">
+      {children}
+    </h2>
   );
 }
 
-// Big pull-quote / highlighted statement with an off-white accent rule.
-function Statement({ children }: { children: ReactNode }) {
+function H3({ children }: { children: ReactNode }) {
+  return <h3 className="text-[16px] font-semibold leading-[24px] text-text">{children}</h3>;
+}
+
+function P({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <p className="border-l-2 border-accent pl-6 font-serif text-[clamp(1.5rem,3.4vw,2.6rem)] leading-[1.12] text-balance md:pl-8">
+    <p className={`mt-3 text-pretty text-[16px] leading-[26px] text-text-muted ${className}`}>
       {children}
     </p>
   );
 }
 
-// Figma-style sticky-note callout (matches the site's feature stickies).
-function Sticky({ children }: { children: ReactNode }) {
+function Label({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <div className="inline-block max-w-md rotate-[-1deg] rounded-md bg-[#f4d24a] px-4 py-3 text-sm font-medium leading-snug text-[#3a2e05] shadow-lg shadow-black/25">
+    <p className={`text-[13px] font-semibold uppercase leading-[20px] tracking-[0.12em] text-text-faint ${className}`}>
       {children}
+    </p>
+  );
+}
+
+/** A section of the reading column, 64px from the one before. */
+function Block({ tag, title, id, children }: { tag?: string; title?: ReactNode; id?: string; children?: ReactNode }) {
+  return (
+    <Reveal as="section" className={`${COL} mt-16`}>
+      {id && <span id={id} aria-hidden className="block scroll-mt-28" />}
+      {tag && <Tag>{tag}</Tag>}
+      {title && <H2>{title}</H2>}
+      {children}
+    </Reveal>
+  );
+}
+
+function Quote({ children }: { children: ReactNode }) {
+  return (
+    <blockquote className="mt-8 border-l-2 border-cta pl-5 text-[22px] font-semibold leading-[1.3] tracking-[-0.02em] text-text md:text-[28px]">
+      {children}
+    </blockquote>
+  );
+}
+
+function Shot({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
+  return (
+    <div className={`relative overflow-hidden rounded-[10px] border border-line bg-surface ${className}`}>
+      <Media src={src} alt={alt} className="!object-contain" />
     </div>
   );
 }
 
-// Horizontal flow of chips joined by arrows (wraps on small screens).
-function Flow({ steps }: { steps: string[] }) {
+function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
+  return <div className={`rounded-[10px] border border-line bg-surface p-5 ${className}`}>{children}</div>;
+}
+
+/** Phase marker — a numbered tag, a 40px title, a one-line purpose. */
+function Phase({ n, title, sub, id }: { n: number; title: string; sub: string; id?: string }) {
   return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-3">
-      {steps.map((s, i) => (
-        <Fragment key={s + i}>
-          <span className="rounded-full border border-line bg-surface px-4 py-2 text-sm text-text">
-            {s}
-          </span>
-          {i < steps.length - 1 && (
-            <span aria-hidden className="text-text-faint">
-              →
-            </span>
-          )}
-        </Fragment>
-      ))}
-    </div>
+    <Reveal className={`${COL} mt-28 border-t border-line pt-14`}>
+      {id && <span id={id} aria-hidden className="block scroll-mt-28" />}
+      <Label>Phase {String(n).padStart(2, "0")}</Label>
+      <p className="mt-3 text-[32px] font-bold leading-[1.05] tracking-[-0.03em] text-text md:text-[40px]">
+        {title}
+      </p>
+      <p className="mt-2 text-[16px] leading-[26px] text-text-muted">{sub}</p>
+    </Reveal>
   );
 }
 
-// Flow with connecting arrows and optional notes. Vertical by default;
-// lays out horizontally (wrapping) once its own container is wide enough —
-// so a full-width card flows across, while a narrow column stays stacked.
-function VFlow({ steps }: { steps: { label: string; note?: string }[] }) {
+function Metrics() {
   return (
-    <div className="@container">
-      <div className="mx-auto flex max-w-md flex-col @2xl:mx-0 @2xl:max-w-none @2xl:flex-row @2xl:flex-wrap @2xl:items-stretch @2xl:gap-y-3">
-        {steps.map((s, i) => (
-          <Fragment key={s.label + i}>
-            <div className="rounded-lg border border-line bg-surface-2 px-4 py-3 @2xl:flex @2xl:max-w-[15rem] @2xl:flex-col @2xl:justify-center">
-              <p className="text-sm text-text">{s.label}</p>
-              {s.note && <p className="mt-1 text-xs text-text-faint">{s.note}</p>}
-            </div>
-            {i < steps.length - 1 && (
-              <>
-                <span aria-hidden className="py-1 text-center text-text-faint @2xl:hidden">
-                  ↓
-                </span>
-                <span
-                  aria-hidden
-                  className="hidden px-1.5 text-text-faint @2xl:flex @2xl:items-center"
-                >
-                  →
-                </span>
-              </>
-            )}
-          </Fragment>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function Card({
-  eyebrow,
-  title,
-  children,
-  light = false,
-}: {
-  eyebrow?: string;
-  title?: string;
-  children?: ReactNode;
-  light?: boolean;
-}) {
-  return (
-    <div
-      className={`rounded-xl border p-6 ${
-        light ? "border-transparent bg-accent text-accent-ink" : "border-line bg-surface"
-      }`}
-    >
-      {eyebrow && (
-        <p
-          className={`text-[0.7rem] font-semibold uppercase tracking-[0.14em] ${
-            light ? "text-accent-ink/70" : "text-text-faint"
-          }`}
-        >
-          {eyebrow}
-        </p>
-      )}
-      {title && (
-        <p className={`mt-3 font-serif text-lg leading-snug ${light ? "" : "text-text"}`}>
-          {title}
-        </p>
-      )}
-      {children && (
-        <div className={`mt-2 text-sm leading-relaxed ${light ? "text-accent-ink/80" : "text-text-muted"}`}>
-          {children}
-        </div>
-      )}
-    </div>
-  );
-}
-
-// Two-sided perspective columns (used for the discovery interviews).
-function Perspective({
-  title,
-  points,
-}: {
-  title: string;
-  points: string[];
-}) {
-  return (
-    <div className="rounded-2xl border border-line bg-surface p-6 md:p-8">
-      <p className="eyebrow">{title}</p>
-      <ul className="mt-5 space-y-3 text-sm leading-relaxed text-text-muted">
-        {points.map((p) => (
-          <li key={p} className="flex gap-3">
-            <span aria-hidden className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[#ff6b6b]" />
-            {p}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function MetaItem({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="border-t border-line pt-4">
-      <dt className="eyebrow">{label}</dt>
-      <dd className="mt-2 text-sm text-text">{value}</dd>
-    </div>
-  );
-}
-
-function MetricsGrid() {
-  return (
-    <dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 md:grid-cols-5">
+    <dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
       {METRICS.map((m) => (
-        <div key={m.label} className="border-t border-line pt-4">
-          <dt className="font-serif text-[clamp(2rem,4.5vw,3.25rem)] leading-none text-gradient w-fit">
-            {m.value}
+        <div key={m.label}>
+          <dt className="text-[40px] font-bold leading-none tracking-[-0.03em] text-cta md:text-[48px]">
+            <CountUp value={m.value} />
           </dt>
-          <dd className="mt-3 text-xs leading-snug text-text-muted">{m.label}</dd>
+          <dd className="mt-2 text-[13px] leading-[20px] text-text-muted">{m.label}</dd>
         </div>
       ))}
     </dl>
@@ -239,771 +162,723 @@ export default function RtglCaseStudy({
   next?: CaseStudy;
 }) {
   return (
-    <article>
-      {/* ---------------- HEADER ---------------- */}
-      <header className="container-page pt-14 pb-12 md:pt-20">
-        <Link href="/work" className="text-sm text-text-muted underline-hover hover:text-text">
+    <article className="pb-24 xl:pl-52">
+      <PageNav
+        items={[
+          { id: "overview", label: "Overview" },
+          { id: "context", label: "Context" },
+          { id: "users", label: "Users" },
+          { id: "brief", label: "The brief" },
+          { id: "discover", label: "Discover" },
+          { id: "define", label: "Define" },
+          { id: "develop", label: "Develop" },
+          { id: "final-product", label: "The final product" },
+          { id: "deliver", label: "Deliver" },
+          { id: "learnings", label: "What I learned" },
+          { id: "reflections", label: "Reflections" },
+        ]}
+      />
+      {/* ---------------- HERO ---------------- */}
+      <header className={`${COL} pt-14 md:pt-24`}>
+        <Link href="/work" className="text-[14px] text-text-muted underline-hover hover:text-text">
           ← All work
         </Link>
-
-        <div className="mt-8 flex flex-wrap gap-2">
-          {study.tags.map((t) => (
-            <span
-              key={t}
-              className="rounded-full border border-line px-3 py-1 text-xs text-text-muted"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-
-        <h1 className="mt-6 max-w-4xl font-serif text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.98] text-balance">
-          {study.title}
+        <Label className="mt-10">UrbanPiper · 2026 · B2B web app</Label>
+        <h1 className="mt-4 text-[40px] font-bold leading-[1.05] tracking-[-0.03em] text-balance text-text md:text-[60px]">
+          Taking restaurants live in <span className="text-cta">hours</span>, not days
         </h1>
-        <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-text-muted">
-          A fragmented, AM-led store onboarding process, reshaped into a product-led experience —
-          giving restaurant merchants ownership, visibility, and a faster path to going live.
+        <p className="mt-5 text-pretty text-[18px] leading-[28px] text-text-muted">
+          A self-serve flow that cut connecting a store to Swiggy and Zomato in India from about 3
+          days to under 5 hours — through one dashboard.
         </p>
 
-        <dl className="mt-12 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4">
-          <MetaItem label="Role" value="Product Designer — owned end to end" />
-          <MetaItem label="Timeline" value="~2.5 months" />
-          <MetaItem label="Launch" value="India + MENA" />
-          <MetaItem label="Platforms" value="6" />
-          {study.team && (
-            <div className="col-span-2 border-t border-line pt-4 sm:col-span-4">
-              <dt className="eyebrow">Team</dt>
-              <dd className="mt-2 text-sm text-text-muted">{study.team}</dd>
+        <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-line pt-6 sm:grid-cols-4">
+          {[
+            ["Role", "Sole Product Designer"],
+            ["Team", "1 PM · 7 engineers"],
+            ["Scope", "Swiggy & Zomato · India"],
+            ["Platform", "Atlas, web"],
+          ].map(([k, v]) => (
+            <div key={k}>
+              <dt className="text-[12px] font-semibold uppercase tracking-[0.12em] text-text-faint">{k}</dt>
+              <dd className="mt-1.5 text-[15px] leading-[21px] text-text">{v}</dd>
             </div>
-          )}
+          ))}
         </dl>
       </header>
 
-      {/* ---------------- COVER ---------------- */}
-      <div className="container-page">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-bg">
-          <Media src={study.cover} alt={study.coverAlt} className="!object-contain" />
-        </div>
+      {/* ---------------- COVER (wide) ---------------- */}
+      <div className={`${WIDE} mt-14`}>
+        <ViewTransition name={`study-cover-${study.slug}`} share="morph" default="none">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-[10px] border border-line bg-bg">
+            <Media src={study.cover} alt={study.coverAlt} className="!object-contain" />
+          </div>
+        </ViewTransition>
       </div>
 
-      <div className="container-page py-16 md:py-20">
-        {/* ---------------- SNAPSHOT ---------------- */}
-        <Reveal>
-          <span className="eyebrow">Impact · first two months after launch</span>
-          <div className="mt-6">
-            <MetricsGrid />
-          </div>
-        </Reveal>
+      {/* ---------------- TL;DR ---------------- */}
+      <Block tag="TL;DR" id="overview">
+        <P className="mt-6">
+          UrbanPiper sits between a restaurant and every delivery platform it sells on — 40,000+
+          restaurants across 30+ countries. Connecting a store to a platform ran by hand through
+          account managers and took about 3 days. For Swiggy and Zomato in India, I designed a
+          self-serve flow in Atlas where
+          merchants connect their own stores, catch menu problems before they fail, and track every
+          store to live.
+        </P>
+        <div className="mt-10 border-y border-line py-8">
+          <Metrics />
+        </div>
+        <Quote>Restaurants now connect their own stores — and can see every step.</Quote>
+      </Block>
 
-        {/* ---------------- MY ROLE ---------------- */}
-        <Reveal as="section" className="mt-16 rounded-2xl border border-line bg-surface p-6 md:p-8">
-          <span className="eyebrow">My role</span>
-          <p className="mt-4 max-w-3xl text-pretty text-lg leading-relaxed text-text-muted">
-            I owned the design end to end — discovery through UI testing. Four calls were mine to make:
-          </p>
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {[
-              ["The request model", "One brand, on one platform, across selected locations — matching the merchant’s unit, not the AM’s."],
-              ["Validation as a gate", "Catch menu problems before the request is sent, not after."],
-              ["Per-platform setup", "One platform at a time with what / why / where guidance — not one generic form."],
-              ["Tracking & recovery", "In-product status with timestamps, plus a fix-and-retry path that replaces the email."],
-            ].map(([t, b]) => (
-              <div key={t} className="rounded-xl border border-line bg-surface-2 p-5">
-                <p className="font-serif text-base text-text">{t}</p>
-                <p className="mt-2 text-sm leading-relaxed text-text-muted">{b}</p>
-              </div>
-            ))}
-          </div>
-          <p className="mt-6 max-w-3xl text-sm leading-relaxed text-text-faint">
-            A senior designer reviewed and critiqued the work; four engineers (2 backend, 2 frontend)
-            owned the underlying automation; QA ran the technical testing; account management and
-            support brought the regional domain detail. Cadence: ~2.5 weeks discovery · ~2 weeks
-            design + iteration · ~6 weeks engineering, QA and release.
-          </p>
-        </Reveal>
+      {/* ---------------- CONTEXT ---------------- */}
+      <Block tag="Context" id="context" title="The software layer between a restaurant and every platform it sells on">
+        <P>
+          UrbanPiper pulls orders, menus and operations from Swiggy, Zomato, Talabat and more into
+          one dashboard, tied to the restaurant&rsquo;s POS.
+        </P>
+      </Block>
+      <Reveal className={`${COL} mt-8`}>
+        <div className="overflow-hidden rounded-[10px] border border-line bg-white">
+          <LottieClip src={`${V}/ecosystem.json`} label="Atlas connected to every delivery platform" className="aspect-[1517/952] w-full" />
+        </div>
+      </Reveal>
 
-        {/* ================= SITUATION ================= */}
-        <Phase
-          name="Situation"
-          blurb="Going live already existed — but it was run by our team, in the dark, and it was starting to break as we scaled."
-        />
-
-        {/* 01 · CONTEXT */}
-        <Sec
-          label="01 · Context"
-          heading="What “going live” actually means."
-          intro="UrbanPiper is one place for a restaurant to run every delivery platform it sells on — orders, menus, inventory. But a store only works here once it’s gone live."
-          first
-        >
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            {[
-              ["It’s a connection", "Going live links a store in UrbanPiper to its listing on the platform, so orders flow in."],
-              ["Not a launch", "The store already exists on the platform — this isn’t about launching it there."],
-              ["Nothing works until then", "Until it’s connected, that store has no orders and nothing to manage here."],
-            ].map(([t, b]) => (
-              <Card key={t} title={t}>
-                {b}
-              </Card>
-            ))}
-          </div>
-          <div className="mt-8">
-            <Sticky>
-              A store can’t go live without a menu — there’s no such thing as a live store with a
-              blank menu.
-            </Sticky>
-          </div>
-        </Sec>
-
-        {/* 02 · THE PROBLEM */}
-        <Sec
-          label="02 · The problem"
-          heading="Request it, then silence."
-          intro="Go-live was requested from Atlas by our own team, on the brand’s behalf — but its progress lived on a separate internal tool that only we could see. Every region and platform had its own rules, so each one meant back-and-forth over email, Slack and WhatsApp."
-        >
-          <div className="mt-10 rounded-xl border border-line bg-surface p-6 md:p-8">
-            <p className="eyebrow">The request, end to end</p>
-            <div className="mt-6">
-              <VFlow
-                steps={[
-                  { label: "Merchant" },
-                  { label: "Account Manager" },
-                  { label: "UrbanPiper" },
-                  { label: "Internal tools / shared sheets" },
-                  { label: "External platform" },
-                  { label: "Internal tracking" },
-                  { label: "Account Manager" },
-                  { label: "Merchant" },
-                ]}
-              />
-            </div>
-          </div>
-          <div className="mt-8">
-            <Statement>The AM had become the status page.</Statement>
-          </div>
-
-          <p className="mt-12 max-w-2xl text-pretty text-lg leading-relaxed text-text-muted">
-            As we grew into the US and UK, this broke. Five pressures compounded at once:
-          </p>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              ["Low ownership", "Merchants couldn’t manage the process themselves."],
-              ["Invisible progress", "The product never showed where a request was, or what came next."],
-              ["Operational dependency", "AMs collected the data, tracked requests and relayed every update."],
-              ["Delays", "Platform timelines ran 6–7 days; UrbanPiper-side delays could push go-live past 10."],
-              ["Support burden", "Timeline, delay and error questions spiked into support tickets."],
-              ["A team-sized bottleneck", "A small account team, so brands queued behind one another."],
-            ].map(([t, b]) => (
-              <Card key={t} title={t}>
-                {b}
-              </Card>
-            ))}
-          </div>
-        </Sec>
-
-        {/* 03 · DISCOVERY */}
-        <Sec
-          label="03 · Discovery"
-          heading="I went to both sides of the process."
-          intro="To understand why go-live stalled, I sat with the account managers running it across MENA, UK, US and India — and with the merchants who requested it. The same broken process was hurting both."
-        >
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
-            <Perspective
-              title="Brand team — the customer"
-              points={[
-                "Requested go-live, then had no visibility — couldn’t tell what was live, pending or failed.",
-                "Couldn’t even see which locations they’d sent live without digging back through an email.",
-                "Typed platform IDs and URLs for every store by hand, unsure what each platform needed.",
-                "No way to know if a store’s menu was ready — found out only when it failed.",
-                "Every question meant pinging an account manager, then waiting.",
-              ]}
-            />
-            <Perspective
-              title="Account managers — our team"
-              points={[
-                "Ran every go-live by hand on an internal tool the customer couldn’t see.",
-                "Buried under rising requests and tickets as more regions came on.",
-                "Re-explained region-specific requirements again and again over chat.",
-                "Chased customers for the right IDs, URLs and menu fixes.",
-                "Became the bottleneck — a small team, so brands waited behind each other.",
-              ]}
-            />
-          </div>
-
-          <p className="mt-14 eyebrow">What I heard, distilled</p>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              ["01", "“When will my store go live?”", "Timeline questions were the single most recurring concern."],
-              ["02", "The AM was the comms layer.", "Merchants depended on AMs just to understand progress."],
-              ["03", "Requirements weren’t consistent.", "Different platforms needed different IDs and information."],
-              ["04", "Some failures were preventable.", "Menu problems could be caught before anything went external."],
-              ["05", "Failure needed a recovery path.", "Users had to fix what broke and continue — without restarting."],
-            ].map(([n, t, b]) => (
-              <div key={n} className="rounded-xl border border-line bg-surface p-6">
-                <span className="font-serif text-2xl text-accent">{n}</span>
-                <p className="mt-3 font-serif text-lg leading-snug text-text">{t}</p>
-                <p className="mt-2 text-sm leading-relaxed text-text-muted">{b}</p>
-              </div>
-            ))}
-          </div>
-        </Sec>
-
-        {/* 04 · CURRENT BEHAVIOUR — real old-flow screenshots */}
-        {study.problemFlow?.length ? (
-          <CaseStudyFeatures
-            features={study.problemFlow}
-            label="04 · Current behaviour — the old flow, where it broke"
-            intro="Then I walked the flow that already existed, screen by screen, to see exactly where visibility fell away."
-          />
-        ) : null}
-
-        {/* 05 · PER-PLATFORM REQUIREMENTS */}
-        <Sec
-          label="05 · Per-platform requirements"
-          heading="Different platforms, different requirements."
-          intro="Next I mapped what each platform actually needs to go live — with the AM teams, region by region. The challenge wasn’t adding more fields; it was making each one make sense to the merchant."
-        >
-          <div className="mt-10 grid items-center gap-8 md:grid-cols-2 md:gap-12">
-            <div>
-              <div className="flex flex-wrap gap-2">
-                {["Platform ID", "URL", "Business type", "Brand ID", "Chain ID"].map((f) => (
-                  <span
-                    key={f}
-                    className="rounded-md border border-line bg-surface px-3 py-2 font-mono text-xs text-text"
-                  >
-                    {f}
-                  </span>
-                ))}
-              </div>
-              <p className="mt-5 text-sm text-text-muted">
-                So every field had to answer three questions, right where it’s asked:
-              </p>
-              <div className="mt-4 grid gap-3">
-                {[
-                  ["What is this?", "Plain language for every field."],
-                  ["Why do I need it?", "The reason the platform asks for it."],
-                  ["Where do I find it?", "Contextual guidance to the exact source."],
-                ].map(([q, a]) => (
-                  <div key={q} className="rounded-lg border border-line bg-surface-2 px-4 py-3">
-                    <p className="font-serif text-base text-text">{q}</p>
-                    <p className="mt-1 text-sm text-text-muted">{a}</p>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-5 max-w-md text-sm leading-relaxed text-text-faint">
-                Support owned the detailed docs; discovery decided where contextual guidance had to
-                live inside the product. So setup became one platform at a time — fields that match
-                exactly what that platform needs.
-              </p>
-            </div>
-            <figure>
-              <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-line bg-surface">
-                <Media
-                  src="/work/self-serve-go-live/03-add-details.png"
-                  alt="Add platform details table with per-store IDs and URLs, matched to the selected platform"
-                  className="!object-contain"
-                />
-              </div>
-              <figcaption className="mt-3 text-xs text-text-faint">
-                Per-platform setup — the fields match exactly what that platform requires.
-              </figcaption>
-            </figure>
-          </div>
-        </Sec>
-
-        {/* 06 · PERSONAS */}
-        <Sec
-          label="06 · Personas"
-          heading="Two brand managers, two regions, the same wall."
-          intro="I distilled the interviews into two representative personas — the people who felt the old process most across India and MENA."
-        >
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
-            {[
-              {
-                initials: "AM",
-                name: "Arjun Mehta",
-                role: "Regional Operations Manager",
-                region: "India · Bengaluru",
-                context: "Runs 100+ outlets for a multi-city QSR chain on Swiggy & Zomato.",
-                goals: [
-                  "Take a batch of new outlets live before a city launch — without waiting on an AM.",
-                  "Tell franchise owners exactly when they’ll be live.",
-                ],
-                pains: [
-                  "Sends the request, then goes silent — no status to share.",
-                  "Finds out about a menu problem only when a store fails.",
-                ],
-                quote: "“I send the request and then I’m just… waiting. I can’t tell my owners a date.”",
-                drove:
-                  "Bulk per-store setup and the timestamped tracker — so a batch of outlets can go live with a date to share.",
-              },
-              {
-                initials: "LH",
-                name: "Layla Haddad",
-                role: "Brand Manager",
-                region: "MENA · Dubai",
-                context: "Manages an F&B group’s listings across Talabat, Deliveroo, Jahez & Noon.",
-                goals: [
-                  "Go live across platforms with the right per-platform data the first time.",
-                  "Understand what each field means before submitting.",
-                ],
-                pains: [
-                  "Every platform asks for something different — IDs, URLs, chain IDs.",
-                  "Never sure which value goes where until something breaks.",
-                ],
-                quote: "“Every platform wants something different. I never know which ID goes where.”",
-                drove:
-                  "Per-platform setup instead of one generic form, plus the what / why / where guidance on every field.",
-              },
-            ].map((p) => (
-              <div key={p.name} className="rounded-2xl border border-line bg-surface p-6 md:p-8">
-                <div className="flex items-center gap-4">
-                  <span className="flex size-12 shrink-0 items-center justify-center rounded-full border border-line bg-surface-2 font-serif text-lg text-text">
-                    {p.initials}
-                  </span>
-                  <div>
-                    <p className="font-serif text-xl leading-tight text-text">{p.name}</p>
-                    <p className="text-sm text-text-muted">
-                      {p.role} · <span className="text-text-faint">{p.region}</span>
-                    </p>
-                  </div>
-                </div>
-                <p className="mt-5 text-sm leading-relaxed text-text-muted">{p.context}</p>
-                <div className="mt-6 grid gap-5 sm:grid-cols-2">
-                  <div>
-                    <p className="eyebrow">Goals</p>
-                    <ul className="mt-3 space-y-2 text-sm text-text-muted">
-                      {p.goals.map((g) => (
-                        <li key={g} className="flex gap-2">
-                          <span aria-hidden className="mt-1.5 size-1 shrink-0 rounded-full bg-accent" />
-                          {g}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <p className="eyebrow">Frustrations</p>
-                    <ul className="mt-3 space-y-2 text-sm text-text-muted">
-                      {p.pains.map((g) => (
-                        <li key={g} className="flex gap-2">
-                          <span aria-hidden className="mt-1.5 size-1 shrink-0 rounded-full bg-[#ff6b6b]" />
-                          {g}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                <p className="mt-6 border-l-2 border-line-strong pl-4 font-serif text-base italic leading-snug text-text">
-                  {p.quote}
-                </p>
-                <p className="mt-5 rounded-lg border border-line bg-surface-2 px-4 py-3 text-sm leading-relaxed text-text-muted">
-                  <span className="font-semibold text-text">Drove →</span> {p.drove}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Sec>
-
-        {/* ================= DEFINITION ================= */}
-        <Phase
-          name="Definition"
-          blurb="With the problem understood from both sides, the goal was simple to state — and one decision shaped everything downstream."
-        />
-
-        {/* 07 · OBJECTIVE */}
-        <Sec
-          label="07 · Objective"
-          heading="Put it in the customer’s hands."
-          intro="One place in Atlas where a brand can request go-live, track it, and understand it — without going through us."
-          first
-        >
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            {[
-              "Request stores themselves, without an account manager in the loop.",
-              "See real status and timelines inside the product.",
-              "Know what’s needed — like whether the menu is ready — before requesting.",
-            ].map((g) => (
-              <Card key={g}>{g}</Card>
-            ))}
-          </div>
-          <div className="mt-8">
-            <p className="eyebrow">Design goals</p>
-            <div className="mt-4 flex flex-wrap gap-3">
-              {[
-                "Own the request",
-                "See progress",
-                "Prevent avoidable failures",
-                "Recover from failures",
-                "Go live faster",
-              ].map((g) => (
-                <span key={g} className="rounded-full border border-line px-4 py-2 text-sm text-text">
-                  {g}
-                </span>
+      <Block tag="The job" title="What it means to connect a store to a platform">
+        <P>
+          Onboarding has two parts. Setting up a restaurant&rsquo;s stores and menus is a different
+          job from linking those stores to each delivery platform — so the product keeps them
+          separate. This project is the second part.
+        </P>
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          <Card>
+            <Label>1 · Set up</Label>
+            <ul className="mt-3 space-y-1.5 text-[15px] leading-[22px] text-text-muted">
+              {["Stores created", "Store setup completed", "Schedules & operations configured", "Menu setup completed"].map((s) => (
+                <li key={s} className="flex gap-2.5">
+                  <span aria-hidden className="text-cta">✓</span>
+                  {s}
+                </li>
               ))}
+            </ul>
+          </Card>
+          <Card className="border-cta/40">
+            <p className="text-[13px] font-semibold uppercase leading-[20px] tracking-[0.12em] text-cta">
+              2 · Connect
+            </p>
+            <p className="mt-3 text-[15px] leading-[22px] text-text">
+              Map each store to its listing on the platform, so it can be managed there through
+              UrbanPiper.
+            </p>
+          </Card>
+        </div>
+      </Block>
+
+      <Block tag="Users" id="users" title="Built for brand managers — but done by onboarding managers">
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          <Card>
+            <Label>The merchant</Label>
+            <p className="mt-3 text-[16px] font-semibold leading-[22px] text-text">Brand manager</p>
+            <p className="mt-2 text-[14px] leading-[21px] text-text-muted">
+              Single- or multi-brand, any number of locations. Their stores are already on the delivery
+              apps — they need each one connected to UrbanPiper.
+            </p>
+          </Card>
+          <Card>
+            <Label>UrbanPiper</Label>
+            <p className="mt-3 text-[16px] font-semibold leading-[22px] text-text">Onboarding manager</p>
+            <p className="mt-2 text-[14px] leading-[21px] text-text-muted">
+              Did the setup and connected every store, on every platform, for them.
+            </p>
+          </Card>
+        </div>
+
+      </Block>
+
+      <Block tag="Regions & platforms" title="One product, many markets — each with its own delivery apps">
+        <P>
+          UrbanPiper runs across 40,000+ locations in 30+ countries. Every region has its own set of
+          delivery platforms — and each platform its own way of connecting a store.
+        </P>
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          {[
+            { region: "India", apps: ["Swiggy", "Zomato", "DotPe"] },
+            { region: "MENA", apps: ["Talabat", "Careem", "Keeta", "Jahez", "HungerStation", "Mrsool"] },
+            { region: "US & Canada", apps: ["DoorDash", "Uber Eats", "Grubhub", "Caviar"] },
+            { region: "UK & Europe", apps: ["Deliveroo", "Just Eat", "Glovo"] },
+          ].map((r) => (
+            <Card key={r.region}>
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-[15px] font-semibold text-text">{r.region}</p>
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2.5">
+                {r.apps.map((a) => (
+                  <PlatformLogo key={a} name={a} />
+                ))}
+              </div>
+            </Card>
+          ))}
+        </div>
+        <p className="mt-3 text-[13px] leading-[20px] text-text-faint">
+          A selection of the delivery platforms UrbanPiper integrates with, from its public integrations
+          list.
+        </p>
+      </Block>
+
+      <Block tag="The brief" id="brief" title="Connecting was slow, and nobody could see why">
+        <dl className="mt-6 space-y-5">
+          {[
+            ["Problem", "Getting a restaurant connected to its delivery platforms was slow and hard to track. Support tickets were rising day by day."],
+            ["Goal", "Find out what was wrong, and make connecting faster and cleaner."],
+            ["Team", "Sole designer · 1 PM · 4 backend + 3 frontend engineers · Onboarding team"],
+            ["My role", "Owned design end to end — research, interaction design, prototyping and design QA with engineering. I grounded it in conversations with account managers across India and MENA."],
+          ].map(([t, d]) => (
+            <div key={t} className="grid gap-1 sm:grid-cols-[8rem_1fr] sm:gap-6">
+              <dt className="text-[13px] font-semibold uppercase leading-[26px] tracking-[0.12em] text-text-faint">{t}</dt>
+              <dd className="text-[16px] leading-[26px] text-text-muted">{d}</dd>
+            </div>
+          ))}
+        </dl>
+      </Block>
+
+      {/* ================= 1 · DISCOVER ================= */}
+      <Phase n={1} id="discover" title="Discover" sub="Why connecting a store took days instead of hours." />
+
+      <Block tag="How I dug in" title="Before designing anything, I found out what was breaking">
+        <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          {[
+            ["150–200 support tickets", "Every go-live ticket from the last quarter, grouped by complaint."],
+            ["7 interviews", "5 brand managers, and the 2 onboarding leads for India and MENA."],
+            ["Shadowed a live go-live", "Sat in on a merchant's Zomato go-live, email thread included, from request to live."],
+          ].map(([t, d], i) => (
+            <Card key={t}>
+              <p className="text-[13px] font-semibold text-text-faint">{String(i + 1).padStart(2, "0")}</p>
+              <div className="mt-2">
+                <H3>{t}</H3>
+              </div>
+              <p className="mt-1 text-[14px] leading-[22px] text-text-muted">{d}</p>
+            </Card>
+          ))}
+        </div>
+      </Block>
+
+      <Block tag="Support tickets" title="Five complaints kept repeating">
+        <P>I grouped 150–200 tickets from different brands and businesses. The same five patterns came up again and again.</P>
+        <ul className="mt-5 divide-y divide-line border-y border-line">
+          {[
+            ["Delays", "Stores sat waiting for days"],
+            ["No visibility", "No idea where the request was"],
+            ["Chasing", "Constant follow-ups for status"],
+            ["Wrong details", "Small mistakes sent it back"],
+            ["Menu problems", "The menu didn't come out right"],
+          ].map(([t, d]) => (
+            <li key={t} className="grid gap-0.5 py-3 text-[16px] leading-[26px] sm:grid-cols-[10rem_1fr] sm:gap-6">
+              <span className="font-semibold text-text">{t}</span>
+              <span className="text-text-muted">{d}</span>
+            </li>
+          ))}
+        </ul>
+      </Block>
+
+      <Block tag="The old process" title="How a store went live before">
+        <P>Every connection ran by hand — through account managers, a shared sheet and two other teams.</P>
+        <ol className="mt-6 space-y-6">
+          {[
+            ["Data gathering", "Onboarding asks the merchant for store IDs, URLs and menus over Slack, WhatsApp and email, then types it all into a shared sheet — one per platform."],
+            ["Platform connection", "The sheet goes to Swiggy or Zomato to link the stores on their side, and comes back confirming which connected."],
+            ["Go-live", "The tech team runs a menu publish script, and onboarding emails the merchant that stores are live."],
+          ].map(([t, d], i) => (
+            <li key={t} className="grid grid-cols-[2rem_1fr] gap-3">
+              <span className="text-[16px] font-semibold leading-[26px] text-cta">{i + 1}</span>
+              <div>
+                <H3>{t}</H3>
+                <p className="mt-1 text-[16px] leading-[26px] text-text-muted">{d}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </Block>
+      <Reveal className={`${COL} mt-8`}>
+        <Shot src={`${V}/shared-sheet-full.webp`} alt="The shared sheet used to track each store, with a new tab every day" className="aspect-[1597/985]" />
+        <p className="mt-3 text-[14px] leading-[22px] text-text-faint">
+          The shared sheet — one row per store, a new tab every day, every field typed by hand.
+        </p>
+      </Reveal>
+      <div className={COL}>
+        <Quote>The only way to check on a store was to ask a person.</Quote>
+      </div>
+
+      <Block tag="Where the time went" title="The platform took hours. Everything around it took days.">
+        <P>
+          For Swiggy and Zomato, I broke the old go-live into its stages. The platform&rsquo;s own step
+          took hours — the days were spent collecting data and waiting on another team&rsquo;s scripts.
+        </P>
+
+        {/* proportional bar — midpoint of each stage */}
+        <div className="mt-8">
+          <div className="flex h-9 overflow-hidden rounded-[8px] border border-line text-[12px] font-medium">
+            <div className="flex items-center justify-center bg-[#e5484d]/15 px-2 text-center text-[#ff9b9b]" style={{ width: "31%" }}>Collect data</div>
+            <div className="flex items-center justify-center bg-surface-2 text-text-muted" style={{ width: "7%" }}>Map</div>
+            <div className="flex items-center justify-center bg-[#e5484d]/25 px-2 text-center text-[#ff9b9b]" style={{ width: "62%" }}>
+              Scripts + store live
             </div>
           </div>
-        </Sec>
+          <p className="mt-2 text-[12px] leading-[18px] text-text-faint">Swiggy &amp; Zomato · share of time per stage, using the midpoint of the mapping range.</p>
+        </div>
 
-        {/* 08 · THE CORE DECISION */}
-        <Sec
-          label="08 · The core decision"
-          heading="What should one request represent?"
-          intro="The old model bundled go-live by location — one location, taken live across all its platforms at once. It was efficient for the AM processing it. It wasn’t how any merchant thinks."
-        >
-          <div className="mt-10 grid gap-4 md:grid-cols-2">
-            <Card eyebrow="Old · location-first — built for us">
-              <p className="text-text">One location → all its platforms, in one go.</p>
-              <ul className="mt-3 space-y-2">
-                <li>✕ Fewer requests for an AM — a provider-centric unit</li>
-                <li>✕ Forces one aggregate status per location</li>
-                <li>✕ Hides per-platform failure</li>
+        <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          {[
+            { stage: "1 · Collect & align data", time: "1 day", who: "Onboarding team chasing merchants for IDs, URLs and menus", bad: true },
+            { stage: "2 · Map stores", time: "2–8 hrs", who: "The platform — its own stated turnaround", bad: false },
+            { stage: "3 · Scripts + store live", time: "~2 days", who: "Another team runs manual scripts, on average", bad: true },
+          ].map((s) => (
+            <div
+              key={s.stage}
+              className={`rounded-[10px] border p-4 ${s.bad ? "border-[#e5484d]/40 bg-[#e5484d]/[0.06]" : "border-line bg-surface"}`}
+            >
+              <p className="text-[11px] font-semibold uppercase tracking-[0.06em] text-text-faint">{s.stage}</p>
+              <p className={`mt-2 text-[24px] font-bold leading-none tracking-[-0.02em] ${s.bad ? "text-[#ff9b9b]" : "text-text"}`}>{s.time}</p>
+              <p className="mt-2 text-[13px] leading-[19px] text-text-muted">{s.who}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* the sum, and what changed */}
+        <div className="mt-6 grid overflow-hidden rounded-[10px] border border-line sm:grid-cols-3">
+          <div className="bg-surface p-5">
+            <Label>Before</Label>
+            <p className="mt-2 text-[28px] font-bold leading-none tracking-[-0.02em] text-text">~3.2 days</p>
+            <p className="mt-2 text-[13px] leading-[19px] text-text-muted">1 day + 2–8 hrs + 2 days = 74–80 hrs</p>
+          </div>
+          <div className="border-t border-line bg-surface-2 p-5 sm:border-l sm:border-t-0">
+            <p className="text-[13px] font-semibold uppercase leading-[20px] tracking-[0.12em] text-cta">Now</p>
+            <p className="mt-2 text-[28px] font-bold leading-none tracking-[-0.02em] text-text">4–5 hrs</p>
+            <p className="mt-2 text-[13px] leading-[19px] text-text-muted">From raising the request to the store going live</p>
+          </div>
+          <div className="border-t border-line bg-surface-2 p-5 sm:border-l sm:border-t-0">
+            <p className="text-[13px] font-semibold uppercase leading-[20px] tracking-[0.12em] text-cta">Reduced by</p>
+            <p className="mt-2 text-[28px] font-bold leading-none tracking-[-0.02em] text-cta">~94%</p>
+            <p className="mt-2 text-[13px] leading-[19px] text-text-muted">~77 hrs down to ~4.5 hrs, using midpoints</p>
+          </div>
+        </div>
+      </Block>
+
+      <Block tag="Pain points" title="Both sides of the process were stuck">
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          {[
+            {
+              img: `${V}/avatar-bm.png`,
+              name: "Brand Manager",
+              role: "Manages 5 brands at WOW! Momo",
+              pains: [
+                ["No visibility", "Can't see status after handing off details."],
+                ["High time-to-live", "Long, unpredictable turnaround."],
+                ["Reactive, not proactive", "Has to chase for updates."],
+                ["Menu integrity", "Menus publish wrong — prices, missing items."],
+              ],
+            },
+            {
+              img: `${V}/avatar-om.png`,
+              name: "Lead Onboarding Manager",
+              role: "Manages 2 teams, India and MENA",
+              pains: [
+                ["Manual overhead", "Hands-on effort per store."],
+                ["Scalability bottleneck", "A single point of dependency."],
+                ["Cross-team dependency", "Blocked on platform and tech hand-offs."],
+                ["No answer to give", "Merchants keep asking “is it done yet?”"],
+              ],
+            },
+          ].map((p) => (
+            <Card key={p.name}>
+              <div className="flex items-center gap-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={p.img} alt="" className="size-10 rounded-full object-cover" />
+                <div>
+                  <H3>{p.name}</H3>
+                  <p className="text-[13px] leading-[18px] text-text-faint">{p.role}</p>
+                </div>
+              </div>
+              <ul className="mt-5 space-y-3">
+                {p.pains.map(([t, d]) => (
+                  <li key={t}>
+                    <p className="text-[15px] font-medium leading-[22px] text-text">{t}</p>
+                    <p className="text-[14px] leading-[21px] text-text-muted">{d}</p>
+                  </li>
+                ))}
               </ul>
             </Card>
-            <div className="rounded-xl border border-transparent bg-accent p-6 text-accent-ink">
-              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-accent-ink/70">
-                New · the merchant’s unit
-              </p>
-              <p className="mt-3 font-serif text-xl leading-tight">
-                Brand × Location × Platform
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-accent-ink/80">
-                “Domino’s · Whitefield · Swiggy” is one cell. A request groups one brand, on one
-                platform, across the locations you choose.
-              </p>
-            </div>
-          </div>
+          ))}
+        </div>
+      </Block>
 
-          {/* Status matrix — proves the unit is the cell */}
-          <figure className="mt-8">
-            <div className="overflow-x-auto rounded-xl border border-line bg-surface p-5 md:p-7">
-              <div className="min-w-[440px]">
-                <p className="eyebrow">Brand · Domino’s</p>
-                <div className="mt-4 grid grid-cols-4 gap-px overflow-hidden rounded-lg border border-line bg-line text-sm">
-                  {/* header row */}
-                  <div className="bg-surface-2 px-4 py-3 text-text-faint">Location</div>
-                  {["Swiggy", "Zomato", "Talabat"].map((p) => (
-                    <div key={p} className="bg-surface-2 px-4 py-3 font-medium text-text">
-                      {p}
-                    </div>
-                  ))}
-                  {/* body rows: each cell is an independent go-live state */}
-                  {[
-                    ["Whitefield", ["live", "failed", "pending"]],
-                    ["Indiranagar", ["live", "live", "pending"]],
-                    ["Koramangala", ["pending", "live", "failed"]],
-                  ].map(([loc, states]) => (
-                    <Fragment key={loc as string}>
-                      <div className="bg-surface px-4 py-3 text-text-muted">{loc as string}</div>
-                      {(states as string[]).map((s, i) => (
-                        <div key={i} className="bg-surface px-4 py-3">
-                          {s === "live" && <span className="text-text">● Live</span>}
-                          {s === "failed" && <span className="text-[#ff6b6b]">✕ Failed</span>}
-                          {s === "pending" && <span className="text-text-faint">○ Pending</span>}
-                        </div>
-                      ))}
-                    </Fragment>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <figcaption className="mt-3 text-xs text-text-faint">
-              The same outlet is live on one platform and failed on another. Status only ever exists
-              at the cell — so “Whitefield is live” can’t be true or false.
-            </figcaption>
-          </figure>
+      {/* ================= 2 · DEFINE ================= */}
+      <Phase n={2} id="define" title="Define" sub="Turning what I learned into a clear problem — and a goal." />
 
-          {/* Justification — why the unit is the triple */}
-          <div className="mt-10">
-            <p className="eyebrow">Why a merchant thinks in that unit</p>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              {[
-                ["Status lives per platform", "A store can be live on Swiggy and down on Zomato at once — same kitchen, separate listing, independent go-live."],
-                ["Operations are per platform", "Menu, price, availability, promos, commission and the order stream are all maintained platform by platform."],
-                ["One address is many brands", "Cloud kitchens run several brands from one location, so “location” alone is ambiguous — the brand is what an operator owns and reports on."],
-                ["“Live” is a revenue statement", "“Are we live?” means “are Swiggy orders landing at Domino’s Whitefield?” — the cell is where money actually flows."],
-              ].map(([t, b]) => (
-                <Card key={t} title={t}>
-                  {b}
-                </Card>
-              ))}
-            </div>
-          </div>
+      <Block tag="The problem">
+        <p className="mt-6 text-[22px] font-semibold leading-[1.35] tracking-[-0.02em] text-text-muted md:text-[28px]">
+          Every store connection ran through a{" "}
+          <span className="text-text">manual process owned by account managers</span> — so it took{" "}
+          <span className="text-cta">~3 days</span> to go live, leaving merchants{" "}
+          <span className="text-text">managing each platform separately</span>, with{" "}
+          <span className="text-text">no visibility</span> the entire time.
+        </p>
+      </Block>
 
-          <div className="mt-10">
-            <Statement>
-              “How many Domino’s stores are live on Swiggy?” — never “how many locations across my
-              brands?”
-            </Statement>
-          </div>
-        </Sec>
+      <Block tag="Jobs to be done" title="What each side was really trying to get done" />
+      <Reveal className={`${WIDE} mt-8`}>
+        <JtbdBoard />
+      </Reveal>
 
-        {/* ================= DESIGN ================= */}
-        <Phase
-          name="Design"
-          blurb="I mapped the whole path first, iterated on the hard parts, then built it screen by screen."
-        />
+      <Block tag="How might we" title="From problems to opportunities" />
+      <Reveal className={`${WIDE} mt-8`}>
+        <HmwBoard />
+      </Reveal>
 
-        {/* 09 · USER FLOW */}
-        <Sec
-          label="09 · User flow"
-          heading="One path, one job per step."
-          intro="Before designing screens, I mapped the end-to-end flow — one brand, selected locations, one platform at a time — so validation and tracking were part of the path, not bolted on."
-          first
-        >
-          <div className="mt-10 rounded-xl border border-line bg-surface p-6 md:p-10">
-            <VFlow
-              steps={[
-                { label: "Atlas → Settings → Platform Integration" },
-                { label: "Select platform" },
-                { label: "Select brand", note: "One brand, selected locations" },
-                { label: "Take stores live" },
-                { label: "Enter platform details", note: "Contextual field guidance" },
-                { label: "Associate a menu per store" },
-                { label: "Activate stores" },
-                { label: "Validation", note: "Behind-the-scenes gate — not a tracker stage" },
-                { label: "Request submitted" },
-                { label: "Track progress" },
-                { label: "Store live  /  fix & retry" },
-              ]}
-            />
-          </div>
-        </Sec>
+      <Block tag="Strategy" title="Build the flow, then roll out region by region">
+        <P>So each step could be validated before scaling it to everyone.</P>
+        <StrategyRoadmap />
+        <Card className="mt-8">
+          <Label>Why Swiggy &amp; Zomato in India first</Label>
+          <ul className="mt-3 space-y-2 text-[15px] leading-[23px] text-text-muted">
+            <li>
+              <span className="text-text">Most tickets came from here.</span> MENA raised far fewer, so
+              India was where the pain — and the payoff — was.
+            </li>
+            <li>
+              <span className="text-text">Two platforms instead of many.</span> In MENA, every
+              platform has its own timings and its own requirements to connect a store.
+            </li>
+            <li>
+              <span className="text-text">MENA needed more research</span> before one flow could cover
+              all of it — so it became Phase 2.
+            </li>
+          </ul>
+        </Card>
+      </Block>
 
-        {/* 10 · IDEATION & ITERATION */}
-        <Sec
-          label="10 · Ideation & iteration"
-          heading="The hard parts came from iterating, not the first sketch."
-          intro="Two decisions only became clear after testing rougher versions against how people actually work."
-        >
-          {/* iteration A — validation as a gate */}
-          <div className="mt-10 rounded-2xl border border-line bg-surface p-6 md:p-8">
-            <p className="eyebrow">Iteration 1 · Menu validation</p>
-            <h3 className="mt-3 font-serif text-xl leading-tight text-text md:text-2xl">
-              Catch what we can, before the platform can’t.
-            </h3>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-text-muted">
-              Menu problems were the most common cause of a failed go-live — and because many
-              locations share one menu, a single fix protects them all. So validation runs before
-              the request is ever sent. It’s a gate, not a tracker stage: invisible unless it finds
-              something.
-            </p>
-            <div className="mt-6 flex flex-col gap-6 md:flex-row md:items-center md:gap-10">
-              <Flow steps={["Error detected", "Fix menu", "Continue"]} />
-              <p className="max-w-sm border-l-2 border-accent pl-4 font-serif text-base leading-snug text-text">
-                Catch what UrbanPiper controls before handing the request to a system it can’t.
-              </p>
-            </div>
-          </div>
+      {/* ================= 3 · DEVELOP ================= */}
+      <Phase n={3} id="develop" title="Develop" sub="The approach, the decisions, and the solution." />
 
-          {/* iteration B — menu selection trade-off */}
-          <div className="mt-6 rounded-2xl border border-line bg-surface p-6 md:p-8">
-            <p className="eyebrow">Iteration 2 · Menu selection — speed vs. confidence</p>
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
-              <Card eyebrow="First iteration" title="Menu cards with previews">
-                Let users visually verify the menu before choosing.
-              </Card>
-              <Card eyebrow="The problem" title="Previews slowed it down">
-                Most users already knew exactly which menu they wanted.
-              </Card>
-              <Card light eyebrow="Final" title="Dropdown + preview after">
-                Preview the selected menu in a separate tab via existing Menu Management.
-              </Card>
-            </div>
-            <p className="mt-6 border-l-2 border-line-strong pl-4 font-serif text-lg leading-snug text-text">
-              Optimise the common path — without removing confidence for the edge cases.
+      <Block tag="Constraint" title="We couldn't touch the sheet">
+        <P>
+          Every platform shares one sheet with us to connect stores — and they own it. We
+          couldn&rsquo;t edit it, automate it or plug into it. So how do you make a process
+          self-serve when its core step lives in a document you&rsquo;re not allowed to touch?
+        </P>
+        <div className="mt-6 rounded-[10px] border border-line bg-surface p-5">
+          <Label>Why Atlas couldn&rsquo;t just connect to the platform</Label>
+          <p className="mt-2 text-[15px] leading-[24px] text-text-muted">
+            The platforms don&rsquo;t offer an API for store mapping. Their mapping teams work only
+            from the sheet they own, so there was nothing on their side for Atlas to call directly.
+          </p>
+        </div>
+      </Block>
+
+      <Block tag="The workaround" title="Swap the sheet for email, and put Nexus in the middle">
+        <P>
+          Product and partnerships got every platform on a call and asked one question: can the
+          sheet&rsquo;s details come over email instead? They agreed — a few more platforms are still
+          in talks. That let engineering build <span className="text-text">Nexus</span>, a backend AI agent that sends each request to the
+          platform by email, reads the platform&rsquo;s reply, and updates the store&rsquo;s status
+          in Atlas.
+        </P>
+      </Block>
+      <Reveal className={`${COL} mt-8`}>
+        <AgentLoop />
+      </Reveal>
+      <p className={`${COL} mt-3 text-[13px] leading-[20px] text-text-faint`}>
+        Nexus is a backend service, owned by engineering, product and partnerships.
+      </p>
+
+      <Block>
+        <H2>What it changed: the system now knows the status</H2>
+        <div className="mt-6 grid overflow-hidden rounded-[10px] border border-line sm:grid-cols-2">
+          <div className="bg-surface p-5">
+            <Label>Before</Label>
+            <p className="mt-2 text-[15px] leading-[24px] text-text-muted">
+              Only the onboarding team knew where a request stood. They tracked replies by hand,
+              updated the sheet and messaged the merchant.
             </p>
           </div>
-        </Sec>
-
-        {/* 11 · WHAT WE BUILT — real screenshots */}
-        {study.features?.length ? (
-          <CaseStudyFeatures
-            features={study.features}
-            label="11 · The solution — what we built"
-            intro="One self-serve flow, end to end: request, set up per platform, catch menu problems before submitting, and track every step to live."
-          />
-        ) : null}
-
-        {/* 12 · TRACKING */}
-        <Sec
-          label="12 · Tracking"
-          heading="From “we’ll notify you” to “here’s where your request is.”"
-        >
-          <div className="mt-10 grid items-center gap-8 md:grid-cols-2 md:gap-12">
-            <figure>
-              <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-line bg-surface">
-                <Media
-                  src="/work/self-serve-go-live/08-track-live.png"
-                  alt="Go-live progress tracker: request, mapping, menu published, live — each with a timestamp"
-                  className="!object-contain"
-                />
-              </div>
-              <figcaption className="mt-3 text-xs text-text-faint">
-                Request → mapping → menu published → live, with the time each step happened. Errors
-                surface at the exact stage they occur.
-              </figcaption>
-            </figure>
-            <div>
-              <p className="text-sm leading-relaxed text-text-muted">
-                Failed requests are visible on the platform page, and a banner on the brand’s store
-                listing highlights failures and prioritises them. The tracker answers, in the
-                product:
-              </p>
-              <div className="mt-6 grid grid-cols-2 gap-3">
-                {["Where is my store?", "What happened?", "Do I need to act?", "What happens next?"].map(
-                  (q) => (
-                    <div
-                      key={q}
-                      className="rounded-lg border border-line bg-surface-2 px-4 py-4 text-center text-sm text-text"
-                    >
-                      {q}
-                    </div>
-                  ),
-                )}
-              </div>
-            </div>
+          <div className="border-t border-line bg-surface-2 p-5 sm:border-l sm:border-t-0">
+            <p className="text-[13px] font-semibold uppercase leading-[20px] tracking-[0.12em] text-cta">Now</p>
+            <p className="mt-2 text-[15px] leading-[24px] text-text">
+              Nexus reads every reply and moves each store from{" "}
+              <span className="whitespace-nowrap">Requested → In progress → Mapped</span> on its own.
+              No one has to track it, and the merchant sees it live.
+            </p>
           </div>
-        </Sec>
+        </div>
+      </Block>
 
-        {/* 13 · FAILURE → RECOVERY */}
-        <Sec label="13 · Failure → recovery" heading="A failure shouldn’t mean starting over.">
-          <div className="mt-10 grid items-center gap-8 md:grid-cols-2 md:gap-12">
-            <figure>
-              <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-line bg-surface">
-                <Media
-                  src="/work/self-serve-go-live/09-error-explained.png"
-                  alt="A failure explained in plain English, with the technical detail and a way to fix and retry"
-                  className="!object-contain"
-                />
-              </div>
-              <figcaption className="mt-3 text-xs text-text-faint">
-                The reason is in the product now — plain-English, with the detail underneath, and a
-                clear path to fix and retry.
-              </figcaption>
-            </figure>
-            <div className="rounded-xl border border-line bg-surface p-6 md:p-8">
-              <p className="eyebrow">The recovery loop</p>
-              <div className="mt-6">
-                <VFlow
-                  steps={[
-                    { label: "Failure" },
-                    { label: "Identify where it failed" },
-                    { label: "Understand the issue" },
-                    { label: "Fix — in Menu Management if it’s a menu issue" },
-                    { label: "Retry", note: "Everything already entered is preserved" },
-                  ]}
-                />
-              </div>
-            </div>
+      <Block tag="Where it lives" title="One platform-level home for connecting stores">
+        <P>
+          Atlas → All Apps → Settings → Platforms → Integrations → <span className="text-text">Connect stores</span>.
+        </P>
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          <Card>
+            <Label>The decision</Label>
+            <p className="mt-2 text-[15px] leading-[24px] text-text-muted">
+              A connection is <span className="text-text">one-to-many</span> — many stores to one
+              platform, under its rules — and a <span className="text-text">process to track</span>,
+              not a one-time store edit. So it lives at the platform level.
+            </p>
+          </Card>
+          <Card>
+            <Label>The trade-off</Label>
+            <p className="mt-2 text-[15px] leading-[24px] text-text-muted">
+              It&rsquo;s less visible from the store itself — so <span className="text-text">Locations</span>{" "}
+              shows each store&rsquo;s status and links straight into the flow.
+            </p>
+          </Card>
+        </div>
+      </Block>
+
+      <Block tag="Mapping the process" title="Every state, before a single screen">
+        <P>
+          Before designing screens, I mapped the brand manager&rsquo;s job on one platform for one
+          brand — and everything that can happen at each step: empty states, edge cases, failures,
+          and how each one gets resolved.
+        </P>
+      </Block>
+      <Reveal className="mx-auto mt-8 w-full max-w-7xl px-6">
+        <RtglProcessMap />
+      </Reveal>
+
+      <Block tag="User flow" title="Connecting a store, end to end">
+        <P>Pick platform & brand → add store IDs → assign menus → verify against platform rules → submit → track to live.</P>
+      </Block>
+      <Reveal className={`${WIDE} mt-8`}>
+        <div className="overflow-hidden rounded-[10px] border border-line bg-[#f8f8fc] p-4 md:p-10">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={`${V}/user-flow.png`} alt="Flowchart of connecting a store end to end" className="mx-auto w-full max-w-4xl" loading="lazy" />
+        </div>
+      </Reveal>
+
+      <Block tag="The final product" id="final-product" title="The shipped flow, end to end">
+        <P>
+          From picking Zomato to every store live — the real screens, played in order.
+        </P>
+      </Block>
+      <Reveal className={`${WIDE} mt-8`}>
+        <ProductDemo />
+      </Reveal>
+
+      <Block tag="Behind the form" title="The sheet had 11 fields per store. The merchant now types 2.">
+        <P>
+          Every column in the platform&rsquo;s sheet was typed by hand. Most of it was data Atlas
+          already had — so the form only asks for what it can&rsquo;t know.
+        </P>
+        <div className="mt-6 overflow-hidden rounded-[10px] border border-line">
+          <div className="grid grid-cols-[minmax(0,9rem)_1fr] bg-surface-2 px-4 py-2.5 sm:grid-cols-[12rem_1fr]">
+            <span className="text-[12px] font-semibold uppercase tracking-[0.12em] text-text-faint">Sheet field</span>
+            <span className="text-[12px] font-semibold uppercase tracking-[0.12em] text-text-faint">Where it comes from now</span>
           </div>
-        </Sec>
+          <ul className="divide-y divide-line">
+            {FIELDS.map((f) => (
+              <li
+                key={f.field}
+                className={`grid grid-cols-[minmax(0,9rem)_1fr] gap-x-3 px-4 py-2.5 sm:grid-cols-[12rem_1fr] ${f.who === "type" ? "bg-cta/5" : ""}`}
+              >
+                <span className={`text-[14px] leading-[22px] ${f.who === "type" ? "font-semibold text-cta" : "text-text"}`}>
+                  {f.field}
+                </span>
+                <span className={`text-[14px] leading-[22px] ${f.who === "type" ? "text-text" : "text-text-muted"}`}>
+                  {f.now}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-text-muted">
+          <span><span className="font-semibold text-text">6</span> filled automatically</span>
+          <span><span className="font-semibold text-text">3</span> a quick pick</span>
+          <span><span className="font-semibold text-cta">2</span> typed by the merchant</span>
+        </div>
+      </Block>
 
-        {/* 14 · SHOW VS HIDE */}
-        <Sec label="14 · What we show vs. hide" heading="Simplicity is the product.">
-          <div className="mt-10 grid gap-4 md:grid-cols-2">
-            <div className="rounded-xl border border-line bg-surface p-6 md:p-8">
-              <p className="eyebrow">Hidden complexity</p>
-              <ul className="mt-4 space-y-2 text-sm text-text-muted">
-                {[
-                  "Internal scripts",
-                  "Technical validation",
-                  "Platform communication",
-                  "Internal tools",
-                  "Backend processing",
-                ].map((x) => (
-                  <li key={x}>— {x}</li>
+      {/* ================= 4 · DELIVER ================= */}
+      <Phase n={4} id="deliver" title="Deliver" sub="What shipped, and what it moved." />
+
+      <Block tag="Impact" title="Three months after release — Swiggy & Zomato, India">
+        <div className="mt-8">
+          <Metrics />
+        </div>
+        <div className="mt-8 grid gap-3 sm:grid-cols-2">
+          <Card>
+            <Label>Before · ~3 days</Label>
+            <ul className="mt-3 space-y-1.5 text-[15px] leading-[22px] text-text-muted">
+              <li>~1 day collecting and aligning data, chasing merchants</li>
+              <li>2–8 hours for the platform to map the stores</li>
+              <li>~2 days of manual scripts by another team</li>
+            </ul>
+          </Card>
+          <Card className="border-cta/40">
+            <p className="text-[13px] font-semibold uppercase leading-[20px] tracking-[0.12em] text-cta">
+              Now · 4–5 hours
+            </p>
+            <p className="mt-3 text-[15px] leading-[22px] text-text">
+              From the moment the merchant raises the request to the store going live — no
+              hand-offs in between.
+            </p>
+          </Card>
+        </div>
+        <p className="mt-4 text-[14px] leading-[22px] text-text-faint">
+          Remaining tickets are mostly from regions not yet live (MENA, UK, US).
+        </p>
+      </Block>
+
+      {/* ---------- After release: the menu preview ---------- */}
+      <Block tag="After release" id="learnings" title="I designed a menu preview most people didn't need">
+        <P>
+          To pick a menu for each store, I first built rich menu cards with a full item preview,
+          right inside the flow. It looked thorough. After release, most people never opened it — and
+          loading every menu&rsquo;s items made the flow slow.
+        </P>
+      </Block>
+      <Reveal className={`${COL} mt-8`}>
+        <Shot src={`${V}/select-menu.png`} alt="First version: rich menu cards with a full item preview" className="aspect-[826/537]" />
+        <p className="mt-3 text-[14px] leading-[22px] text-text-faint">
+          Version 1 — rich menu cards with a full preview, inside the flow.
+        </p>
+      </Reveal>
+
+      <Block>
+        <H2>So I asked merchants how they actually pick a menu</H2>
+        <P>
+          The answer was simple. Brand managers don&rsquo;t decide menus inside the product — they
+          already have a sheet that maps every outlet to its menu.
+        </P>
+        <Quote>
+          &ldquo;We already have a sheet that says which menu goes to which outlet. I don&rsquo;t
+          need to look inside the menu — I just pick it and move on.&rdquo;
+        </Quote>
+        <p className="mt-3 pl-5 text-[14px] leading-[22px] text-text-faint">
+          — Brand manager, multi-brand QSR group
+        </p>
+      </Block>
+
+      <Block>
+        <H2>But I couldn&rsquo;t drop the preview entirely</H2>
+        <P>
+          We checked live menus on the platforms and found near-identical names with different
+          contents. Same brand, almost the same name — but one outlet had a special biryani and a few
+          extra items. Pick the wrong one, and the wrong menu quietly goes live.
+        </P>
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          {[
+            { name: "Paris Panini Menu", items: ["Chicken Biryani", "…same items as the rest"], extra: [] as string[] },
+            { name: "Paris Panini Whitefield Special", items: ["Special Chicken Biryani", "…same items as the rest"], extra: ["a few location-only items"] },
+          ].map((m) => (
+            <Card key={m.name}>
+              <p className="text-[15px] font-semibold leading-[22px] text-text">{m.name}</p>
+              <ul className="mt-3 space-y-1 text-[14px] leading-[21px] text-text-muted">
+                {m.items.map((i) => (
+                  <li key={i} className={i.startsWith("Special") ? "text-cta" : ""}>
+                    {i}
+                  </li>
+                ))}
+                {m.extra.map((i) => (
+                  <li key={i} className="text-cta">
+                    + {i}
+                  </li>
                 ))}
               </ul>
-            </div>
-            <div className="rounded-xl border border-transparent bg-accent p-6 text-accent-ink md:p-8">
-              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-accent-ink/70">
-                Merchant-facing
-              </p>
-              <ul className="mt-4 space-y-2 text-sm">
-                {["Mapping", "Menu published", "Store live"].map((x) => (
-                  <li key={x}>✓ {x}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <p className="mt-8 max-w-2xl text-pretty text-lg leading-relaxed text-text">
-            Merchants chose UrbanPiper to simplify the operational complexity. They don’t need to
-            understand the machinery behind it.
-          </p>
-        </Sec>
+            </Card>
+          ))}
+        </div>
+        <p className="mt-3 text-[14px] leading-[22px] text-text-faint">
+          Two menus a brand manager could easily mix up from the name alone.
+        </p>
+      </Block>
 
-        {/* ================= IMPACT ================= */}
-        <Phase
-          name="Impact"
-          blurb="Go-live moved from a task our team ran by hand to one brands run themselves."
-        />
+      <Block>
+        <H2>What I shipped: a fast dropdown, with preview one click away</H2>
+        <P>
+          Picking a menu is now a plain dropdown — no loading, no cards. Once a menu is picked,{" "}
+          <span className="text-text">Preview</span> opens it in a new tab, so it never slows the
+          flow down but is there when two menus look alike.
+        </P>
+      </Block>
+      <Reveal className={`${WIDE} mt-10`}>
+        <div className="grid gap-x-8 gap-y-10 md:grid-cols-2">
+          {[
+            { src: `${V}/menu-dropdown-empty.png`, title: "Pick from a dropdown", text: "One click per store — the brand manager matches it to their sheet." },
+            { src: `${V}/menu-dropdown-preview.png`, title: "Preview, only if needed", text: "Once picked, Preview opens that menu in a new tab." },
+          ].map((s) => (
+            <figure key={s.src}>
+              <Shot src={s.src} alt={s.title} className="aspect-[2560/1664]" />
+              <figcaption className="mt-4">
+                <H3>{s.title}</H3>
+                <p className="mt-1 text-[15px] leading-[24px] text-text-muted">{s.text}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </Reveal>
+      <Reveal className={`${COL} mt-10`}>
+        <Shot src={`${V}/menu-preview-tab.png`} alt="Menu preview opened in a new tab" className="aspect-[2560/1664]" />
+        <p className="mt-3 text-[14px] leading-[22px] text-text-faint">
+          The preview in its own tab — every section and item, to check before publishing.
+        </p>
+      </Reveal>
 
-        {/* 15 · OUTCOME */}
-        <Sec label="15 · Outcome" heading="1,700 stores live in two months." first>
-          <div className="mt-10">
-            <MetricsGrid />
-          </div>
-          <p className="mt-6 max-w-2xl text-sm leading-relaxed text-text-faint">
-            Measured over the first two months after launch, against the prior AM-led baseline
-            (average go-live 13 days → 7). Adoption is per business — the share of new and scaling
-            merchants in supported India + MENA regions who went self-serve rather than through an AM.
-            Design through release ran ~2.5 months.
-          </p>
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
-            {[
-              ["Adoption is ongoing", "Some merchants scaling large store counts still leaned on AMs — a live opportunity, not a failure."],
-              ["Platforms still shift", "External platforms can change validation rules without notice, so some issues surfaced after internal checks."],
-              ["Next on the roadmap", "UK / US support issues were identified as future work."],
-            ].map(([t, b]) => (
-              <Card key={t} title={t}>
-                {b}
-              </Card>
-            ))}
-          </div>
-        </Sec>
+      <Block>
+        <Quote>
+          Speed for the many, a safety net for the few. What feels right to the team isn&rsquo;t
+          always how merchants actually work.
+        </Quote>
+      </Block>
 
-        {/* 16 · LEARNINGS */}
-        <Sec label="16 · Learnings">
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            {[
-              ["Understand both sides first.", "The insight that shaped everything came from the AMs, not just the customer."],
-              ["Visibility is part of the product.", "Users don’t need every technical state — they need meaningful progress."],
-              ["Flexibility isn’t always better.", "One brand + selected locations created clearer ownership and tracking."],
-              ["Error handling is a workflow.", "Detect → Explain → Fix → Retry."],
-            ].map(([t, b]) => (
-              <Card key={t} title={t}>
-                {b}
-              </Card>
-            ))}
-          </div>
-        </Sec>
+      <Block tag="What's next" title="Where this goes">
+        <ul className="mt-5 space-y-2">
+          {[
+            "Phase 2 — MENA, UK and US, including Talabat",
+            "Handle each region's different connection requirements",
+            "Reduce the account managers' remaining manual steps further",
+            "Platforms plan their own agent and an API to replace the email step — on their roadmap, not yet live",
+          ].map((t) => (
+            <li key={t} className="flex gap-3 text-[16px] leading-[26px] text-text-muted">
+              <span aria-hidden className="text-text-faint">·</span>
+              {t}
+            </li>
+          ))}
+        </ul>
+      </Block>
 
-        {/* ---------------- FINAL STATEMENT ---------------- */}
-        <Reveal as="section" className="mt-20 border-t border-line pt-16 md:pt-24">
-          <p className="max-w-4xl font-serif text-[clamp(1.9rem,4.6vw,3.5rem)] leading-[1.08] text-balance">
-            RTGL wasn’t about removing the AM from the process.{" "}
-            <span className="text-text-muted">
-              It was about moving the process into the product.
-            </span>
-          </p>
-        </Reveal>
-      </div>
+      <Block tag="Reflections" id="reflections" title="What I'm taking forward">
+        <ol className="mt-5 space-y-3">
+          {[
+            "The brief was “reduce tickets” — the real work was fixing a broken process.",
+            "Most of the win was system design, not screens.",
+            "Visibility is a feature — showing status removed tickets before the hard parts.",
+            "Ship, then learn — the menu preview insight only appeared after release.",
+          ].map((t, i) => (
+            <li key={t} className="grid grid-cols-[2rem_1fr] gap-2">
+              <span className="text-[16px] font-semibold leading-[26px] text-cta">{i + 1}</span>
+              <span className="text-[16px] leading-[26px] text-text">{t}</span>
+            </li>
+          ))}
+        </ol>
+      </Block>
 
       {/* ---------------- NEXT PROJECT ---------------- */}
       {next && (
-        <div className="border-t border-line">
+        <div className={`${COL} mt-24`}>
           <Link
             href={`/work/${next.slug}`}
-            className="group container-page flex flex-wrap items-center justify-between gap-4 py-16 md:py-20"
+            className="group flex items-center justify-between gap-4 rounded-[10px] border border-line bg-surface p-5 transition-colors hover:border-line-strong md:p-6"
           >
             <div>
-              <span className="eyebrow">Next project</span>
-              <p className="mt-3 font-serif text-[clamp(1.75rem,4vw,3rem)] leading-tight text-text">
+              <Label>Next</Label>
+              <p className="mt-1.5 text-[18px] font-semibold leading-[24px] tracking-[-0.01em] text-text">
                 {next.title}
               </p>
             </div>
             <span
               aria-hidden
-              className="text-2xl text-text-faint transition-all duration-500 group-hover:translate-x-2 group-hover:text-accent"
+              className="text-xl text-text-faint transition-all duration-500 group-hover:translate-x-1 group-hover:text-cta"
             >
               →
             </span>

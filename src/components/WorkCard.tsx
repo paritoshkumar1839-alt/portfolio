@@ -1,8 +1,10 @@
+import { ViewTransition } from "react";
 import type { CaseStudy } from "@/lib/case-studies";
 import Media from "@/components/Media";
 import StudyLink from "@/components/StudyLink";
 import LockBadge from "@/components/LockBadge";
 import { isLocked } from "@/lib/gate";
+import Tilt from "@/components/Tilt";
 
 export default function WorkCard({
   study,
@@ -17,6 +19,8 @@ export default function WorkCard({
 
   const inner = (
     <>
+      <Tilt max={comingSoon ? 0 : 4}>
+      <ViewTransition name={`study-cover-${study.slug}`} share="morph" default="none">
       <div
         className={`relative aspect-[4/3] overflow-hidden rounded-xl border border-line ${
           study.cardContain ? "bg-bg" : "bg-surface"
@@ -41,6 +45,8 @@ export default function WorkCard({
           <LockBadge locked={gated} />
         )}
       </div>
+      </ViewTransition>
+      </Tilt>
 
       <div className="mt-5 flex items-start justify-between gap-4">
         <div>

@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useGate } from "@/components/GateProvider";
 import PasswordGate from "@/components/PasswordGate";
 
@@ -19,12 +18,10 @@ export default function CaseStudyGate({
   children: React.ReactNode;
 }) {
   const { unlocked, unlock } = useGate();
-  const [ready, setReady] = useState(false);
-
-  // Avoid flashing content before we've read the unlock state.
-  useEffect(() => setReady(true), []);
-
-  if (locked && (!ready || !unlocked)) {
+  // `unlocked` is false until GateProvider reads it on the client, so content
+  // never flashes on load — and on in-app navigation it renders in the first
+  // commit, which lets the card cover morph into the page.
+  if (locked && !unlocked) {
     return (
       <PasswordGate
         variant="page"

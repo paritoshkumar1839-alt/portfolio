@@ -1,11 +1,13 @@
 import { profile } from "@/lib/profile";
 import Magnetic from "@/components/Magnetic";
+import { HeroStage, FadeUp, SplitName } from "@/components/HeroMotion";
 
 export default function Hero() {
   return (
     <section className="container-page pt-16 pb-20 text-center md:pt-24 md:pb-28">
+      <HeroStage>
       {/* Eyebrow — plain text, role + availability with a green beacon */}
-      <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+      <FadeUp className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
         <span className="eyebrow text-text-muted">
           {profile.role} · {profile.location}
         </span>
@@ -16,21 +18,23 @@ export default function Hero() {
           </span>
           <span className="eyebrow">{profile.availability}</span>
         </span>
-      </div>
+      </FadeUp>
 
       {/* Big self-branded name — one line, two-tone */}
       <h1 className="mt-8 whitespace-nowrap font-serif text-[clamp(1.9rem,9vw,5.75rem)] leading-[0.95] tracking-tight">
-        <span className="text-text">{profile.firstName} </span>
-        <span className="text-text-muted">{profile.lastName}</span>
+        <SplitName text={`${profile.firstName} `} className="text-text" />
+        <SplitName text={profile.lastName} className="text-text-muted" />
       </h1>
 
       {/* Positioning heading */}
+      <FadeUp>
       <p className="mx-auto mt-8 max-w-3xl text-pretty text-xl leading-relaxed text-text-muted md:text-2xl">
         {profile.headline}
       </p>
+      </FadeUp>
 
       {/* CTAs — primary (lime) + secondary (minimal), centered */}
-      <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
+      <FadeUp className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
         <Magnetic>
           <a
             href="#work"
@@ -47,7 +51,8 @@ export default function Hero() {
           Get in touch
           <span aria-hidden>→</span>
         </a>
-      </div>
+      </FadeUp>
+      </HeroStage>
     </section>
   );
 }

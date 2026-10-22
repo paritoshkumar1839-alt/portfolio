@@ -3,6 +3,8 @@ import { Montserrat } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import GateProvider from "@/components/GateProvider";
+import SmoothScroll from "@/components/SmoothScroll";
+import ScrollProgress from "@/components/ScrollProgress";
 import { profile } from "@/lib/profile";
 import "./globals.css";
 
@@ -38,6 +40,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${montserrat.variable} antialiased`}
     >
       <body>
+        <SmoothScroll />
+        <ScrollProgress />
         <div className="ambient" aria-hidden />
         <div className="grain" aria-hidden />
         <GateProvider>

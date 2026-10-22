@@ -113,18 +113,18 @@ export const caseStudies: CaseStudy[] = [
     slug: "self-serve-go-live",
     title: "Self-Serve Store Go-Live",
     tagline:
-      "Restaurants take their own stores live across every delivery platform — no account manager needed. 1,700 stores in two months, ~46% faster.",
+      "Restaurants connect their own stores to Swiggy and Zomato from one dashboard — no account manager needed. Store connection cut from about 3 days to under 5 hours.",
     tags: ["B2B SaaS", "0 → 1 Flow"],
     domain: "B2B SaaS · UrbanPiper",
     featured: true,
     lockedTeaser:
       "The self-serve flow that let restaurants take their own stores live across every delivery platform.",
     metrics: [
-      { label: "stores processed in 2 months", value: "1,700" },
-      { label: "days — average go-live time", value: "13→7" },
-      { label: "reduction in go-live time", value: "~46%" },
+      { label: "stores connected in 3 months", value: "1,700" },
+      { label: "request to live (was ~3 days)", value: "<5 hrs" },
+      { label: "faster go-live", value: "~94%" },
       { label: "fewer support tickets", value: "38%" },
-      { label: "adoption across supported India + MENA regions", value: "~60%" },
+      { label: "of new connections raised by merchants", value: "60%" },
     ],
     cover: "/work/self-serve-go-live/cover.png",
     cardCover: "/work/self-serve-go-live/card-cover.png",
@@ -132,7 +132,7 @@ export const caseStudies: CaseStudy[] = [
     coverAlt: "Request to go live dashboard in Atlas",
     year: "2026",
     role: "Product Designer — owned end to end",
-    team: "2 designers (me on design, a design lead on review), 1 PM, 4 engineers (2 backend, 2 frontend), account management + support, and QA — across India and MENA",
+    team: "Sole designer, 1 PM, 4 backend and 3 frontend engineers, and the onboarding team",
     timeline: "~2.5 months, discovery through release",
     tools: ["Figma", "Claude", "Linear"],
     overview:

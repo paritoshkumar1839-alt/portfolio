@@ -35,8 +35,8 @@ export const profile = {
 
   // Bio — used in the "Who I am" section.
   bio: [
-    "I'm a product designer who spent the last few years at UrbanPiper, the platform restaurants use to run every delivery channel they sell on. I designed across its three core products — Meraki, the white-labeled app diners order from; Prime, the point-of-sale system cashiers run; and Atlas, the dashboard restaurant teams use to manage it all — which meant designing for consumers, cashiers, and operators, on web and mobile.",
-    "My work lives wherever a workflow is too complex for the person stuck inside it. I start with why a step exists and who it actually serves, work with engineering from day one so decisions survive the handoff, and treat design QA as part of the job rather than an afterthought. Before product, I trained as a film editor — the instinct for pacing and story never left, and it still shapes how I think about a flow.",
+    "At UrbanPiper, I designed across all three core products — Meraki, Prime and Atlas — for diners, cashiers and restaurant operators, on web and mobile.",
+    "I untangle complex workflows, partner with engineering from day one, and own design QA.",
   ],
 
   // Stat band under the hero. Keep these honest.

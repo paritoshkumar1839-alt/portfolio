@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ViewTransition } from "react";
 import { notFound } from "next/navigation";
 import { caseStudies, getCaseStudy } from "@/lib/case-studies";
 import Media from "@/components/Media";
@@ -130,9 +131,11 @@ export default async function CaseStudyPage({
 
       {/* Cover */}
       <div className="container-page">
+        <ViewTransition name={`study-cover-${study.slug}`} share="morph" default="none">
         <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-bg">
           <Media src={study.cover} alt={study.coverAlt} className="!object-contain" />
         </div>
+        </ViewTransition>
       </div>
 
       {study.comingSoon ? (

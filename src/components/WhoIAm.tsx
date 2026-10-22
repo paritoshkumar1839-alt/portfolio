@@ -1,5 +1,4 @@
 import { profile } from "@/lib/profile";
-import SectionHeader from "@/components/SectionHeader";
 import Media from "@/components/Media";
 import Reveal from "@/components/Reveal";
 import ToolsMarquee from "@/components/ToolsMarquee";
@@ -12,31 +11,31 @@ export default function WhoIAm() {
   return (
     <section id="about" className="section-anchor border-t border-line">
       <div className="container-page py-24 md:py-32">
-        <SectionHeader
-          label="Who I am"
-          title={
-            <>
+        {/* Intro — heading + bio left, portrait right, side by side (portrait on top on mobile) */}
+        <div className="grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_17rem] md:gap-14 lg:gap-20">
+          <Reveal className="mx-auto w-full max-w-[15rem] md:order-2 md:max-w-none">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line bg-surface">
+              <Media
+                src="/about/portrait.jpg"
+                alt={`Portrait of ${profile.name}`}
+              />
+            </div>
+          </Reveal>
+
+          <Reveal delay={80} className="text-center md:text-left">
+            <span className="eyebrow">Who I am</span>
+            <h2 className="mt-6 font-serif text-[clamp(2rem,4vw,3.25rem)] leading-[1.04] text-balance">
               A designer who thinks in <span className="text-cta">systems</span>.
-            </>
-          }
-        />
-
-        <Reveal className="mx-auto mt-14 w-full max-w-[16rem]">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line bg-surface">
-            <Media
-              src="/about/portrait.jpg"
-              alt={`Portrait of ${profile.name}`}
-            />
-          </div>
-        </Reveal>
-
-        <Reveal className="mx-auto mt-10 max-w-3xl space-y-5 text-center">
-          {profile.bio.map((para, i) => (
-            <p key={i} className="text-pretty leading-relaxed text-text-muted">
-              {para}
-            </p>
-          ))}
-        </Reveal>
+            </h2>
+            <div className="mx-auto mt-6 max-w-xl space-y-4 md:mx-0">
+              {profile.bio.map((para, i) => (
+                <p key={i} className="text-pretty text-lg leading-relaxed text-text-muted md:text-xl">
+                  {para}
+                </p>
+              ))}
+            </div>
+          </Reveal>
+        </div>
 
         {/* Capabilities — the Skills & craft grid, embedded here */}
         <div id="skills" className="section-anchor mt-16 border-t border-line pt-12 text-center">
