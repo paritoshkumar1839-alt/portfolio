@@ -165,10 +165,10 @@ export default function RtglCaseStudy({
     <article className="pb-24 xl:pl-52">
       <PageNav
         items={[
-          { id: "overview", label: "Overview" },
+          { id: "brief", label: "The brief" },
+          { id: "outcome", label: "Outcome" },
           { id: "context", label: "Context" },
           { id: "users", label: "Users" },
-          { id: "brief", label: "The brief" },
           { id: "discover", label: "Discover" },
           { id: "define", label: "Define" },
           { id: "develop", label: "Develop" },
@@ -216,20 +216,40 @@ export default function RtglCaseStudy({
         </ViewTransition>
       </div>
 
-      {/* ---------------- TL;DR ---------------- */}
-      <Block tag="TL;DR" id="overview">
+      {/* ---------------- THE BRIEF ---------------- */}
+      <Block tag="The brief" id="brief" title="Connecting was slow, and nobody could see why">
+        {/* the problem, highlighted — same lime-bar treatment as the page's key quotes */}
+        <div className="mt-6 border-l-2 border-cta pl-5">
+          <Label>Problem</Label>
+          <p className="mt-2 text-pretty text-[22px] font-semibold leading-[1.3] tracking-[-0.02em] text-text md:text-[26px]">
+            Getting a restaurant connected to its delivery platforms was slow and hard to track — and
+            support tickets were rising day by day.
+          </p>
+        </div>
+
+        <dl className="mt-8 space-y-5">
+          {[
+            ["Goal", "Find out what was wrong, and make connecting faster and cleaner."],
+            ["Team", "Sole designer · 1 PM · 4 backend + 3 frontend engineers · Onboarding team"],
+            ["My role", "Owned design end to end — research, interaction design, prototyping and design QA with engineering. I grounded it in conversations with account managers across India and MENA."],
+          ].map(([t, d]) => (
+            <div key={t} className="grid gap-1 sm:grid-cols-[8rem_1fr] sm:gap-6">
+              <dt className="text-[13px] font-semibold uppercase leading-[26px] tracking-[0.12em] text-text-faint">{t}</dt>
+              <dd className="text-[16px] leading-[26px] text-text-muted">{d}</dd>
+            </div>
+          ))}
+        </dl>
+      </Block>
+
+      {/* ---------------- OUTCOME AT A GLANCE ---------------- */}
+      <Block tag="Outcome at a glance" id="outcome">
         <P className="mt-6">
-          UrbanPiper sits between a restaurant and every delivery platform it sells on — 40,000+
-          restaurants across 30+ countries. Connecting a store to a platform ran by hand through
-          account managers and took about 3 days. For Swiggy and Zomato in India, I designed a
-          self-serve flow in Atlas where
-          merchants connect their own stores, catch menu problems before they fail, and track every
-          store to live.
+          A self-serve flow in Atlas where merchants connect their own stores to Swiggy and Zomato,
+          catch menu problems before they fail, and track every store to live.
         </P>
-        <div className="mt-10 border-y border-line py-8">
+        <div className="mt-8 border-y border-line py-8">
           <Metrics />
         </div>
-        <Quote>Restaurants now connect their own stores — and can see every step.</Quote>
       </Block>
 
       {/* ---------------- CONTEXT ---------------- */}
@@ -326,21 +346,6 @@ export default function RtglCaseStudy({
         </p>
       </Block>
 
-      <Block tag="The brief" id="brief" title="Connecting was slow, and nobody could see why">
-        <dl className="mt-6 space-y-5">
-          {[
-            ["Problem", "Getting a restaurant connected to its delivery platforms was slow and hard to track. Support tickets were rising day by day."],
-            ["Goal", "Find out what was wrong, and make connecting faster and cleaner."],
-            ["Team", "Sole designer · 1 PM · 4 backend + 3 frontend engineers · Onboarding team"],
-            ["My role", "Owned design end to end — research, interaction design, prototyping and design QA with engineering. I grounded it in conversations with account managers across India and MENA."],
-          ].map(([t, d]) => (
-            <div key={t} className="grid gap-1 sm:grid-cols-[8rem_1fr] sm:gap-6">
-              <dt className="text-[13px] font-semibold uppercase leading-[26px] tracking-[0.12em] text-text-faint">{t}</dt>
-              <dd className="text-[16px] leading-[26px] text-text-muted">{d}</dd>
-            </div>
-          ))}
-        </dl>
-      </Block>
 
       {/* ================= 1 · DISCOVER ================= */}
       <Phase n={1} id="discover" title="Discover" sub="Why connecting a store took days instead of hours." />
