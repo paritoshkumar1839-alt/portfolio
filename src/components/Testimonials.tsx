@@ -51,7 +51,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
         <span className="mr-1 font-serif text-accent/60" aria-hidden>
           &ldquo;
         </span>
-        <span className="line-clamp-[9]">{t.quote}</span>
+        <span>{t.quote}</span>
       </blockquote>
     </article>
   );
