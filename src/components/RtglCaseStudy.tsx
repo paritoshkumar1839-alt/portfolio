@@ -80,21 +80,6 @@ const OTHER_SCREENS: GalleryScreen[] = [
   },
 ];
 
-/** The 11 columns of the platform's shared sheet, and where each now comes from. */
-const FIELDS: { field: string; now: string; who: "auto" | "pick" | "type" }[] = [
-  { field: "Reference ID", now: "Atlas generates it", who: "auto" },
-  { field: "Biz ID", now: "Atlas fills it in from the account", who: "auto" },
-  { field: "Biz name", now: "Atlas fills it in from the account", who: "auto" },
-  { field: "Location ID", now: "Atlas fills it in from stores already set up", who: "auto" },
-  { field: "Location name", now: "Atlas fills it in from stores already set up", who: "auto" },
-  { field: "Vendor ID", now: "Filled in automatically — UrbanPiper's ID on the platform", who: "auto" },
-  { field: "Brand name", now: "Merchant picks it — last-used is pre-selected", who: "pick" },
-  { field: "Platform", now: "Merchant picks it on the first step", who: "pick" },
-  { field: "Menu ID", now: "Merchant picks a menu by name; Atlas maps it to the ID", who: "pick" },
-  { field: "Zomato platform ID", now: "Merchant types it", who: "type" },
-  { field: "Restaurant URL", now: "Merchant types it", who: "type" },
-];
-
 /* ---------------- type + layout primitives ----------------
  * Modelled on a calm editorial case-study system: one 720px reading
  * column, 16/26 body, 20px section heads, small uppercase tag labels,
@@ -929,39 +914,6 @@ export default function RtglCaseStudy({
                 </Reveal>
               </>
             )}
-
-            <Block tag="Behind the form" title="The sheet had 11 fields per store. The merchant now types 2.">
-              <P>
-                Every column in the platform&rsquo;s sheet was typed by hand. Most of it was data Atlas
-                already had — so the form only asks for what it can&rsquo;t know.
-              </P>
-              <div className="mt-6 overflow-hidden rounded-[10px] border border-line">
-                <div className="grid grid-cols-[minmax(0,9rem)_1fr] bg-surface-2 px-4 py-2.5 sm:grid-cols-[12rem_1fr]">
-                  <span className="text-[12px] font-semibold uppercase tracking-[0.12em] text-text-faint">Sheet field</span>
-                  <span className="text-[12px] font-semibold uppercase tracking-[0.12em] text-text-faint">Where it comes from now</span>
-                </div>
-                <ul className="divide-y divide-line">
-                  {FIELDS.map((f) => (
-                    <li
-                      key={f.field}
-                      className={`grid grid-cols-[minmax(0,9rem)_1fr] gap-x-3 px-4 py-2.5 sm:grid-cols-[12rem_1fr] ${f.who === "type" ? "bg-cta/5" : ""}`}
-                    >
-                      <span className={`text-[14px] leading-[22px] ${f.who === "type" ? "font-semibold text-cta" : "text-text"}`}>
-                        {f.field}
-                      </span>
-                      <span className={`text-[14px] leading-[22px] ${f.who === "type" ? "text-text" : "text-text-muted"}`}>
-                        {f.now}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-text-muted">
-                <span><span className="font-semibold text-text">6</span> filled automatically</span>
-                <span><span className="font-semibold text-text">3</span> a quick pick</span>
-                <span><span className="font-semibold text-cta">2</span> typed by the merchant</span>
-              </div>
-            </Block>
 
             {/* ================= 4 · DELIVER ================= */}
             <Phase n={4} id="deliver" title="Deliver" sub="What shipped, and what it moved." />
