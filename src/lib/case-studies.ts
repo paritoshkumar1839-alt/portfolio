@@ -571,8 +571,12 @@ export const caseStudies: CaseStudy[] = [
     // Outside/card thumbnail — the branded UrbanPiper design-system cover, shown
     // whole (contain) so the full design isn't cropped. The detail-page hero
     // still uses `cover` (the doc title slide).
-    cardCover: "/work/up-design-system/assets/card-cover.png",
+    // Outside/card thumbnail — original "design-system launch" cover in the site's
+    // dark language: title + pill + floating token/type panels + UrbanPiper logo.
+    cardCover: "/work/up-design-system/assets/ds-cover-launch.svg",
     cardContain: true,
+    // Public — this study is open (no password gate).
+    isPublic: true,
     coverAlt: "UrbanPiper design system — Building consistency, enabling scale",
     year: "2025",
     role: "Core contributor — foundations & components",
