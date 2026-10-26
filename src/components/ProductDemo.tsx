@@ -10,7 +10,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 type Kind = "button" | "link" | "card" | "input";
 
-type Frame = {
+export type Frame = {
   /** How long the screen is read before anything happens (ms). */
   dwell: number;
   /** The element that gets clicked to move on, as a box in % of the screen. Omit to just advance. */
@@ -60,7 +60,9 @@ const TINT: Record<Kind, { hover: string; press: string }> = {
 };
 
 /** Chapters shown under the player, by the screen they start on. */
-const CHAPTERS: { from: number; label: string }[] = [
+export type Chapter = { from: number; label: string };
+
+const CHAPTERS: Chapter[] = [
   { from: 0, label: "Pick the platform" },
   { from: 2, label: "Add store details" },
   { from: 4, label: "Assign menus" },
@@ -74,7 +76,21 @@ const HOVER = 380; // hover held before the click
 const PRESS = 260; // click → next screen
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 
-export default function ProductDemo() {
+/**
+ * Defaults play the RTGL flow; pass `frames`, `chapters`, `dir` (folder of
+ * 01.webp, 02.webp…) and `aspect` to play any other set of screens.
+ */
+export default function ProductDemo({
+  frames = FRAMES,
+  chapters = CHAPTERS,
+  dir = DIR,
+  aspect = "1600 / 1040",
+}: {
+  frames?: Frame[];
+  chapters?: Chapter[];
+  dir?: string;
+  aspect?: string;
+} = {}) {
   const box = useRef<HTMLDivElement>(null);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const [i, setI] = useState(0);
@@ -99,8 +115,8 @@ export default function ProductDemo() {
     setHover(false);
     setOpen(false);
     setOption(-1);
-    const f = FRAMES[n];
-    const next = (n + 1) % FRAMES.length;
+    const f = frames[n];
+    const next = (n + 1) % frames.length;
     let t = 0;
     const at = (ms: number, fn: () => void) => timers.current.push(setTimeout(fn, (t += ms)));
     if (!f.hit) {
@@ -125,7 +141,7 @@ export default function ProductDemo() {
     at(MOVE - 120, () => setOption(0));
     at(HOVER, () => setPressed(true));
     at(PRESS, () => run(next));
-  }, []);
+  }, [frames]);
 
   // Play only while on screen (and not paused by the viewer).
   useEffect(() => {
@@ -148,7 +164,7 @@ export default function ProductDemo() {
 
   /** Jump to a screen — keeps playing from there, or just shows it when paused. */
   const go = (n: number) => {
-    const to = (n + FRAMES.length) % FRAMES.length;
+    const to = (n + frames.length) % frames.length;
     if (playing) run(to);
     else {
       clear();
@@ -159,18 +175,18 @@ export default function ProductDemo() {
     }
   };
 
-  const chapter = CHAPTERS.reduce((c, ch, k) => (i >= ch.from ? k : c), 0);
+  const chapter = chapters.reduce((c, ch, k) => (i >= ch.from ? k : c), 0);
 
   return (
     <div ref={box}>
       {/* the "screen" */}
-      <div className="relative overflow-hidden rounded-[12px] border border-line bg-white" style={{ aspectRatio: "1600 / 1040", containerType: "inline-size" }}>
-        {FRAMES.map((_, n) => (
+      <div className="relative overflow-hidden rounded-[12px] border border-line bg-white" style={{ aspectRatio: aspect, containerType: "inline-size" }}>
+        {frames.map((_, n) => (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             key={n}
-            src={`${DIR}/${String(n + 1).padStart(2, "0")}.webp`}
-            alt={n === i ? `Atlas — ${CHAPTERS[chapter].label}` : ""}
+            src={`${dir}/${String(n + 1).padStart(2, "0")}.webp`}
+            alt={n === i ? `Atlas — ${chapters[chapter].label}` : ""}
             loading={n < 3 ? "eager" : "lazy"}
             className="absolute inset-0 h-full w-full object-cover transition-opacity duration-300"
             style={{ opacity: n === i ? 1 : 0 }}
@@ -178,30 +194,30 @@ export default function ProductDemo() {
         ))}
 
         {/* hover / pressed state on the element under the cursor */}
-        {FRAMES[i].hit && (hover || pressed) && !open && (
+        {frames[i].hit && (hover || pressed) && !open && (
           <span
             aria-hidden
             className="pointer-events-none absolute rounded-[0.4cqw] transition-colors duration-150"
             style={{
-              left: `${FRAMES[i].hit!.x}%`,
-              top: `${FRAMES[i].hit!.y}%`,
-              width: `${FRAMES[i].hit!.w}%`,
-              height: `${FRAMES[i].hit!.h}%`,
-              background: pressed ? TINT[FRAMES[i].hit!.kind].press : TINT[FRAMES[i].hit!.kind].hover,
-              boxShadow: FRAMES[i].hit!.kind === "input" ? "inset 0 0 0 1.5px rgb(59 91 219 / 0.9)" : undefined,
+              left: `${frames[i].hit!.x}%`,
+              top: `${frames[i].hit!.y}%`,
+              width: `${frames[i].hit!.w}%`,
+              height: `${frames[i].hit!.h}%`,
+              background: pressed ? TINT[frames[i].hit!.kind].press : TINT[frames[i].hit!.kind].hover,
+              boxShadow: frames[i].hit!.kind === "input" ? "inset 0 0 0 1.5px rgb(59 91 219 / 0.9)" : undefined,
             }}
           />
         )}
 
         {/* fake menu dropdown (screen 5) */}
-        {open && FRAMES[i].hit && (
+        {open && frames[i].hit && (
           <div
             aria-hidden
             className="absolute z-[5] overflow-hidden border border-[#dcdcdc] bg-white"
             style={{
-              left: `${FRAMES[i].hit!.x}%`,
-              top: `${FRAMES[i].hit!.y + FRAMES[i].hit!.h + 0.6}%`,
-              width: `${FRAMES[i].hit!.w}%`,
+              left: `${frames[i].hit!.x}%`,
+              top: `${frames[i].hit!.y + frames[i].hit!.h + 0.6}%`,
+              width: `${frames[i].hit!.w}%`,
               borderRadius: "0.3cqw",
               boxShadow: "0 0.5cqw 1.6cqw rgb(0 0 0 / 0.14)",
               fontFamily: '"Source Sans 3", "Source Sans Pro", system-ui, sans-serif',
@@ -226,7 +242,7 @@ export default function ProductDemo() {
         )}
 
         {/* cursor */}
-        {playing && (
+        {playing && frames.some((f) => f.hit) && (
           <div
             aria-hidden
             className="pointer-events-none absolute z-10"
@@ -279,8 +295,8 @@ export default function ProductDemo() {
           </button>
         </div>
         <div className="flex flex-1 gap-1.5">
-          {CHAPTERS.map((ch, k) => {
-            const end = CHAPTERS[k + 1]?.from ?? FRAMES.length;
+          {chapters.map((ch, k) => {
+            const end = chapters[k + 1]?.from ?? frames.length;
             const fill = i >= end ? 1 : i < ch.from ? 0 : (i - ch.from + 1) / (end - ch.from);
             return (
               <button
@@ -295,7 +311,7 @@ export default function ProductDemo() {
             );
           })}
         </div>
-        <p className="hidden w-48 shrink-0 text-right text-[13px] font-medium text-text sm:block">{CHAPTERS[chapter].label}</p>
+        <p className="hidden w-48 shrink-0 text-right text-[13px] font-medium text-text sm:block">{chapters[chapter].label}</p>
       </div>
     </div>
   );

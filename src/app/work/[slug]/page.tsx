@@ -10,6 +10,7 @@ import CaseStudyFeatures from "@/components/CaseStudyFeatures";
 import CaseStudyGate from "@/components/CaseStudyGate";
 import RtglCaseStudy from "@/components/RtglCaseStudy";
 import DesignSystemCaseStudy from "@/components/DesignSystemCaseStudy";
+import MenuRulesCaseStudy from "@/components/MenuRulesCaseStudy";
 import { isLocked } from "@/lib/gate";
 
 export function generateStaticParams() {
@@ -57,6 +58,18 @@ export default async function CaseStudyPage({
         teaser={study.lockedTeaser}
       >
         <RtglCaseStudy study={study} next={next} />
+      </CaseStudyGate>
+    );
+  }
+
+  if (study.slug === "menu-rules") {
+    return (
+      <CaseStudyGate
+        locked={isLocked(study)}
+        title={study.title}
+        teaser={study.lockedTeaser}
+      >
+        <MenuRulesCaseStudy study={study} next={next} />
       </CaseStudyGate>
     );
   }

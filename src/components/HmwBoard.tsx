@@ -6,7 +6,9 @@ import Reveal from "@/components/Reveal";
  * it led to, grouped by who it's for.
  * ------------------------------------------------------------------ */
 
-const GROUPS: { who: string; rows: [string, string][] }[] = [
+export type HmwGroup = { who: string; rows: [string, string][] };
+
+const GROUPS: HmwGroup[] = [
   {
     who: "For the brand manager",
     rows: [
@@ -26,7 +28,7 @@ const GROUPS: { who: string; rows: [string, string][] }[] = [
 
 const SHADOW = "0 1px 2px rgb(0 0 0 / 0.12), 0 8px 18px -8px rgb(0 0 0 / 0.22)";
 
-export default function HmwBoard() {
+export default function HmwBoard({ groups = GROUPS }: { groups?: HmwGroup[] }) {
   return (
     <div
       className="rounded-[14px] border border-line p-3 md:p-6"
@@ -37,7 +39,7 @@ export default function HmwBoard() {
       }}
     >
       <div className="grid gap-6 md:grid-cols-2">
-        {GROUPS.map((g, gi) => (
+        {groups.map((g, gi) => (
           <section key={g.who} className="relative rounded-[12px] border border-black/10 bg-white/70 p-4 pt-12 md:p-5 md:pt-12">
             <span className="absolute left-4 top-3 rounded-[6px] bg-[#1e1e1e] px-2.5 py-1 text-[12px] font-semibold text-white md:left-5">
               {g.who}
