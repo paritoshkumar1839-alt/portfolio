@@ -27,9 +27,13 @@ export const profile = {
     company: "UrbanPiper",
   } as { label: string; company: string } | null,
 
-  // Hero headline — the lead. States what I do + the domain, credentials baked in.
-  headline:
-    "I turn complex, high-stakes B2B SaaS workflows into web apps that scale.",
+  // Hero headline — the lead. Positioning: role + the kind of company.
+  headline: "Product Designer for high-growth B2B companies.",
+  // Hero subtext — two short, personality-forward lines under the heading.
+  heroSub: [
+    "Design technologist, deep in systems and detail.",
+    "Four years deep in complex B2B SaaS.",
+  ],
   // Subtle hero metadata line, sits beside the availability chip.
   tagline: "4+ years · Design systems",
 
