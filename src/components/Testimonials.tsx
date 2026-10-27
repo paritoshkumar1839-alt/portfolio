@@ -47,7 +47,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
       </div>
 
       {/* Quote — in its own inner panel */}
-      <blockquote className="mt-5 flex-1 rounded-xl border border-line bg-surface-2 p-5 text-sm leading-relaxed text-text-muted">
+      <blockquote className="mt-5 rounded-xl border border-line bg-surface-2 p-5 text-sm leading-relaxed text-text-muted">
         <span className="mr-1 font-serif text-accent/60" aria-hidden>
           &ldquo;
         </span>
@@ -88,7 +88,7 @@ export default function Testimonials() {
               "linear-gradient(to right, transparent, #000 5%, #000 95%, transparent)",
           }}
         >
-          <div className="testimonial-track flex shrink-0 items-stretch gap-6 pr-6">
+          <div className="testimonial-track flex shrink-0 items-start gap-6 pr-6">
             {row.map((t, i) => (
               <TestimonialCard key={`${t.name}-${i}`} t={t} />
             ))}
