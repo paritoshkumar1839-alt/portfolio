@@ -37,6 +37,15 @@ export const profile = {
   // Subtle hero metadata line, sits beside the availability chip.
   tagline: "4+ years · Design systems",
 
+  // Hero stat strip — proof points under the lead.
+  heroStats: [
+    { value: "4+", label: "Years of experience" },
+    { value: "50+", label: "Features shipped" },
+    { value: "∞", label: "Iterations" },
+    { value: "40K+", label: "Users reached" },
+    { value: "7+", label: "Countries" },
+  ],
+
   // Bio — used in the "Who I am" section.
   bio: [
     "At UrbanPiper, I designed across all three core products — Meraki, Prime and Atlas — for diners, cashiers and restaurant operators, on web and mobile.",
@@ -249,7 +258,13 @@ export const profile = {
   openTo:
     "Open to full-time product design roles, ideally with teams building complex, high-growth software products.",
 
-  resumeHref: "/resume.pdf",
+  // Résumé lives in Google Drive so it stays current — edit the file (or
+  // upload a new version to the SAME Drive file) and these links update too.
+  // View opens Drive's PDF viewer; download streams the file directly.
+  resumeHref:
+    "https://drive.google.com/file/d/1oWTlaOtcVVzeCKvUwYaxu_hhCGRT1J44/view",
+  resumeDownloadHref:
+    "https://drive.google.com/uc?export=download&id=1oWTlaOtcVVzeCKvUwYaxu_hhCGRT1J44",
 
   socials: [
     { label: "LinkedIn", href: "https://linkedin.com/in/iamparitoshkumar" },

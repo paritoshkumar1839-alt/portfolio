@@ -33,7 +33,9 @@ export default function Footer() {
               </a>
             </Magnetic>
             <a
-              href={profile.resumeHref}
+              href={profile.resumeDownloadHref}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-sm font-medium text-text-muted transition-colors hover:text-text"
             >
               Download résumé
@@ -57,6 +59,8 @@ export default function Footer() {
             </a>
             <a
               href={profile.resumeHref}
+              target="_blank"
+              rel="noopener noreferrer"
               className="underline-hover hover:text-text"
             >
               Résumé

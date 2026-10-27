@@ -1,6 +1,7 @@
 import { profile } from "@/lib/profile";
 import Magnetic from "@/components/Magnetic";
 import { HeroStage, FadeUp } from "@/components/HeroMotion";
+import HeroStats from "@/components/HeroStats";
 
 export default function Hero() {
   return (
@@ -54,6 +55,11 @@ export default function Hero() {
             Get in touch
             <span aria-hidden>→</span>
           </a>
+        </FadeUp>
+
+        {/* Proof points — a compact stat strip under the lead */}
+        <FadeUp>
+          <HeroStats stats={profile.heroStats} />
         </FadeUp>
       </HeroStage>
     </section>
