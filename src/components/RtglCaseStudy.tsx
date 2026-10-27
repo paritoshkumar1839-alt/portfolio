@@ -26,10 +26,14 @@ const A = "/work/self-serve-go-live";
 const V = `${A}/v2`;
 
 const METRICS = [
-  { value: "~94%", label: "faster go-live — ~3 days → under 5 hours" },
-  { value: "1,700", label: "stores connected" },
-  { value: "38%", label: "fewer support tickets" },
-  { value: "60%", label: "of new store connections in India raised by merchants themselves" },
+  { value: "~8 hrs", label: "from request to store live — down from ~3 days" },
+  { value: "650+", label: "stores taken live in the first month (brand × location)" },
+  { value: "100%", label: "of those requests raised by merchants themselves — up from ~0%" },
+];
+
+const OUTCOMES = [
+  "Onboarding managers used to collect every store's details and link it by hand. In India, merchants now do it themselves — onboarding managers only step in for edge cases.",
+  "Go-live support tickets in India mostly stopped.",
 ];
 
 
@@ -173,16 +177,26 @@ function Phase({ n, title, sub, id }: { n: number; title: string; sub: string; i
 
 function Metrics() {
   return (
-    <dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
-      {METRICS.map((m) => (
-        <div key={m.label}>
-          <dt className="text-[40px] font-bold leading-none tracking-[-0.03em] text-cta md:text-[48px]">
-            <CountUp value={m.value} />
-          </dt>
-          <dd className="mt-2 text-[13px] leading-[20px] text-text-muted">{m.label}</dd>
-        </div>
-      ))}
-    </dl>
+    <>
+      <dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3">
+        {METRICS.map((m) => (
+          <div key={m.label}>
+            <dt className="text-[40px] font-bold leading-none tracking-[-0.03em] text-cta md:text-[48px]">
+              <CountUp value={m.value} />
+            </dt>
+            <dd className="mt-2 text-[13px] leading-[20px] text-text-muted">{m.label}</dd>
+          </div>
+        ))}
+      </dl>
+      <ul className="mt-8 space-y-2">
+        {OUTCOMES.map((t) => (
+          <li key={t} className="flex gap-3 text-[15px] leading-[23px] text-text-muted">
+            <span aria-hidden className="text-text-faint">·</span>
+            {t}
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
 
@@ -205,8 +219,8 @@ function TimeBar() {
         </div>
       </div>
       <div>
-        <p className="text-[13px] font-semibold uppercase leading-[20px] tracking-[0.12em] text-cta">Now · 4–5 hours</p>
-        <div className="mt-3 flex h-8 items-center whitespace-nowrap rounded-[6px] bg-cta/20 px-3 text-[12px] font-medium text-cta" style={{ width: "6%", minWidth: "8rem" }}>
+        <p className="text-[13px] font-semibold uppercase leading-[20px] tracking-[0.12em] text-cta">Now · ~8 hours</p>
+        <div className="mt-3 flex h-8 items-center whitespace-nowrap rounded-[6px] bg-cta/20 px-3 text-[12px] font-medium text-cta" style={{ width: "10%", minWidth: "8rem" }}>
           Request → live
         </div>
       </div>
@@ -217,18 +231,18 @@ function TimeBar() {
 function QuickRead() {
   const decisions: { title: string; text: string; media: ReactNode }[] = [
     {
-      title: "Ask only for what Atlas can't know",
-      text: "The platform's sheet had 11 fields per store, all typed by hand. Atlas already had most of them, so the form asks for just two: the platform store ID and URL.",
+      title: "Ask only for what UrbanPiper can't know",
+      text: "The platform's sheet had 11 fields per store, all typed by hand. UrbanPiper already had most of them, so the form asks for just two: the platform store ID and URL.",
       media: <Shot src={`${A}/03-add-details.png`} alt="Adding store IDs and URLs" className="aspect-[1304/856]" />,
     },
     {
       title: "Catch menu problems before they go out",
-      text: "Wrong menus were a top reason connections failed. Prism checks every menu against the platform's rules in the flow — errors block submitting, warnings don't, and fixes happen right there.",
+      text: "Wrong menus were a top reason go-lives failed. Prism checks every menu against the platform's rules in the flow — errors block submitting, warnings don't, and fixes happen right there.",
       media: <Shot src={`${A}/05-menu-issues.png`} alt="Menu issues listed in plain words" className="aspect-[1280/832]" />,
     },
     {
       title: "Work around a sheet we couldn't touch",
-      text: "Platforms own the connection sheet and offer no API. Partnerships agreed to take details by email instead, and Nexus, a backend AI agent, sends each request and reads the reply — so the status updates itself.",
+      text: "Platforms own the linking sheet and offer no API. Partnerships agreed to take details by email instead, and Nexus, a backend AI agent, sends each request and reads the reply — so the status updates itself.",
       media: <AgentLoop />,
     },
     {
@@ -240,19 +254,18 @@ function QuickRead() {
 
   return (
     <>
-      <Block tag="Context" title="One dashboard for every delivery platform — once a store is connected">
+      <Block tag="Context" title="One dashboard for every delivery platform — once a store is linked">
         <P>
           Restaurants sell on several delivery platforms at once, like Swiggy and Zomato. Without
           UrbanPiper, every platform means its own tablet, its own menus and its own orders — managed
           separately, store by store.
         </P>
         <P>
-          UrbanPiper brings them into one dashboard, <span className="text-text">Atlas</span>, tied to the
-          restaurant&rsquo;s POS:
+          UrbanPiper brings them into one dashboard, tied to the restaurant&rsquo;s POS:
         </P>
         <div className="mt-5 grid gap-3 sm:grid-cols-3">
           {[
-            ["Orders in one place", "Swiggy and Zomato orders land in Atlas and the POS — no juggling tablets."],
+            ["Orders in one place", "Swiggy and Zomato orders land in UrbanPiper and the POS — no juggling tablets."],
             ["Menus for every store, every platform", "Manage the menus for all your stores across every delivery platform, from one place."],
             ["Stock in sync", "Mark an item out once, and it's off on every platform."],
           ].map(([t, d]) => (
@@ -263,13 +276,13 @@ function QuickRead() {
           ))}
         </div>
         <P className="mt-6">
-          Getting a brand onto Atlas happens in <span className="text-text">two parts</span>:
+          Getting a brand onto UrbanPiper happens in <span className="text-text">two parts</span>:
         </P>
         <div className="mt-4 grid gap-3 sm:grid-cols-[1fr_auto_1fr] sm:items-stretch">
           <Card>
             <Label>1 · Onboarding setup</Label>
             <p className="mt-2 text-[15px] leading-[23px] text-text-muted">
-              The brand&rsquo;s stores are created in Atlas — locations, schedules, operations — and
+              The brand&rsquo;s stores are created in UrbanPiper — locations, schedules, operations — and
               their menus are built.
             </p>
           </Card>
@@ -279,30 +292,26 @@ function QuickRead() {
           </span>
           <Card className="border-cta/40">
             <p className="text-[13px] font-semibold uppercase leading-[20px] tracking-[0.12em] text-cta">
-              2 · Connect — this project
+              2 · Link — this project
             </p>
             <p className="mt-2 text-[15px] leading-[23px] text-text">
-              Each store is linked to its listing on each delivery platform, so orders flow into Atlas
-              and menus publish from it. Internally, this is <span className="font-semibold">RTGL</span>{" "}
+              Each store is linked to the same store already on Swiggy and Zomato, so its orders and menus
+              run through UrbanPiper. Internally, this is <span className="font-semibold">RTGL</span>{" "}
               — Request to Go Live.
             </p>
           </Card>
         </div>
-        <P className="mt-6">
-          The store is already live on Swiggy and Zomato — until it&rsquo;s connected, though, Atlas
-          can&rsquo;t run it.
-        </P>
       </Block>
       <Reveal className={`${COL} mt-8`}>
         <div className="overflow-hidden rounded-[10px] border border-line bg-white">
-          <LottieClip src={`${V}/ecosystem.json`} label="Atlas connected to every delivery platform" className="aspect-[1517/952] w-full" />
+          <LottieClip src={`${V}/ecosystem.json`} label="UrbanPiper linked to every delivery platform" className="aspect-[1517/952] w-full" />
         </div>
       </Reveal>
 
-      <Block tag="The problem" title="Connecting ran on a shared sheet, by hand — and took about 3 days">
+      <Block tag="The problem" title="Linking ran on a shared sheet, by hand — and took about 3 days">
         <P>
-          Platforms only connect stores through a shared sheet they own, passed back and forth. So every
-          connection went through UrbanPiper&rsquo;s onboarding team:
+          Platforms only link stores through a shared sheet they own, passed back and forth. So every
+          store went through UrbanPiper&rsquo;s onboarding team:
         </P>
         <ol className="mt-6 space-y-3">
           {[
@@ -343,9 +352,9 @@ function QuickRead() {
         </div>
       </Block>
 
-      <Block tag="The solution" title="Merchants connect their own stores — and see every step">
+      <Block tag="The solution" title="Merchants link their own stores — and see every step">
         <P>
-          A self-serve flow in Atlas: pick the platform, add each store&rsquo;s ID and URL, assign
+          A self-serve flow in UrbanPiper: pick the platform, add each store&rsquo;s ID and URL, assign
           menus, fix any menu issues, and track every store to live.
         </P>
       </Block>
@@ -367,8 +376,8 @@ function QuickRead() {
         ))}
       </div>
 
-      <Block tag="Impact" title="From about 3 days to under 5 hours">
-        <P>Three months after release, for Swiggy and Zomato in India.</P>
+      <Block tag="Impact" title="What changed">
+        <P>One month after release, for Swiggy and Zomato in India.</P>
         <div className="mt-8 border-y border-line py-8">
           <Metrics />
         </div>
@@ -397,11 +406,12 @@ export default function RtglCaseStudy({
         </Link>
         <Label className="mt-10">UrbanPiper · 2026 · B2B web app</Label>
         <h1 className="mt-4 text-[40px] font-bold leading-[1.05] tracking-[-0.03em] text-balance text-text md:text-[60px]">
-          Taking restaurants live in <span className="text-cta">hours</span>, not days
+          Linking Swiggy and Zomato stores to UrbanPiper — in{" "}
+          <span className="text-cta">hours</span>, not days
         </h1>
         <p className="mt-5 text-pretty text-[18px] leading-[28px] text-text-muted">
-          A self-serve flow that cut connecting a store to Swiggy and Zomato in India from about 3
-          days to under 5 hours — through one dashboard.
+          Merchants link their UrbanPiper stores to the same stores on Swiggy and Zomato, so they can
+          run every platform from one place. I made it self-serve.
         </p>
 
         <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-line pt-6 sm:grid-cols-4">
@@ -451,21 +461,21 @@ export default function RtglCaseStudy({
               ]}
             />
             {/* ---------------- THE BRIEF ---------------- */}
-            <Block tag="The brief" id="brief" title="Connecting was slow, and nobody could see why">
+            <Block tag="The brief" id="brief" title="Linking was slow, and nobody could see why">
               {/* the problem, highlighted — same lime-bar treatment as the page's key quotes */}
               <div className="mt-6 border-l-2 border-cta pl-5">
                 <Label>Problem</Label>
                 <p className="mt-2 text-pretty text-[22px] font-semibold leading-[1.3] tracking-[-0.02em] text-text md:text-[26px]">
-                  Getting a restaurant connected to its delivery platforms was slow and hard to track — and
-                  support tickets were rising day by day.
+                  Linking stores was manual — onboarding managers filled shared sheets with each platform by
+                  hand. It was slow, hard to track, and support tickets were rising day by day.
                 </p>
               </div>
 
               <dl className="mt-8 space-y-5">
                 {[
-                  ["Goal", "Find out what was wrong, and make connecting faster and cleaner."],
+                  ["Goal", "Find out what was wrong, and make linking faster and cleaner."],
                   ["Team", "Sole designer · 1 PM · 4 backend + 3 frontend engineers · Onboarding team"],
-                  ["My role", "Owned design end to end — research, interaction design, prototyping and design QA with engineering. I grounded it in conversations with account managers across India and MENA."],
+                  ["My role", "Owned design end to end — research, interaction design, prototyping and design QA with engineering. I grounded it in conversations with onboarding managers across India and MENA."],
                 ].map(([t, d]) => (
                   <div key={t} className="grid gap-1 sm:grid-cols-[8rem_1fr] sm:gap-6">
                     <dt className="text-[13px] font-semibold uppercase leading-[26px] tracking-[0.12em] text-text-faint">{t}</dt>
@@ -477,10 +487,13 @@ export default function RtglCaseStudy({
 
             {/* ---------------- OUTCOME AT A GLANCE ---------------- */}
             <Block tag="Outcome at a glance" id="outcome">
-              <P className="mt-6">
-                A self-serve flow in Atlas where merchants connect their own stores to Swiggy and Zomato,
-                catch menu problems before they fail, and track every store to live.
-              </P>
+              <div className="mt-6 border-l-2 border-cta pl-5">
+                <Label>Solution</Label>
+                <p className="mt-2 text-pretty text-[22px] font-semibold leading-[1.3] tracking-[-0.02em] text-text md:text-[26px]">
+                  A self-serve flow — merchants link their own stores, catch menu problems before they fail,
+                  and track every store until it&rsquo;s live.
+                </p>
+              </div>
               <div className="mt-8 border-y border-line py-8">
                 <Metrics />
               </div>
@@ -495,11 +508,11 @@ export default function RtglCaseStudy({
             </Block>
             <Reveal className={`${COL} mt-8`}>
               <div className="overflow-hidden rounded-[10px] border border-line bg-white">
-                <LottieClip src={`${V}/ecosystem.json`} label="Atlas connected to every delivery platform" className="aspect-[1517/952] w-full" />
+                <LottieClip src={`${V}/ecosystem.json`} label="UrbanPiper linked to every delivery platform" className="aspect-[1517/952] w-full" />
               </div>
             </Reveal>
 
-            <Block tag="The job" title="What it means to connect a store to a platform">
+            <Block tag="The job" title="What it means to link a store to a platform">
               <P>
                 Onboarding has two parts. Setting up a restaurant&rsquo;s stores and menus is a different
                 job from linking those stores to each delivery platform — so the product keeps them
@@ -519,7 +532,7 @@ export default function RtglCaseStudy({
                 </Card>
                 <Card className="border-cta/40">
                   <p className="text-[13px] font-semibold uppercase leading-[20px] tracking-[0.12em] text-cta">
-                    2 · Connect
+                    2 · Link
                   </p>
                   <p className="mt-3 text-[15px] leading-[22px] text-text">
                     Map each store to its listing on the platform, so it can be managed there through
@@ -536,14 +549,14 @@ export default function RtglCaseStudy({
                   <p className="mt-3 text-[16px] font-semibold leading-[22px] text-text">Brand manager</p>
                   <p className="mt-2 text-[14px] leading-[21px] text-text-muted">
                     Single- or multi-brand, any number of locations. Their stores are already on delivery
-                    platforms like Swiggy and Zomato — they need each one connected to UrbanPiper.
+                    platforms like Swiggy and Zomato — they need each one linked to UrbanPiper.
                   </p>
                 </Card>
                 <Card>
                   <Label>UrbanPiper</Label>
                   <p className="mt-3 text-[16px] font-semibold leading-[22px] text-text">Onboarding manager</p>
                   <p className="mt-2 text-[14px] leading-[21px] text-text-muted">
-                    Did the setup and connected every store, on every platform, for them.
+                    Did the setup and linked every store, on every platform, for them.
                   </p>
                 </Card>
               </div>
@@ -553,7 +566,7 @@ export default function RtglCaseStudy({
             <Block tag="Regions & platforms" title="One product, many markets — each with its own delivery platforms">
               <P>
                 UrbanPiper runs across 40,000+ locations in 30+ countries. Every region has its own set of
-                delivery platforms — and each platform its own way of connecting a store.
+                delivery platforms — and each platform its own way of linking a store.
               </P>
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 {[
@@ -582,7 +595,7 @@ export default function RtglCaseStudy({
 
 
             {/* ================= 1 · DISCOVER ================= */}
-            <Phase n={1} id="discover" title="Discover" sub="Why connecting a store took days instead of hours." />
+            <Phase n={1} id="discover" title="Discover" sub="Why linking a store took days instead of hours." />
 
             <Block tag="How I dug in" title="Before designing anything, I found out what was breaking">
               <div className="mt-6 grid gap-3 sm:grid-cols-3">
@@ -621,11 +634,11 @@ export default function RtglCaseStudy({
             </Block>
 
             <Block tag="The old process" title="How a store went live before">
-              <P>Every connection ran by hand — through account managers, a shared sheet and two other teams.</P>
+              <P>Every link ran by hand — through onboarding managers, a shared sheet and two other teams.</P>
               <ol className="mt-6 space-y-6">
                 {[
                   ["Data gathering", "Onboarding asks the merchant for store IDs, URLs and menus over Slack, WhatsApp and email, then types it all into a shared sheet — one per platform."],
-                  ["Platform connection", "The sheet goes to Swiggy or Zomato to link the stores on their side, and comes back confirming which connected."],
+                  ["Platform linking", "The sheet goes to Swiggy or Zomato to link the stores on their side, and comes back confirming which went through."],
                   ["Go-live", "The tech team runs a menu publish script, and onboarding emails the merchant that stores are live."],
                 ].map(([t, d], i) => (
                   <li key={t} className="grid grid-cols-[2rem_1fr] gap-3">
@@ -692,13 +705,13 @@ export default function RtglCaseStudy({
                 </div>
                 <div className="border-t border-line bg-surface-2 p-5 sm:border-l sm:border-t-0">
                   <p className="text-[13px] font-semibold uppercase leading-[20px] tracking-[0.12em] text-cta">Now</p>
-                  <p className="mt-2 text-[28px] font-bold leading-none tracking-[-0.02em] text-text">4–5 hrs</p>
-                  <p className="mt-2 text-[13px] leading-[19px] text-text-muted">From raising the request to the store going live</p>
+                  <p className="mt-2 text-[28px] font-bold leading-none tracking-[-0.02em] text-text">~8 hrs</p>
+                  <p className="mt-2 text-[13px] leading-[19px] text-text-muted">From raising the request to the store going live, on average</p>
                 </div>
                 <div className="border-t border-line bg-surface-2 p-5 sm:border-l sm:border-t-0">
-                  <p className="text-[13px] font-semibold uppercase leading-[20px] tracking-[0.12em] text-cta">Reduced by</p>
-                  <p className="mt-2 text-[28px] font-bold leading-none tracking-[-0.02em] text-cta">~94%</p>
-                  <p className="mt-2 text-[13px] leading-[19px] text-text-muted">~77 hrs down to ~4.5 hrs, using midpoints</p>
+                  <p className="text-[13px] font-semibold uppercase leading-[20px] tracking-[0.12em] text-cta">Scripts now</p>
+                  <p className="mt-2 text-[28px] font-bold leading-none tracking-[-0.02em] text-cta">One click</p>
+                  <p className="mt-2 text-[13px] leading-[19px] text-text-muted">The script runs in ~2 min — the rest is waiting for the onboarding team to click</p>
                 </div>
               </div>
             </Block>
@@ -756,8 +769,8 @@ export default function RtglCaseStudy({
 
             <Block tag="The problem">
               <p className="mt-6 text-[22px] font-semibold leading-[1.35] tracking-[-0.02em] text-text-muted md:text-[28px]">
-                Every store connection ran through a{" "}
-                <span className="text-text">manual process owned by account managers</span> — so it took{" "}
+                Every store link ran through a{" "}
+                <span className="text-text">manual process owned by onboarding managers</span> — so it took{" "}
                 <span className="text-cta">~3 days</span> to go live, leaving merchants{" "}
                 <span className="text-text">managing each platform separately</span>, with{" "}
                 <span className="text-text">no visibility</span> the entire time.
@@ -786,7 +799,7 @@ export default function RtglCaseStudy({
                   </li>
                   <li>
                     <span className="text-text">Two platforms instead of many.</span> In MENA, every
-                    platform has its own timings and its own requirements to connect a store.
+                    platform has its own timings and its own requirements to link a store.
                   </li>
                   <li>
                     <span className="text-text">MENA needed more research</span> before one flow could cover
@@ -801,15 +814,15 @@ export default function RtglCaseStudy({
 
             <Block tag="Constraint" title="We couldn't touch the sheet">
               <P>
-                Every platform shares one sheet with us to connect stores — and they own it. We
+                Every platform shares one sheet with us to link stores — and they own it. We
                 couldn&rsquo;t edit it, automate it or plug into it. So how do you make a process
                 self-serve when its core step lives in a document you&rsquo;re not allowed to touch?
               </P>
               <div className="mt-6 rounded-[10px] border border-line bg-surface p-5">
-                <Label>Why Atlas couldn&rsquo;t just connect to the platform</Label>
+                <Label>Why UrbanPiper couldn&rsquo;t just link to the platform</Label>
                 <p className="mt-2 text-[15px] leading-[24px] text-text-muted">
                   The platforms don&rsquo;t offer an API for store mapping. Their mapping teams work only
-                  from the sheet they own, so there was nothing on their side for Atlas to call directly.
+                  from the sheet they own, so there was nothing on their side for UrbanPiper to call directly.
                 </p>
               </div>
             </Block>
@@ -820,7 +833,7 @@ export default function RtglCaseStudy({
                 sheet&rsquo;s details come over email instead? They agreed — a few more platforms are still
                 in talks. That let engineering build <span className="text-text">Nexus</span>, a backend AI agent that sends each request to the
                 platform by email, reads the platform&rsquo;s reply, and updates the store&rsquo;s status
-                in Atlas.
+                in UrbanPiper.
               </P>
             </Block>
             <Reveal className={`${COL} mt-8`}>
@@ -851,7 +864,7 @@ export default function RtglCaseStudy({
               </div>
             </Block>
 
-            <Block tag="Where it lives" title="One platform-level home for connecting stores">
+            <Block tag="Where it lives" title="One platform-level home for linking stores">
               <P>
                 Atlas → All Apps → Settings → Platforms → Integrations → <span className="text-text">Connect stores</span>.
               </P>
@@ -859,7 +872,7 @@ export default function RtglCaseStudy({
                 <Card>
                   <Label>The decision</Label>
                   <p className="mt-2 text-[15px] leading-[24px] text-text-muted">
-                    A connection is <span className="text-text">one-to-many</span> — many stores to one
+                    A link is <span className="text-text">one-to-many</span> — many stores to one
                     platform, under its rules — and a <span className="text-text">process to track</span>,
                     not a one-time store edit. So it lives at the platform level.
                   </p>
@@ -885,13 +898,13 @@ export default function RtglCaseStudy({
               <RtglProcessMap />
             </Reveal>
 
-            <Block tag="User flow" title="Connecting a store, end to end">
+            <Block tag="User flow" title="Linking a store, end to end">
               <P>Pick platform & brand → add store IDs → assign menus → verify against platform rules → submit → track to live.</P>
             </Block>
             <Reveal className={`${WIDE} mt-8`}>
               <div className="overflow-hidden rounded-[10px] border border-line bg-[#f8f8fc] p-4 md:p-10">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={`${V}/user-flow.png`} alt="Flowchart of connecting a store end to end" className="mx-auto w-full max-w-4xl" loading="lazy" />
+                <img src={`${V}/user-flow.png`} alt="Flowchart of linking a store end to end" className="mx-auto w-full max-w-4xl" loading="lazy" />
               </div>
             </Reveal>
 
@@ -918,7 +931,7 @@ export default function RtglCaseStudy({
             {/* ================= 4 · DELIVER ================= */}
             <Phase n={4} id="deliver" title="Deliver" sub="What shipped, and what it moved." />
 
-            <Block tag="Impact" title="Three months after release — Swiggy & Zomato, India">
+            <Block tag="Impact" title="One month after release — Swiggy & Zomato, India">
               <div className="mt-8">
                 <Metrics />
               </div>
@@ -926,23 +939,25 @@ export default function RtglCaseStudy({
                 <Card>
                   <Label>Before · ~3 days</Label>
                   <ul className="mt-3 space-y-1.5 text-[15px] leading-[22px] text-text-muted">
-                    <li>~1 day collecting and aligning data, chasing merchants</li>
+                    <li>~1 day waiting on merchants for store details, while onboarding managers chased</li>
                     <li>2–8 hours for the platform to map the stores</li>
                     <li>~2 days of manual scripts by another team</li>
                   </ul>
                 </Card>
                 <Card className="border-cta/40">
                   <p className="text-[13px] font-semibold uppercase leading-[20px] tracking-[0.12em] text-cta">
-                    Now · 4–5 hours
+                    Now · ~8 hours
                   </p>
-                  <p className="mt-3 text-[15px] leading-[22px] text-text">
-                    From the moment the merchant raises the request to the store going live — no
-                    hand-offs in between.
-                  </p>
+                  <ul className="mt-3 space-y-1.5 text-[15px] leading-[22px] text-text">
+                    <li>Minutes for the merchant to raise the request, with store details</li>
+                    <li>3–4 hours for the platform to map the stores</li>
+                    <li>2–3 hours for the onboarding team to run the menu script — now one click</li>
+                  </ul>
                 </Card>
               </div>
               <p className="mt-4 text-[14px] leading-[22px] text-text-faint">
-                Remaining tickets are mostly from regions not yet live (MENA, UK, US).
+                The tickets left are about platforms missing their turnaround, taking stores offline, and
+                minor bugs like menus not loading — plus regions not yet live (MENA, UK, US).
               </p>
             </Block>
 
@@ -1052,8 +1067,9 @@ export default function RtglCaseStudy({
               <ul className="mt-5 space-y-2">
                 {[
                   "Phase 2 — MENA, UK and US, including Talabat",
-                  "Handle each region's different connection requirements",
-                  "Reduce the account managers' remaining manual steps further",
+                  "Handle each region's different linking requirements",
+                  "Automate the menu script in Nexus — removing the 2–3 hour wait for a click",
+                  "Request to Go Offline — merchants take stores offline themselves",
                   "Platforms plan their own agent and an API to replace the email step — on their roadmap, not yet live",
                 ].map((t) => (
                   <li key={t} className="flex gap-3 text-[16px] leading-[26px] text-text-muted">

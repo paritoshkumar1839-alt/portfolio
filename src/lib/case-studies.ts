@@ -113,18 +113,16 @@ export const caseStudies: CaseStudy[] = [
     slug: "self-serve-go-live",
     title: "Self-Serve Store Go-Live",
     tagline:
-      "Restaurants connect their own stores to Swiggy and Zomato from one dashboard — no account manager needed. Store connection cut from about 3 days to under 5 hours.",
+      "Merchants link their UrbanPiper stores to the same stores on Swiggy and Zomato themselves — no onboarding manager needed. Cut from about 3 days to about 8 hours.",
     tags: ["B2B SaaS", "0 → 1 Flow"],
     domain: "B2B SaaS · UrbanPiper",
     featured: true,
     lockedTeaser:
-      "The self-serve flow that let restaurants take their own stores live across every delivery platform.",
+      "The self-serve flow that lets merchants link their UrbanPiper stores to the same stores on Swiggy and Zomato.",
     metrics: [
-      { label: "stores connected in 3 months", value: "1,700" },
-      { label: "request to live (was ~3 days)", value: "<5 hrs" },
-      { label: "faster go-live", value: "~94%" },
-      { label: "fewer support tickets", value: "38%" },
-      { label: "of new connections raised by merchants", value: "60%" },
+      { label: "stores live in the first month", value: "650+" },
+      { label: "request to live (was ~3 days)", value: "~8 hrs" },
+      { label: "of requests raised by merchants", value: "100%" },
     ],
     cover: "/work/self-serve-go-live/cover.png",
     cardCover: "/work/self-serve-go-live/card-cover.png",
@@ -159,8 +157,8 @@ export const caseStudies: CaseStudy[] = [
         intro:
           "The request was made from Atlas by our own team, on the brand’s behalf — but its progress was tracked on a separate internal tool connected to the platforms, which only we could see.",
         bullets: [
-          "Every region and platform had its own rules, so each go-live meant back-and-forth between the account manager and the brand — over email, Slack and WhatsApp.",
-          "As we grew into the US and UK, this broke: support tickets spiked, and a small account team became the bottleneck.",
+          "Every region and platform had its own rules, so each go-live meant back-and-forth between the onboarding manager and the brand — over email, Slack and WhatsApp.",
+          "As we grew into the US and UK, this broke: support tickets spiked, and a small onboarding team became the bottleneck.",
         ],
         sticky:
           "The only “tracking” a brand got was an email saying it’s done. No link, no status, no why.",
@@ -171,7 +169,7 @@ export const caseStudies: CaseStudy[] = [
         intro:
           "One place in Atlas where a brand can request go-live, track it, and understand it — without going through us.",
         bullets: [
-          "Request stores themselves, without an account manager in the loop.",
+          "Request stores themselves, without an onboarding manager in the loop.",
           "See real status and timelines inside the product.",
           "Know what’s needed — like whether the menu is ready — before requesting.",
         ],
@@ -188,11 +186,11 @@ export const caseStudies: CaseStudy[] = [
               "Couldn’t even see which locations they’d sent live without digging back through an email.",
               "Typed platform IDs and URLs for every store by hand, unsure what each platform needed.",
               "No way to know if a store’s menu was ready — found out only when it failed.",
-              "Every question meant pinging an account manager on Slack or WhatsApp, then waiting.",
+              "Every question meant pinging an onboarding manager on Slack or WhatsApp, then waiting.",
             ],
           },
           {
-            title: "Account managers — our team",
+            title: "Onboarding managers — our team",
             points: [
               "Ran every go-live by hand on an internal tool the customer couldn’t see.",
               "Buried under rising requests and support tickets as more regions came on.",
@@ -315,7 +313,7 @@ export const caseStudies: CaseStudy[] = [
     process: [],
     gallery: [],
     outcome:
-      "Go-live moved from a task our account team ran by hand to one brands run themselves — with menu problems caught before submitting, and every step visible in the product.",
+      "Go-live moved from a task our onboarding team ran by hand to one brands run themselves — with menu problems caught before submitting, and every step visible in the product.",
     nextSlug: "menu-rules",
   },
 
