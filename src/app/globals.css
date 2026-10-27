@@ -351,3 +351,87 @@ body {
   to { transform: scale(1.6); opacity: 0; }
 }
 .story-ripple { animation: story-ripple 0.45s ease-out both; }
+
+/* --- Cinematic background -------------------------------------------------- */
+/* Drifting, out-of-focus "theatre light" bokeh + a slow projector-beam sweep.
+ * Sits above the base canvas, below .grain and the z-[2] content. Original and
+ * abstract — a cinema/projector mood, not any film's imagery. Fully halted by
+ * the global prefers-reduced-motion rule above. */
+.cinema {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  animation: cinema-flicker 7.5s ease-in-out infinite;
+}
+.cinema-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(64px);
+  opacity: 0.15;
+  will-change: transform;
+}
+.cinema-orb-1 {
+  width: 34rem;
+  height: 34rem;
+  top: -8rem;
+  left: -7rem;
+  background: radial-gradient(circle, rgba(245, 190, 95, 0.9), transparent 70%);
+  animation: cinema-drift-1 28s ease-in-out infinite;
+}
+.cinema-orb-2 {
+  width: 27rem;
+  height: 27rem;
+  bottom: -9rem;
+  right: -5rem;
+  background: radial-gradient(circle, rgba(220, 255, 5, 0.6), transparent 70%);
+  animation: cinema-drift-2 34s ease-in-out infinite;
+}
+.cinema-orb-3 {
+  width: 25rem;
+  height: 25rem;
+  top: 34%;
+  left: 56%;
+  background: radial-gradient(circle, rgba(95, 160, 245, 0.55), transparent 70%);
+  animation: cinema-drift-3 40s ease-in-out infinite;
+}
+.cinema-beam {
+  position: absolute;
+  top: -30%;
+  left: 15%;
+  width: 34rem;
+  height: 170%;
+  transform: rotate(16deg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.022),
+    transparent
+  );
+  filter: blur(10px);
+  animation: cinema-sweep 26s ease-in-out infinite;
+}
+@keyframes cinema-drift-1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(4rem, 3rem); }
+}
+@keyframes cinema-drift-2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-5rem, -2.5rem); }
+}
+@keyframes cinema-drift-3 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-3.5rem, 4rem); }
+}
+@keyframes cinema-sweep {
+  0%, 100% { transform: rotate(16deg) translateX(-7rem); opacity: 0.55; }
+  50% { transform: rotate(16deg) translateX(11rem); opacity: 1; }
+}
+@keyframes cinema-flicker {
+  0%, 100% { opacity: 1; }
+  47% { opacity: 0.94; }
+  49% { opacity: 0.84; }
+  51% { opacity: 0.96; }
+  53% { opacity: 0.9; }
+}

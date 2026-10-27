@@ -43,6 +43,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SmoothScroll />
         <ScrollProgress />
         <div className="ambient" aria-hidden />
+        <div className="cinema" aria-hidden>
+          <span className="cinema-orb cinema-orb-1" />
+          <span className="cinema-orb cinema-orb-2" />
+          <span className="cinema-orb cinema-orb-3" />
+          <span className="cinema-beam" />
+        </div>
         <div className="grain" aria-hidden />
         <GateProvider>
           <div className="relative z-[2] flex min-h-dvh flex-col">
