@@ -326,12 +326,10 @@ export const caseStudies: CaseStudy[] = [
     domain: "B2B SaaS · UrbanPiper",
     lockedTeaser:
       "The rules engine that replaced dozens of duplicated menus with a single source of truth.",
-    // TODO(paritosh): real numbers later. "Change types" and "Timeline" are real.
     metrics: [
-      { label: "Duplicate menus replaced", value: "[  ]" },
-      { label: "Ops effort reduced", value: "[  ]%" },
-      { label: "Change types per rule", value: "3" },
-      { label: "Timeline", value: "~1 mo" },
+      { label: "menus at Pizza Hut", value: "16 → 1" },
+      { label: "businesses creating rules", value: "25+" },
+      { label: "rules in the last 90 days", value: "2,636" },
     ],
     cover: "/work/menu-rules/cover.png",
     // Outside/card thumbnail — the Menu Rules screen in a tablet mockup on a
@@ -581,6 +579,11 @@ export const caseStudies: CaseStudy[] = [
     team: "A small group of product designers maintaining the system, with engineering — I built and extended parts of it alongside shipping features",
     timeline: "Ongoing — a living system",
     tools: ["Figma", "Styles & Components"],
+    metrics: [
+      { value: "1,108", label: "Component variants" },
+      { value: "141", label: "Icons unified" },
+      { value: "3", label: "Products on one library" },
+    ],
     overview:
       "UrbanPiper's Atlas is a large B2B product — orders, menus, tables, analytics and onboarding — built by multiple squads at speed. The design system is the shared vocabulary that keeps all of it feeling like one product.",
     problem:

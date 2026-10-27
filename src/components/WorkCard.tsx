@@ -5,6 +5,7 @@ import StudyLink from "@/components/StudyLink";
 import LockBadge from "@/components/LockBadge";
 import { isLocked } from "@/lib/gate";
 import Tilt from "@/components/Tilt";
+import CountUp from "@/components/CountUp";
 
 export default function WorkCard({
   study,
@@ -75,6 +76,21 @@ export default function WorkCard({
               </span>
             )}
           </div>
+
+          {study.metrics?.length ? (
+            <dl className="mt-5 grid grid-cols-3 gap-x-4 border-t border-line pt-4">
+              {study.metrics.slice(0, 3).map((m) => (
+                <div key={m.label}>
+                  <dt className="font-serif text-lg leading-none text-text">
+                    <CountUp value={m.value} />
+                  </dt>
+                  <dd className="mt-1.5 text-[0.65rem] leading-tight text-text-faint">
+                    {m.label}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          ) : null}
         </div>
         {!comingSoon && (
           <span
