@@ -1,14 +1,19 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { profile } from "@/lib/profile";
-import VideoEmbed from "@/components/VideoEmbed";
+import VideoLightbox from "@/components/VideoLightbox";
+
+type Remix = (typeof profile.film.remixes)[number];
 
 // About subsection: a one-line, horizontally-scrollable rail of fun remix
 // videos hosted on Google Drive. Arrows scroll it; trackpad/touch works too.
+// The clips are horizontal, so the cards are 16:9 and playback opens in a big
+// lightbox instead of a cramped inline frame.
 export default function RemixRail() {
   const { film } = profile;
   const trackRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState<Remix | null>(null);
 
   const scroll = (dir: 1 | -1) => {
     const el = trackRef.current;
@@ -51,24 +56,55 @@ export default function RemixRail() {
           // Optional per-remix custom thumbnail; else the Drive auto-poster.
           const thumb =
             (r as { thumb?: string }).thumb ??
-            `https://drive.google.com/thumbnail?id=${r.id}&sz=w480`;
+            `https://drive.google.com/thumbnail?id=${r.id}&sz=w640`;
           return (
-            <VideoEmbed
+            <button
               key={r.id}
-              source="drive"
-              videoId={r.id}
-              thumb={thumb}
-              title={r.title}
-              className="aspect-[9/16] w-[200px] shrink-0 snap-start rounded-xl border border-line bg-gradient-to-br from-surface-2 to-surface"
-              overlay={
-                <span className="absolute inset-x-3 bottom-3 text-sm font-medium leading-tight text-text [text-shadow:0_1px_4px_rgba(0,0,0,0.6)]">
-                  {r.title}
+              type="button"
+              onClick={() => setActive(r)}
+              aria-label={`Play ${r.title}`}
+              className="group relative aspect-video w-[280px] shrink-0 cursor-pointer snap-start overflow-hidden rounded-xl border border-line bg-gradient-to-br from-surface-2 to-surface sm:w-[320px]"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={thumb}
+                alt={r.title}
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                }}
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+              <span className="absolute inset-x-3 bottom-3 text-left text-sm font-medium leading-tight text-text [text-shadow:0_1px_4px_rgba(0,0,0,0.6)]">
+                {r.title}
+              </span>
+              <span className="absolute inset-0 flex items-center justify-center">
+                <span className="flex size-12 items-center justify-center rounded-full bg-bg/70 text-text backdrop-blur transition-transform duration-300 group-hover:scale-110">
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    aria-hidden
+                  >
+                    <path d="M5 3.5v9l7-4.5-7-4.5z" />
+                  </svg>
                 </span>
-              }
-            />
+              </span>
+            </button>
           );
         })}
       </div>
+
+      {active && (
+        <VideoLightbox
+          source="drive"
+          videoId={active.id}
+          title={active.title}
+          onClose={() => setActive(null)}
+        />
+      )}
     </div>
   );
 }
