@@ -319,7 +319,7 @@ export default async function CaseStudyPage({
             <div>
               <span className="eyebrow">Next project</span>
               <p className="mt-3 font-serif text-[clamp(1.75rem,4vw,3rem)] leading-tight text-text">
-                {next.title}
+                {next.headline ?? next.title}
               </p>
             </div>
             <span

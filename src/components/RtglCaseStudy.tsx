@@ -1109,7 +1109,7 @@ export default function RtglCaseStudy({
             <div>
               <Label>Next</Label>
               <p className="mt-1.5 text-[18px] font-semibold leading-[24px] tracking-[-0.01em] text-text">
-                {next.title}
+                {next.headline ?? next.title}
               </p>
             </div>
             <span

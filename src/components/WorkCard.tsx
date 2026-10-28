@@ -56,7 +56,7 @@ export default function WorkCard({
             <span className="eyebrow">{study.domain ?? study.tags.join(" · ")}</span>
           </div>
           <h3 className="mt-3 font-serif text-2xl leading-tight text-text md:text-[1.75rem]">
-            {study.title}
+            {study.headline ?? study.title}
           </h3>
           <p className="mt-2 max-w-md text-pretty text-sm leading-relaxed text-text-muted line-clamp-3">
             {study.tagline}

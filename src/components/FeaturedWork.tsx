@@ -43,7 +43,7 @@ export default function FeaturedWork({ study }: { study: CaseStudy }) {
                 {study.domain && <span className="eyebrow">{study.domain}</span>}
               </div>
               <h3 className="mt-5 font-serif text-[clamp(1.5rem,2.6vw,2rem)] leading-[1.08] text-text">
-                {study.title}
+                {study.headline ?? study.title}
               </h3>
               <p className="mt-4 max-w-md text-pretty text-sm leading-relaxed text-text-muted">
                 {study.tagline}

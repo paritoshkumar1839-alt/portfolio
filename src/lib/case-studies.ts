@@ -61,6 +61,10 @@ export type CaseStudySection = {
 export type CaseStudy = {
   slug: string;
   title: string;
+  // Editorial headline shown on the work cards so they read the same as the
+  // page's own <h1>. Falls back to `title` when unset. Keep it in sync with the
+  // in-page heading for studies that hardcode their own <h1> (RTGL, Menu Rules).
+  headline?: string;
   tagline: string;
   tags: string[];
   // Short domain eyebrow shown above the title on cards (e.g. "B2B SaaS · Founding").
@@ -112,6 +116,8 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "self-serve-go-live",
     title: "Self-Serve Store Go-Live",
+    headline:
+      "Linking Swiggy and Zomato stores to UrbanPiper — in hours, not days",
     tagline:
       "Merchants link their UrbanPiper stores to the same stores on Swiggy and Zomato themselves — no onboarding manager needed. Cut from about 3 days to about 8 hours.",
     tags: ["B2B SaaS", "0 → 1 Flow"],
@@ -320,6 +326,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "menu-rules",
     title: "Targeted Menu Overrides",
+    headline: "One menu and a few rules, instead of dozens of copies",
     tagline:
       "Change price and availability by platform, location and item — with one menu and a few rules instead of dozens of duplicate menus.",
     tags: ["B2B SaaS", "Systems"],
