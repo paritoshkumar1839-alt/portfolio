@@ -406,8 +406,8 @@ export default function RtglCaseStudy({
         </Link>
         <Label className="mt-10">UrbanPiper · 2026 · B2B web app</Label>
         <h1 className="mt-4 text-[40px] font-bold leading-[1.05] tracking-[-0.03em] text-balance text-text md:text-[60px]">
-          Giving restaurants a <span className="text-cta">self-serve</span> way to
-          connect their Swiggy and Zomato stores to UrbanPiper
+          Connecting Swiggy and Zomato stores to UrbanPiper,{" "}
+          <span className="text-cta">self-serve</span>
         </h1>
         <p className="mt-5 text-pretty text-[18px] leading-[28px] text-text-muted">
           Linking each Swiggy and Zomato store to UrbanPiper used to take an
