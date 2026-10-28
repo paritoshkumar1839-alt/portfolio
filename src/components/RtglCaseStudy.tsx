@@ -398,7 +398,7 @@ export default function RtglCaseStudy({
   next?: CaseStudy;
 }) {
   return (
-    <article className="pb-24 xl:pl-52">
+    <article className="pb-24 lg:pl-52">
       {/* ---------------- HERO ---------------- */}
       <header className={`${COL} pt-14 md:pt-24`}>
         <Link href="/work" className="text-[14px] text-text-muted underline-hover hover:text-text">

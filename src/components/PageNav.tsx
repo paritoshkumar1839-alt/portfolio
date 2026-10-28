@@ -32,11 +32,11 @@ export default function PageNav({ items }: { items: PageNavItem[] }) {
   return (
     <nav
       aria-label="On this page"
-      className={`group fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 lg:block xl:left-6 xl:w-44`}
+      className={`group fixed left-6 top-1/2 z-40 hidden w-44 -translate-y-1/2 lg:block`}
     >
       {/* lg: a slim tick rail that expands on hover · xl+: always-open sidebar */}
-      <div className="rounded-[12px] border border-transparent p-2 transition-colors duration-200 group-hover:border-line group-hover:bg-bg/95 group-hover:shadow-xl group-hover:backdrop-blur group-focus-within:border-line group-focus-within:bg-bg/95 xl:p-0 xl:group-hover:border-transparent xl:group-hover:bg-transparent xl:group-hover:shadow-none xl:group-focus-within:border-transparent xl:group-focus-within:bg-transparent">
-        <p className="mb-2 hidden px-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-text-faint group-hover:block group-focus-within:block xl:block">
+      <div className="p-0">
+        <p className="mb-2 px-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-text-faint">
           On this page
         </p>
         <ul className="space-y-0.5">
@@ -56,7 +56,7 @@ export default function PageNav({ items }: { items: PageNavItem[] }) {
                   />
                   <span
                     aria-hidden
-                    className={`hidden whitespace-nowrap text-[13px] group-hover:inline group-focus-within:inline xl:inline ${
+                    className={`whitespace-nowrap text-[13px] ${
                       on ? "font-medium text-text" : "text-text-muted"
                     }`}
                   >
