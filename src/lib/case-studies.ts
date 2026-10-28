@@ -117,7 +117,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "self-serve-go-live",
     title: "Self-Serve Store Go-Live",
     headline:
-      "Linking Swiggy and Zomato stores to UrbanPiper — in hours, not days",
+      "Giving restaurants a self-serve way to connect their Swiggy and Zomato stores to UrbanPiper",
     tagline:
       "Merchants link their UrbanPiper stores to the same stores on Swiggy and Zomato themselves — no onboarding manager needed. Cut from about 3 days to about 8 hours.",
     tags: ["B2B SaaS", "0 → 1 Flow"],

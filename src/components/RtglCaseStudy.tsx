@@ -406,12 +406,13 @@ export default function RtglCaseStudy({
         </Link>
         <Label className="mt-10">UrbanPiper · 2026 · B2B web app</Label>
         <h1 className="mt-4 text-[40px] font-bold leading-[1.05] tracking-[-0.03em] text-balance text-text md:text-[60px]">
-          Linking Swiggy and Zomato stores to UrbanPiper — in{" "}
-          <span className="text-cta">hours</span>, not days
+          Giving restaurants a <span className="text-cta">self-serve</span> way to
+          connect their Swiggy and Zomato stores to UrbanPiper
         </h1>
         <p className="mt-5 text-pretty text-[18px] leading-[28px] text-text-muted">
-          Merchants link their UrbanPiper stores to the same stores on Swiggy and Zomato, so they can
-          run every platform from one place. I made it self-serve.
+          Each Swiggy and Zomato store connects to the same store in UrbanPiper, so its
+          orders and menus run from one dashboard — without waiting on an onboarding
+          manager or the usual 3 days.
         </p>
 
         <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-line pt-6 sm:grid-cols-4">
