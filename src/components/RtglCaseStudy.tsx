@@ -410,9 +410,9 @@ export default function RtglCaseStudy({
           connect their Swiggy and Zomato stores to UrbanPiper
         </h1>
         <p className="mt-5 text-pretty text-[18px] leading-[28px] text-text-muted">
-          Each Swiggy and Zomato store connects to the same store in UrbanPiper, so its
-          orders and menus run from one dashboard — without waiting on an onboarding
-          manager or the usual 3 days.
+          A restaurant links each Swiggy and Zomato store to the same store in
+          UrbanPiper, so every order and menu runs from one place — no onboarding
+          manager, no 3-day wait.
         </p>
 
         <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-line pt-6 sm:grid-cols-4">
