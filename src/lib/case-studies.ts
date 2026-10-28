@@ -124,11 +124,11 @@ export const caseStudies: CaseStudy[] = [
     domain: "B2B SaaS · UrbanPiper",
     featured: true,
     lockedTeaser:
-      "The self-serve flow that lets merchants link their UrbanPiper stores to the same stores on Swiggy and Zomato.",
+      "The self-serve flow that lets brand managers link their UrbanPiper stores to the same stores on Swiggy and Zomato.",
     metrics: [
       { label: "stores live in the first month", value: "650+" },
       { label: "request to live (was ~3 days)", value: "~8 hrs" },
-      { label: "of requests raised by merchants", value: "100%" },
+      { label: "of requests raised by brand managers", value: "100%" },
     ],
     cover: "/work/self-serve-go-live/cover.png",
     cardCover: "/work/self-serve-go-live/card-cover.png",

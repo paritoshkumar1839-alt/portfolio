@@ -12,15 +12,15 @@ const GROUPS: HmwGroup[] = [
   {
     who: "For the brand manager",
     rows: [
-      ["help merchants connect their stores faster?", "A self-serve flow"],
-      ["give merchants visibility and control?", "A live status tracker + notifications"],
+      ["help brand managers connect their stores faster?", "A self-serve flow"],
+      ["give brand managers visibility and control?", "A live status tracker + notifications"],
       ["make them confident their menus publish right?", "In-flow menu verification"],
     ],
   },
   {
     who: "For the onboarding team",
     rows: [
-      ["cut the team's manual work?", "Merchant does the entry; the team handles exceptions"],
+      ["cut the team's manual work?", "Brand manager does the entry; the team handles exceptions"],
       ["remove the dependency on other teams?", "Automated menu publish, in the product"],
     ],
   },

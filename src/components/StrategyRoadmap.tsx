@@ -9,8 +9,8 @@ import { useEffect, useRef, useState } from "react";
  * ------------------------------------------------------------------ */
 
 const STEPS: { title: string; text: string; current?: boolean }[] = [
-  { title: "Give merchants visibility", text: "A live tracker showing where every store's link stands." },
-  { title: "Let merchants link their own stores", text: "Self-serve replaces the manual chain — the team just confirms." },
+  { title: "Give brand managers visibility", text: "A live tracker showing where every store's link stands." },
+  { title: "Let brand managers link their own stores", text: "Self-serve replaces the manual chain — the team just confirms." },
   { title: "Phase 1 — Swiggy & Zomato, India", text: "Start where the tickets were — just two platforms to get right.", current: true },
   { title: "Phase 2 — MENA platforms", text: "Apply Phase 1's learnings, close the gaps, then expand." },
   { title: "Phase 3 — every region", text: "Once it holds up, scale to all regions and platforms." },

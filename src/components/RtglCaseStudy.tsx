@@ -28,11 +28,11 @@ const V = `${A}/v2`;
 const METRICS = [
   { value: "~8 hrs", label: "from request to store live — down from ~3 days" },
   { value: "650+", label: "stores taken live in the first month (brand × location)" },
-  { value: "100%", label: "of those requests raised by merchants themselves — up from ~0%" },
+  { value: "100%", label: "of those requests raised by brand managers themselves — up from ~0%" },
 ];
 
 const OUTCOMES = [
-  "Onboarding managers used to collect every store's details and link it by hand. In India, merchants now do it themselves — onboarding managers only step in for edge cases.",
+  "Onboarding managers used to collect every store's details and link it by hand. In India, brand managers now do it themselves — onboarding managers only step in for edge cases.",
   "Go-live support tickets in India mostly stopped.",
 ];
 
@@ -247,7 +247,7 @@ function QuickRead() {
     },
     {
       title: "A dropdown, not a rich menu preview",
-      text: "My first version showed rich menu cards with a full preview. After release, most merchants never opened it — they already map menus in their own sheet. A fast dropdown shipped, with preview in a new tab for look-alike menus.",
+      text: "My first version showed rich menu cards with a full preview. After release, most brand managers never opened it — they already map menus in their own sheet. A fast dropdown shipped, with preview in a new tab for look-alike menus.",
       media: <Shot src={`${V}/menu-dropdown-preview.png`} alt="Menu dropdown with preview" className="aspect-[2560/1664]" />,
     },
   ];
@@ -319,7 +319,7 @@ function QuickRead() {
             ["Onboarding manager", "types 11 fields per store into the platform's sheet"],
             ["Platform", "maps the stores in 2–8 hours, and sends the sheet back"],
             ["Another team", "runs manual scripts to enable stores and publish menus — about 2 days in the queue"],
-            ["Onboarding manager", "emails the merchant that the stores are live"],
+            ["Onboarding manager", "emails the brand manager that the stores are live"],
           ].map(([who, what], i) => (
             <li key={i} className="grid grid-cols-[1.75rem_1fr] gap-3">
               <span className="flex size-6 items-center justify-center rounded-full border border-line-strong text-[12px] font-semibold tabular-nums text-text-muted">
@@ -332,7 +332,7 @@ function QuickRead() {
           ))}
         </ol>
         <P className="mt-6">
-          The merchant saw none of it — so they chased for updates, and support tickets kept rising.
+          The brand manager saw none of it — so they chased for updates, and support tickets kept rising.
         </P>
         <TimeBar />
       </Block>
@@ -352,7 +352,7 @@ function QuickRead() {
         </div>
       </Block>
 
-      <Block tag="The solution" title="Merchants link their own stores — and see every step">
+      <Block tag="The solution" title="Brand managers link their own stores — and see every step">
         <P>
           A self-serve flow in UrbanPiper: pick the platform, add each store&rsquo;s ID and URL, assign
           menus, fix any menu issues, and track every store to live.
@@ -492,7 +492,7 @@ export default function RtglCaseStudy({
               <div className="mt-6 border-l-2 border-cta pl-5">
                 <Label>Solution</Label>
                 <p className="mt-2 text-pretty text-[22px] font-semibold leading-[1.3] tracking-[-0.02em] text-text md:text-[26px]">
-                  A self-serve flow — merchants link their own stores, catch menu problems before they fail,
+                  A self-serve flow — brand managers link their own stores, catch menu problems before they fail,
                   and track every store until it&rsquo;s live.
                 </p>
               </div>
@@ -547,7 +547,7 @@ export default function RtglCaseStudy({
             <Block tag="Users" id="users" title="Built for brand managers — but done by onboarding managers">
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 <Card>
-                  <Label>The merchant</Label>
+                  <Label>The restaurant</Label>
                   <p className="mt-3 text-[16px] font-semibold leading-[22px] text-text">Brand manager</p>
                   <p className="mt-2 text-[14px] leading-[21px] text-text-muted">
                     Single- or multi-brand, any number of locations. Their stores are already on delivery
@@ -604,7 +604,7 @@ export default function RtglCaseStudy({
                 {[
                   ["150–200 support tickets", "Every go-live ticket from the last quarter, grouped by complaint."],
                   ["7 interviews", "5 brand managers, and the 2 onboarding leads for India and MENA."],
-                  ["Shadowed a live go-live", "Sat in on a merchant's Zomato go-live, email thread included, from request to live."],
+                  ["Shadowed a live go-live", "Sat in on a brand manager's Zomato go-live, email thread included, from request to live."],
                 ].map(([t, d], i) => (
                   <Card key={t}>
                     <p className="text-[13px] font-semibold text-text-faint">{String(i + 1).padStart(2, "0")}</p>
@@ -639,9 +639,9 @@ export default function RtglCaseStudy({
               <P>Every link ran by hand — through onboarding managers, a shared sheet and two other teams.</P>
               <ol className="mt-6 space-y-6">
                 {[
-                  ["Data gathering", "Onboarding asks the merchant for store IDs, URLs and menus over Slack, WhatsApp and email, then types it all into a shared sheet — one per platform."],
+                  ["Data gathering", "Onboarding asks the brand manager for store IDs, URLs and menus over Slack, WhatsApp and email, then types it all into a shared sheet — one per platform."],
                   ["Platform linking", "The sheet goes to Swiggy or Zomato to link the stores on their side, and comes back confirming which went through."],
-                  ["Go-live", "The tech team runs a menu publish script, and onboarding emails the merchant that stores are live."],
+                  ["Go-live", "The tech team runs a menu publish script, and onboarding emails the brand manager that stores are live."],
                 ].map(([t, d], i) => (
                   <li key={t} className="grid grid-cols-[2rem_1fr] gap-3">
                     <span className="text-[16px] font-semibold leading-[26px] text-cta">{i + 1}</span>
@@ -683,7 +683,7 @@ export default function RtglCaseStudy({
 
               <div className="mt-6 grid gap-3 sm:grid-cols-3">
                 {[
-                  { stage: "1 · Collect & align data", time: "1 day", who: "Onboarding team chasing merchants for IDs, URLs and menus", bad: true },
+                  { stage: "1 · Collect & align data", time: "1 day", who: "Onboarding team chasing brand managers for IDs, URLs and menus", bad: true },
                   { stage: "2 · Map stores", time: "2–8 hrs", who: "The platform — its own stated turnaround", bad: false },
                   { stage: "3 · Scripts + store live", time: "~2 days", who: "Another team runs manual scripts, on average", bad: true },
                 ].map((s) => (
@@ -740,7 +740,7 @@ export default function RtglCaseStudy({
                       ["Manual overhead", "Hands-on effort per store."],
                       ["Scalability bottleneck", "A single point of dependency."],
                       ["Cross-team dependency", "Blocked on platform and tech hand-offs."],
-                      ["No answer to give", "Merchants keep asking “is it done yet?”"],
+                      ["No answer to give", "Brand managers keep asking “is it done yet?”"],
                     ],
                   },
                 ].map((p) => (
@@ -773,7 +773,7 @@ export default function RtglCaseStudy({
               <p className="mt-6 text-[22px] font-semibold leading-[1.35] tracking-[-0.02em] text-text-muted md:text-[28px]">
                 Every store link ran through a{" "}
                 <span className="text-text">manual process owned by onboarding managers</span> — so it took{" "}
-                <span className="text-cta">~3 days</span> to go live, leaving merchants{" "}
+                <span className="text-cta">~3 days</span> to go live, leaving brand managers{" "}
                 <span className="text-text">managing each platform separately</span>, with{" "}
                 <span className="text-text">no visibility</span> the entire time.
               </p>
@@ -852,7 +852,7 @@ export default function RtglCaseStudy({
                   <Label>Before</Label>
                   <p className="mt-2 text-[15px] leading-[24px] text-text-muted">
                     Only the onboarding team knew where a request stood. They tracked replies by hand,
-                    updated the sheet and messaged the merchant.
+                    updated the sheet and messaged the brand manager.
                   </p>
                 </div>
                 <div className="border-t border-line bg-surface-2 p-5 sm:border-l sm:border-t-0">
@@ -860,7 +860,7 @@ export default function RtglCaseStudy({
                   <p className="mt-2 text-[15px] leading-[24px] text-text">
                     Nexus reads every reply and moves each store from{" "}
                     <span className="whitespace-nowrap">Requested → In progress → Mapped</span> on its own.
-                    No one has to track it, and the merchant sees it live.
+                    No one has to track it, and the brand manager sees it live.
                   </p>
                 </div>
               </div>
@@ -941,7 +941,7 @@ export default function RtglCaseStudy({
                 <Card>
                   <Label>Before · ~3 days</Label>
                   <ul className="mt-3 space-y-1.5 text-[15px] leading-[22px] text-text-muted">
-                    <li>~1 day waiting on merchants for store details, while onboarding managers chased</li>
+                    <li>~1 day waiting on brand managers for store details, while onboarding managers chased</li>
                     <li>2–8 hours for the platform to map the stores</li>
                     <li>~2 days of manual scripts by another team</li>
                   </ul>
@@ -951,7 +951,7 @@ export default function RtglCaseStudy({
                     Now · ~8 hours
                   </p>
                   <ul className="mt-3 space-y-1.5 text-[15px] leading-[22px] text-text">
-                    <li>Minutes for the merchant to raise the request, with store details</li>
+                    <li>Minutes for the brand manager to raise the request, with store details</li>
                     <li>3–4 hours for the platform to map the stores</li>
                     <li>2–3 hours for the onboarding team to run the menu script — now one click</li>
                   </ul>
@@ -979,7 +979,7 @@ export default function RtglCaseStudy({
             </Reveal>
 
             <Block>
-              <H2>So I asked merchants how they actually pick a menu</H2>
+              <H2>So I asked brand managers how they actually pick a menu</H2>
               <P>
                 The answer was simple. Brand managers don&rsquo;t decide menus inside the product — they
                 already have a sheet that maps every outlet to its menu.
@@ -1061,7 +1061,7 @@ export default function RtglCaseStudy({
             <Block>
               <Quote>
                 Speed for the many, a safety net for the few. What feels right to the team isn&rsquo;t
-                always how merchants actually work.
+                always how brand managers actually work.
               </Quote>
             </Block>
 
@@ -1071,7 +1071,7 @@ export default function RtglCaseStudy({
                   "Phase 2 — MENA, UK and US, including Talabat",
                   "Handle each region's different linking requirements",
                   "Automate the menu script in Nexus — removing the 2–3 hour wait for a click",
-                  "Request to Go Offline — merchants take stores offline themselves",
+                  "Request to Go Offline — brand managers take stores offline themselves",
                   "Platforms plan their own agent and an API to replace the email step — on their roadmap, not yet live",
                 ].map((t) => (
                   <li key={t} className="flex gap-3 text-[16px] leading-[26px] text-text-muted">

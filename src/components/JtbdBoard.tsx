@@ -12,7 +12,7 @@ type Person = { who: string; role: string; avatar: string; core: Job; jobs: Job[
 const PEOPLE: Person[] = [
   {
     who: "Brand manager",
-    role: "The merchant",
+    role: "The restaurant",
     avatar: "/work/self-serve-go-live/v2/avatar-bm.png",
     core: {
       when: "I open new outlets",
@@ -36,7 +36,7 @@ const PEOPLE: Person[] = [
     },
     jobs: [
       { when: "a store fails", want: "a clear reason", so: "I can help without digging through raw errors" },
-      { when: "merchants ask “is it done yet?”", want: "them to already see the answer", so: "the question never reaches me" },
+      { when: "brand managers ask “is it done yet?”", want: "them to already see the answer", so: "the question never reaches me" },
     ],
   },
 ];
