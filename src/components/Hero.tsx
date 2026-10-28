@@ -9,7 +9,7 @@ export default function Hero() {
       <HeroStage>
         {/* Kicker — name sits small here; location + availability alongside */}
         <FadeUp className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
-          <span className="eyebrow text-text">{profile.name}</span>
+          <span className="eyebrow text-sm text-text md:text-base">{profile.name}</span>
           <span aria-hidden className="text-text-faint">·</span>
           <span className="eyebrow text-text-muted">{profile.location}</span>
           <span className="inline-flex items-center gap-2">
