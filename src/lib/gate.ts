@@ -48,10 +48,19 @@ export async function verifyPassword(input: string): Promise<boolean> {
   return hex === PASSWORD_HASH;
 }
 
-/** A study is locked when it's a real study (not a placeholder) and not
- *  explicitly marked public. New studies are therefore locked by default. */
+/** Master switch for the whole password gate.
+ *  - `false` → every case study is public; no password anywhere.
+ *  - `true`  → per-study locking resumes (locked unless `isPublic`).
+ *  Flip this one line to lock/unlock the site; the per-study `isPublic`
+ *  flags are preserved either way, so turning it back on restores exactly
+ *  the locks that were in place before. */
+export const GATE_ENABLED = false;
+
+/** A study is locked when the gate is on, it's a real study (not a
+ *  placeholder) and not explicitly marked public. */
 export function isLocked(
   study: Pick<CaseStudy, "comingSoon" | "isPublic">,
 ): boolean {
+  if (!GATE_ENABLED) return false;
   return !study.comingSoon && !study.isPublic;
 }
