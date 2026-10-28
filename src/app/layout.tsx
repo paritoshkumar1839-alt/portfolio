@@ -6,6 +6,8 @@ import GateProvider from "@/components/GateProvider";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollProgress from "@/components/ScrollProgress";
 import { profile } from "@/lib/profile";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 // Single sans-serif typeface across the whole site.
@@ -57,6 +59,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Footer />
           </div>
         </GateProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
