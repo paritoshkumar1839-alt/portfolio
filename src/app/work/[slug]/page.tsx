@@ -53,6 +53,7 @@ export default async function CaseStudyPage({
   if (study.slug === "self-serve-go-live") {
     return (
       <CaseStudyGate
+        slug={study.slug}
         locked={isLocked(study)}
         title={study.title}
         teaser={study.lockedTeaser}
@@ -65,6 +66,7 @@ export default async function CaseStudyPage({
   if (study.slug === "menu-rules") {
     return (
       <CaseStudyGate
+        slug={study.slug}
         locked={isLocked(study)}
         title={study.title}
         teaser={study.lockedTeaser}
@@ -79,6 +81,7 @@ export default async function CaseStudyPage({
   if (study.slug === "up-design-system") {
     return (
       <CaseStudyGate
+        slug={study.slug}
         locked={isLocked(study)}
         title={study.title}
         teaser={study.lockedTeaser}
@@ -94,6 +97,7 @@ export default async function CaseStudyPage({
 
   return (
     <CaseStudyGate
+      slug={study.slug}
       locked={isLocked(study)}
       title={study.title}
       teaser={study.lockedTeaser}

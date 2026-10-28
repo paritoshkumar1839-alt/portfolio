@@ -1,17 +1,21 @@
 "use client";
 
+import { track } from "@vercel/analytics";
 import { useGate } from "@/components/GateProvider";
 import PasswordGate from "@/components/PasswordGate";
+import CaseStudyAnalytics from "@/components/CaseStudyAnalytics";
 
 /** Wraps a case-study page. When the study is locked and the visitor hasn't
  *  unlocked, it renders the full-page gate instead of the content — so direct
  *  links / refreshes stay protected too. */
 export default function CaseStudyGate({
+  slug,
   locked,
   title,
   teaser,
   children,
 }: {
+  slug: string;
   locked: boolean;
   title: string;
   teaser?: string;
@@ -27,10 +31,18 @@ export default function CaseStudyGate({
         variant="page"
         title={title}
         teaser={teaser}
-        onSuccess={unlock}
+        onSuccess={() => {
+          track("case_study_unlock", { slug, title, source: "direct_link" });
+          unlock();
+        }}
       />
     );
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <CaseStudyAnalytics slug={slug} title={title} />
+      {children}
+    </>
+  );
 }

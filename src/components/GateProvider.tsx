@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import { useRouter } from "next/navigation";
+import { track } from "@vercel/analytics";
 import { readUnlocked, writeUnlocked } from "@/lib/gate";
 import PasswordGate from "@/components/PasswordGate";
 
@@ -103,7 +104,8 @@ export default function GateProvider({
               teaser={modal.teaser}
               variant="modal"
               onSuccess={() => {
-                const { slug } = modal;
+                const { slug, title } = modal;
+                track("case_study_unlock", { slug, title, source: "card_modal" });
                 unlock();
                 closeModal();
                 router.push(`/work/${slug}`);
