@@ -119,7 +119,7 @@ export const caseStudies: CaseStudy[] = [
     headline:
       "Giving restaurants a self-serve way to connect their Swiggy and Zomato stores to UrbanPiper",
     tagline:
-      "Merchants link their UrbanPiper stores to the same stores on Swiggy and Zomato themselves — no onboarding manager needed. Cut from about 3 days to about 8 hours.",
+      "Linking each Swiggy and Zomato store to UrbanPiper used to take an onboarding manager about 3 days, by hand. Now a restaurant does it itself in roughly 8 hours — orders, menus and every other operation from one place.",
     tags: ["B2B SaaS", "0 → 1 Flow"],
     domain: "B2B SaaS · UrbanPiper",
     featured: true,
