@@ -11,6 +11,8 @@ import ScreenGallery, { type GalleryScreen } from "@/components/ScreenGallery";
 import StudyViews from "@/components/StudyViews";
 import StrategyRoadmap from "@/components/StrategyRoadmap";
 import ProductDemo from "@/components/ProductDemo";
+import ProductExplainer from "@/components/ProductExplainer";
+import DemoViews from "@/components/DemoViews";
 import LottieClip from "@/components/LottieClip";
 import PlatformLogo from "@/components/PlatformLogo";
 import RtglProcessMap from "@/components/RtglProcessMap";
@@ -912,11 +914,11 @@ export default function RtglCaseStudy({
 
             <Block tag="The final product" id="final-product" title="The shipped flow, end to end">
               <P>
-                From picking Zomato to every store live — the real screens, played in order.
+                From picking Zomato to every store live — the real screens, played in order or explained step by step.
               </P>
             </Block>
             <Reveal className={`${WIDE} mt-8`}>
-              <ProductDemo />
+              <DemoViews video={<ProductDemo />} explainer={<ProductExplainer />} />
             </Reveal>
 
             {OTHER_SCREENS.length > 0 && (
