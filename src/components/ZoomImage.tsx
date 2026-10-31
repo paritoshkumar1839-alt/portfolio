@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type CSSProperties } from "react";
+import { createPortal } from "react-dom";
 
 /**
  * An <img> that opens full-resolution in a dismissible overlay on click.
@@ -12,11 +13,14 @@ export default function ZoomImage({
   alt,
   className = "",
   style,
+  fit = false,
 }: {
   src: string;
   alt: string;
   className?: string;
   style?: CSSProperties;
+  /** Fit the whole image in the window (UI screens) instead of native size (dense sheets). */
+  fit?: boolean;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -52,7 +56,8 @@ export default function ZoomImage({
         </span>
       </button>
 
-      {open && (
+      {/* Portalled to <body> so a transformed or overflow-hidden parent can't trap it. */}
+      {open && createPortal(
         <div
           className="fixed inset-0 z-[100] flex flex-col bg-black/92 backdrop-blur-sm"
           onClick={() => setOpen(false)}
@@ -64,17 +69,30 @@ export default function ZoomImage({
             <span className="truncate text-xs">{alt}</span>
             <span className="shrink-0 text-xs text-white/50">Click anywhere or press Esc to close</span>
           </div>
-          <div className="min-h-0 flex-1 overflow-auto p-4 md:p-8">
-            {/* Native resolution — pan/scroll to read every state and value. */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={src}
-              alt={alt}
-              onClick={(e) => e.stopPropagation()}
-              className="mx-auto block h-auto max-w-none cursor-default rounded-md bg-white"
-            />
-          </div>
-        </div>
+          {fit ? (
+            <div className="flex min-h-0 flex-1 items-center justify-center p-4 md:p-8">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={src}
+                alt={alt}
+                onClick={(e) => e.stopPropagation()}
+                className="block max-h-full max-w-full cursor-default rounded-md bg-white object-contain shadow-2xl"
+              />
+            </div>
+          ) : (
+            <div data-lenis-prevent className="min-h-0 flex-1 overflow-auto p-4 md:p-8">
+              {/* Native resolution — pan/scroll to read every state and value. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={src}
+                alt={alt}
+                onClick={(e) => e.stopPropagation()}
+                className="mx-auto block h-auto max-w-none cursor-default rounded-md bg-white"
+              />
+            </div>
+          )}
+        </div>,
+        document.body,
       )}
     </>
   );

@@ -49,7 +49,7 @@ export default function ScreenGallery({
           return (
             <figure key={s.src} className={i >= initial ? "story-in" : ""}>
               <div className="overflow-hidden rounded-[10px] border border-line bg-white" style={{ aspectRatio: aspect }}>
-                <ZoomImage src={s.src} alt={s.title} className="h-full w-full cursor-zoom-in object-cover object-top" />
+                <ZoomImage fit src={s.src} alt={s.title} className="h-full w-full cursor-zoom-in object-cover object-top" />
               </div>
               <figcaption className="mt-4">
                 {k && (

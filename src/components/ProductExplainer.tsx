@@ -163,6 +163,7 @@ export default function ProductExplainer() {
                   <figure>
                     <div className="overflow-hidden rounded-[8px] border border-black/10 bg-white" style={{ boxShadow: SHADOW, aspectRatio: "1600 / 1040" }}>
                       <ZoomImage
+                        fit
                         src={`${DIR}/${String(sc.n).padStart(2, "0")}.webp`}
                         alt={sc.alt}
                         className="h-full w-full cursor-zoom-in object-cover object-top"
